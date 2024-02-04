@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="25dp"
-    android:layout_marginRight="25dp"
+
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,18 +116,18 @@
                                 </TextView>
                             </LinearLayout>
 
-                            <ImageView
-                                android:id="@+id/imageFav3"
+                            <ImageButton
+                                android:id="@+id/btnAddFav"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="105dp"
-                                app:srcCompat="@drawable/fav" />
+                                android:layout_marginLeft="110dp"
+                                android:src="@drawable/favorite"
+                                android:background="@android:color/transparent"/>
                         </RelativeLayout>
                     </LinearLayout>
 
 
                 </androidx.cardview.widget.CardView>
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="170dp"
                     android:layout_height="217dp"
@@ -151,14 +153,12 @@
                             android:layout_gravity="center">
 
                             <ImageView
-                                android:id="@+id/imageBg3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
                                 app:srcCompat="@drawable/bgshoe" />
 
                             <ImageView
-                                android:id="@+id/imageShoe3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
@@ -204,6 +204,104 @@
 
                                 </TextView>
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="23dp"
+                                    android:layout_marginLeft="5dp"
+
+                                    android:text="$1500"
+                                    android:textSize="15sp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                            <ImageButton
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="110dp"
+                                android:src="@drawable/favorite"
+                                android:background="@android:color/transparent"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="170dp"
+                    android:layout_height="217dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="5dp"
+
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                app:srcCompat="@drawable/bgshoe" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                app:srcCompat="@drawable/shoe" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Product's Name"
+                            android:textSize="15sp"
+                            android:textStyle="bold">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="5dp"
+
+                            android:text="Product's Category"
+                            android:textSize="13sp">
+
+                        </TextView>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="23dp"
+                                    android:text="$1500"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold">
+
+                                </TextView>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -216,18 +314,18 @@
                                 </TextView>
                             </LinearLayout>
 
-                            <ImageView
-                                android:id="@+id/imageFav3"
+                            <ImageButton
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="105dp"
-                                app:srcCompat="@drawable/fav" />
+                                android:layout_marginLeft="110dp"
+                                android:src="@drawable/favorite"
+                                android:background="@android:color/transparent"/>
                         </RelativeLayout>
                     </LinearLayout>
 
 
                 </androidx.cardview.widget.CardView>
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="170dp"
                     android:layout_height="217dp"
@@ -253,14 +351,12 @@
                             android:layout_gravity="center">
 
                             <ImageView
-                                android:id="@+id/imageBg3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
                                 app:srcCompat="@drawable/bgshoe" />
 
                             <ImageView
-                                android:id="@+id/imageShoe3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
@@ -302,7 +398,9 @@
                                     android:layout_height="23dp"
                                     android:text="$1500"
                                     android:textSize="20sp"
-                                    android:textStyle="bold"></TextView>
+                                    android:textStyle="bold">
+
+                                </TextView>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -310,149 +408,354 @@
                                     android:layout_marginLeft="5dp"
 
                                     android:text="$1500"
-                                    android:textSize="15sp"></TextView>
+                                    android:textSize="15sp">
+
+                                </TextView>
                             </LinearLayout>
 
-                            <ImageView
-                                android:id="@+id/imageFav3"
+                            <ImageButton
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="105dp"
-                                app:srcCompat="@drawable/fav" />
+                                android:layout_marginLeft="110dp"
+                                android:src="@drawable/favorite"
+                                android:background="@android:color/transparent"/>
                         </RelativeLayout>
                     </LinearLayout>
 
 
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="170dp"
-                    android:layout_height="217dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="5dp"
 
-                    >
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center">
-
-                            <ImageView
-                                android:id="@+id/imageBg3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                app:srcCompat="@drawable/bgshoe" />
-
-                            <ImageView
-                                android:id="@+id/imageShoe3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                app:srcCompat="@drawable/shoe" />
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            android:text="Product's Name"
-                            android:textSize="15sp"
-                            android:textStyle="bold">
-
-                        </TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-
-                            android:text="Product's Category"
-                            android:textSize="13sp">
-
-                        </TextView>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="23dp"
-                                    android:text="$1500"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold"></TextView>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="23dp"
-                                    android:layout_marginLeft="5dp"
-
-                                    android:text="$1500"
-                                    android:textSize="15sp"></TextView>
-                            </LinearLayout>
-
-                            <ImageView
-                                android:id="@+id/imageFav3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="105dp"
-                                app:srcCompat="@drawable/fav" />
-                        </RelativeLayout>
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
 
             </GridLayout>
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
                 <RelativeLayout
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="180dp"
+
+                    android:layout_marginRight="200dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                    <ImageView
 
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         app:srcCompat="@drawable/bgsell" />
-                    <ImageView
 
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="20dp"
                         app:srcCompat="@drawable/shoesell" />
                 </RelativeLayout>
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="180dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/bgsell" />
-                </RelativeLayout>
+                        android:text="BestSelling"
+                        android:textSize="17sp"
+                        />
+                    <TextView
+
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:text="Nike Air Force One Preme"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        >
+
+                    </TextView>
+                    <TextView
+
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:text="$1000"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        >
+                    </TextView>
+                    <ImageButton
+                        android:layout_marginTop="7dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_width="112dp"
+                        android:layout_height="29dp"
+                        android:src="@drawable/addcart"
+                        android:contentDescription="Add to cart"
+                        >
+
+                    </ImageButton>
+                </LinearLayout>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Most popular"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp">
+
+            </TextView>
+            <LinearLayout
+
+                android:paddingBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <androidx.cardview.widget.CardView
+                    android:layout_width="350dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="5dp"
+
+                    >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            >
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/bgpopular" />
+                            <ImageView
+                                android:layout_marginRight="2dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/shoepopular" />
+                        </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="165dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+                            <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="20dp"
+                                android:textStyle="bold"
+                                android:textSize="18sp"
+                                android:text="Nike A Force One Preme">
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:text="Product's Category">
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="7dp"
+                                android:text="$1500">
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+
+                            android:layout_marginTop="20dp">
+                            <ImageButton
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/add"
+                                android:background="@android:color/transparent"
+                                android:contentDescription="Add to cart"
+                                />
+
+                            <ImageButton
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/favorite"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:contentDescription="Add to favorite"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="350dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="5dp"
+
+                    >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            >
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/bgpopular" />
+                            <ImageView
+                                android:layout_marginRight="2dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/shoepopular" />
+                        </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="165dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+                            <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="20dp"
+                                android:textStyle="bold"
+                                android:textSize="18sp"
+                                android:text="Nike A Force One Preme">
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:text="Product's Category">
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="7dp"
+                                android:text="$1500">
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+
+                            android:layout_marginTop="20dp">
+                            <ImageButton
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/add"
+                                android:background="@android:color/transparent"
+                                />
+
+                            <ImageButton
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/favorite"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="350dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="5dp"
+
+                    >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            >
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/bgpopular" />
+                            <ImageView
+                                android:layout_marginRight="2dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/shoepopular" />
+                        </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="165dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+                            <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="20dp"
+                                android:textStyle="bold"
+                                android:textSize="18sp"
+                                android:text="Nike A Force One Preme">
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:text="Product's Category">
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="7dp"
+                                android:text="$1500">
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+
+                            android:layout_marginTop="20dp">
+                            <ImageButton
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/add"
+                                android:background="@android:color/transparent"
+                                />
+
+                            <ImageButton
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/favorite"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
