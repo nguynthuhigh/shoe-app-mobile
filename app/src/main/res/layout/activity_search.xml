@@ -4,79 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <androidx.gridlayout.widget.GridLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/menu_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:columnCount="2"
-        app:rowCount="2">
+        app:logo="@drawable/nike_logo"
+        android:layout_gravity="end"
+        android:paddingEnd="30dp"
+        app:title=" ">
 
-        <!-- CardView 1 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Hello">
-
-            </TextView>
-            <!-- Nội dung của CardView 1 -->
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- CardView 2 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-            <!-- Nội dung của CardView 2 -->
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- CardView 3 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-            <!-- Nội dung của CardView 3 -->
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- CardView 4 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-            <!-- Nội dung của CardView 4 -->
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.gridlayout.widget.GridLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <EditText
+        android:id="@+id/searchProduct"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="355dp"
+        android:layout_height="60dp"
+        android:drawableStart="@drawable/search"
+        android:paddingLeft="30dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/bgsearch"
+        android:hint="Search product"
+        android:textSize="15sp"
+        >
+    </EditText>
 
 </LinearLayout>
