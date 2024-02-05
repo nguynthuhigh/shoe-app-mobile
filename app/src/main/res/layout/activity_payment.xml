@@ -9,7 +9,10 @@
     tools:context=".PaymentActivity"
     android:orientation="vertical"
     >
+    <include
+        layout="@layout/item_back">
 
+    </include>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
