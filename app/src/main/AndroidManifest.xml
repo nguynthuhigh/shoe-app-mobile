@@ -14,13 +14,14 @@
         android:theme="@style/Theme.ShoeApp"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
+            android:name=".MyCartActivity"
+            android:exported="false" />
+        <activity
             android:name=".PaymentActivity"
             android:exported="true" />
-=======
+        <activity
             android:name=".MyOrderActivity"
-            android:exported="false" />
->>>>>>> 60d196fb3c2229ebc2ecdec0559f6e9fe80b1c54
+            android:exported="true" />
         <activity
             android:name=".SearchActivity"
             android:exported="true" />
