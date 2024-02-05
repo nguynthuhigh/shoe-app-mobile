@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/productCard"
         android:layout_width="170dp"
         android:layout_height="217dp"
         android:layout_marginLeft="5dp"
@@ -86,7 +87,7 @@
                         android:layout_height="23dp"
                         android:layout_marginLeft="5dp"
 
-                        android:text="$1500"
+                        android:text="$15000"
                         android:textSize="15sp">
 
                     </TextView>

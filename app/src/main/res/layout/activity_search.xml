@@ -7,30 +7,21 @@
     tools:context=".SearchActivity"
     android:background="@color/white"
     android:orientation="vertical">
+    <include
+        android:id="@+id/include_search_old"
+        layout="@layout/item_menuback"
+        >
+    </include>
+    <include
+        android:id="@+id/include_search_old"
+        layout="@layout/item_search"
+        >
+    </include>
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/menu_header"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:logo="@drawable/nike_logo"
-        android:layout_gravity="end"
-        android:paddingEnd="30dp"
-        app:title=" ">
-
-    </androidx.appcompat.widget.Toolbar>
-    <EditText
-        android:id="@+id/searchProduct"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_width="355dp"
-        android:layout_height="60dp"
-        android:drawableStart="@drawable/search"
-        android:paddingLeft="30dp"
-        android:paddingBottom="8dp"
-        android:background="@drawable/bgsearch"
-        android:hint="Search product"
-        android:textSize="15sp"
-        >
-    </EditText>
+        android:text="TextView" />
 
 </LinearLayout>
