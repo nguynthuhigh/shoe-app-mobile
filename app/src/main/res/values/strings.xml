@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Shoe App</string>
+    <string name="payment">Payment</string>
+    <string name="nothing">nothing</string>
 </resources>
