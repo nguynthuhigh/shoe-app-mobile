@@ -89,14 +89,15 @@ ImageButton finishLayout;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.bag_header){
-            Intent intent = new Intent(MainActivity.this,MyOrderActivity.class);
+            Intent intent = new Intent(MainActivity.this,MyCartActivity.class);
             startActivity(intent);
         }
         if(item.getItemId() == R.id.favorite_header){
             Toast.makeText(MainActivity.this,"Favorite",Toast.LENGTH_SHORT).show();
         }
         if(item.getItemId() == R.id.account_header){
-            Toast.makeText(MainActivity.this,"Account",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this,MyOrderActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
