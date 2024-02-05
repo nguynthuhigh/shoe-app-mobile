@@ -22,21 +22,13 @@
         >
 
     </androidx.appcompat.widget.Toolbar>
-    <EditText
-        android:id="@+id/searchProduct"
-
-        android:layout_gravity="center"
-        android:layout_width="355dp"
-        android:layout_height="60dp"
-        android:drawableStart="@drawable/search"
-        android:paddingLeft="30dp"
-        android:paddingBottom="8dp"
-        android:background="@drawable/bgsearch"
-        android:hint="Search product"
-        android:textSize="15sp"
+    <include
+        android:id="@+id/include_search_old"
+        layout="@layout/item_search"
         >
+    </include>
 
-    </EditText>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,6 +40,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <HorizontalScrollView
+                android:contentDescription="Banner"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
@@ -88,306 +81,17 @@
 
                 <include
                     layout="@layout/item_card"
-                    >
+                    />
+                <include
+                    layout="@layout/item_card"
+                    />
+                <include
+                    layout="@layout/item_card"
+                    />
+                <include
+                    layout="@layout/item_card"
+                    />
 
-                </include>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="170dp"
-                    android:layout_height="217dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="5dp"
-
-                    >
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                app:srcCompat="@drawable/bgshoe" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                app:srcCompat="@drawable/shoe" />
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            android:text="Product's Name"
-                            android:textSize="15sp"
-                            android:textStyle="bold">
-
-                        </TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-
-                            android:text="Product's Category"
-                            android:textSize="13sp">
-
-                        </TextView>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="23dp"
-                                    android:text="$1500"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold">
-
-                                </TextView>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="23dp"
-                                    android:layout_marginLeft="5dp"
-
-                                    android:text="$1500"
-                                    android:textSize="15sp">
-
-                                </TextView>
-                            </LinearLayout>
-
-                            <ImageButton
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="110dp"
-                                android:src="@drawable/favorite"
-                                android:background="@android:color/transparent"/>
-                        </RelativeLayout>
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="170dp"
-                    android:layout_height="217dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="5dp"
-
-                    >
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                app:srcCompat="@drawable/bgshoe" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                app:srcCompat="@drawable/shoe" />
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            android:text="Product's Name"
-                            android:textSize="15sp"
-                            android:textStyle="bold">
-
-                        </TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-
-                            android:text="Product's Category"
-                            android:textSize="13sp">
-
-                        </TextView>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="23dp"
-                                    android:text="$1500"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold">
-
-                                </TextView>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="23dp"
-                                    android:layout_marginLeft="5dp"
-
-                                    android:text="$1500"
-                                    android:textSize="15sp">
-
-                                </TextView>
-                            </LinearLayout>
-
-                            <ImageButton
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="110dp"
-                                android:src="@drawable/favorite"
-                                android:background="@android:color/transparent"/>
-                        </RelativeLayout>
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="170dp"
-                    android:layout_height="217dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="5dp"
-
-                    >
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                app:srcCompat="@drawable/bgshoe" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                app:srcCompat="@drawable/shoe" />
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            android:text="Product's Name"
-                            android:textSize="15sp"
-                            android:textStyle="bold">
-
-                        </TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-
-                            android:text="Product's Category"
-                            android:textSize="13sp">
-
-                        </TextView>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="23dp"
-                                    android:text="$1500"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold">
-
-                                </TextView>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="23dp"
-                                    android:layout_marginLeft="5dp"
-
-                                    android:text="$1500"
-                                    android:textSize="15sp">
-
-                                </TextView>
-                            </LinearLayout>
-
-                            <ImageButton
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="110dp"
-                                android:src="@drawable/favorite"
-                                android:background="@android:color/transparent"/>
-                        </RelativeLayout>
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
 
 
 
@@ -450,6 +154,7 @@
                         >
                     </TextView>
                     <ImageButton
+                        android:id="@+id/btnSeller"
                         android:layout_marginTop="7dp"
                         android:layout_marginLeft="25dp"
                         android:layout_width="112dp"
