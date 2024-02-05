@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="the_menu" type="id" />
+    <item name="the_left" type="id" />
+    <item name="btnBack" type="id" />
+    <item name="the_right" type="id" />
+</resources>
