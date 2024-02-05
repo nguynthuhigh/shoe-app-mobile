@@ -1,81 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     android:background="@color/paymentBG"
-    tools:context=".PaymentActivity">
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@drawable/rectangle_bottom_radius"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".PaymentActivity"
+    android:orientation="vertical"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/btnBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/left_circle_outlined"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_brand_nike" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/btnFavourite"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_favourite"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageButton
-                    android:id="@+id/btnCart"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_shoping_cart"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageButton
-                    android:id="@+id/btnApps"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_apps"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </LinearLayout>
-        </LinearLayout>
+        >
 
 
-    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/bg_checkout" />
 
     <TextView
         android:id="@+id/textView"
@@ -85,10 +31,7 @@
         android:fontFamily="@font/alata_regular"
         android:gravity="center"
         android:text="@string/payment"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="25sp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
@@ -96,9 +39,8 @@
         android:layout_marginTop="30dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        android:layout_marginLeft="60dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -319,5 +261,5 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</LinearLayout>
