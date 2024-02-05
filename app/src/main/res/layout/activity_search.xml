@@ -4,79 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/include_search_old"
+        layout="@layout/item_menuback"
+        >
+    </include>
+    <include
+        android:id="@+id/include_search_old"
+        layout="@layout/item_search"
+        >
+    </include>
 
-    <androidx.gridlayout.widget.GridLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:columnCount="2"
-        app:rowCount="2">
-
-        <!-- CardView 1 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Hello">
-
-            </TextView>
-            <!-- Nội dung của CardView 1 -->
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- CardView 2 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-            <!-- Nội dung của CardView 2 -->
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- CardView 3 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-            <!-- Nội dung của CardView 3 -->
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- CardView 4 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-            <!-- Nội dung của CardView 4 -->
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.gridlayout.widget.GridLayout>
+        android:text="TextView" />
 
 </LinearLayout>

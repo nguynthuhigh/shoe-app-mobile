@@ -82,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="98dp"
+        android:fontFamily="@font/alata_regular"
         android:gravity="center"
         android:text="@string/payment"
         android:textSize="25sp"
@@ -114,6 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/alata_regular"
                 android:paddingLeft="15dp"
                 android:text="Total"
                 android:textSize="20dp" />
@@ -121,6 +123,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/alata_regular"
                 android:paddingLeft="15dp"
                 android:text="14,000,000đ"
                 android:textColor="@color/black"
@@ -136,6 +139,7 @@
                     android:id="@+id/orderID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/alata_regular"
                     android:text="Order ID"
                     android:textColor="@color/darkGrey"
                     android:textSize="12sp" />
@@ -144,6 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/alata_regular"
                     android:text="#01"
                     android:textColor="@color/black" />
 
@@ -152,6 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/orderID"
+                    android:fontFamily="@font/alata_regular"
                     android:text="Date"
                     android:textColor="@color/darkGrey"
                     android:textSize="12sp" />
@@ -161,6 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/orderID"
                     android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/alata_regular"
                     android:text="Feb 2, 2024"
                     android:textColor="@color/black" />
 
@@ -169,6 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/date"
+                    android:fontFamily="@font/alata_regular"
                     android:text="Customer"
                     android:textColor="@color/darkGrey"
                     android:textSize="12sp" />
@@ -178,6 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/date"
                     android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/alata_regular"
                     android:text="PhongSongSong"
                     android:textColor="@color/black" />
 
@@ -186,6 +195,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/customer"
+                    android:fontFamily="@font/alata_regular"
                     android:text="Address"
                     android:textColor="@color/darkGrey"
                     android:textSize="12sp" />
@@ -195,6 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/customer"
                     android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/alata_regular"
                     android:text="Viva la Franc"
                     android:textColor="@color/black" />
             </RelativeLayout>
@@ -228,6 +239,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/img1"
+                    android:fontFamily="@font/alata_regular"
                     android:gravity="center"
                     android:text="Cash on delivery"
                     android:textColor="@color/black"
@@ -268,6 +280,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/img2"
+                    android:fontFamily="@font/alata_regular"
                     android:gravity="center_vertical"
                     android:text="Pay with Momo\nNew"
                     android:textColor="@color/black"
@@ -287,8 +300,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray" />
@@ -299,6 +312,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
+                android:fontFamily="@font/alata_regular"
                 android:text="Pay now"
                 android:textStyle="bold" />
 

@@ -8,6 +8,26 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".MainActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_marginTop="10dp"
+        android:id="@+id/menu_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:logo="@drawable/nike_logo"
+        android:layout_gravity="end"
+        android:paddingEnd="30dp"
+        android:paddingStart="30dp"
+        app:title=" "
+
+        >
+
+    </androidx.appcompat.widget.Toolbar>
+    <include
+        android:id="@+id/include_search_old"
+        layout="@layout/item_search"
+        >
+    </include>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +40,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+<<<<<<< HEAD
 
+=======
+            <HorizontalScrollView
+                android:contentDescription="Banner"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                   >
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="145dp"
+                        app:srcCompat="@drawable/justdoit"
+                        android:layout_marginRight="20dp">
+                    </ImageView>
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="145dp"
+                        app:srcCompat="@drawable/justdoit">
+                    </ImageView>
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+>>>>>>> 60d196fb3c2229ebc2ecdec0559f6e9fe80b1c54
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,6 +84,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+<<<<<<< HEAD
                 <androidx.cardview.widget.CardView
                     android:layout_width="170dp"
                     android:layout_height="217dp"
@@ -421,6 +475,22 @@
 
 
                 </androidx.cardview.widget.CardView>
+=======
+                <include
+                    layout="@layout/item_card"
+                    />
+                <include
+                    layout="@layout/item_card"
+                    />
+                <include
+                    layout="@layout/item_card"
+                    />
+                <include
+                    layout="@layout/item_card"
+                    />
+
+
+>>>>>>> 60d196fb3c2229ebc2ecdec0559f6e9fe80b1c54
 
 
             </GridLayout>
@@ -483,6 +553,12 @@
                         android:textStyle="bold"></TextView>
 
                     <ImageButton
+<<<<<<< HEAD
+=======
+                        android:id="@+id/btnSeller"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginLeft="25dp"
+>>>>>>> 60d196fb3c2229ebc2ecdec0559f6e9fe80b1c54
                         android:layout_width="112dp"
                         android:layout_height="29dp"
                         android:layout_marginLeft="25dp"
