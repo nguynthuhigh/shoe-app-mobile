@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckoutActivity"
+    android:background="@color/color_checkout">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/bg_checkout" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_marginTop="100dp"
+                        android:layout_marginLeft="25dp"
+                        android:id="@+id/bg_checkout"
+                        android:layout_width="358dp"
+                        android:layout_height="703dp"
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="0dp">
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_above="@id/bg_checkout">
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:src="@drawable/ic_brand_nike" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/alata_regular"
+                                android:paddingLeft="15dp"
+                                android:text="Total"
+                                android:textSize="20dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/alata_regular"
+                                android:layout_marginLeft="15dp"
+                                android:text="14,000,000đ"
+                                android:textColor="@color/black"
+                                android:textSize="30sp" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp">
+
+                                <TextView
+                                    android:id="@+id/orderID"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/alata_regular"
+                                    android:text="Order ID"
+                                    android:textColor="@color/darkGrey"
+                                    android:textSize="16sp" />
+
+                                <TextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:fontFamily="@font/alata_regular"
+                                    android:text="#01"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/black" />
+
+                                <TextView
+                                    android:layout_marginTop="15dp"
+                                    android:id="@+id/date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/orderID"
+                                    android:fontFamily="@font/alata_regular"
+                                    android:text="Date"
+                                    android:textColor="@color/darkGrey"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:layout_marginTop="15dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/orderID"
+                                    android:layout_alignParentEnd="true"
+                                    android:fontFamily="@font/alata_regular"
+                                    android:text="Feb 2, 2024"
+                                    android:textColor="@color/black" />
+
+                                <TextView
+                                    android:layout_marginTop="15dp"
+                                    android:id="@+id/customer"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/date"
+                                    android:fontFamily="@font/alata_regular"
+                                    android:text="Customer"
+                                    android:textColor="@color/darkGrey"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/date"
+                                    android:layout_alignParentEnd="true"
+                                    android:fontFamily="@font/alata_regular"
+                                    android:text="PhongSongSong"
+                                    android:textColor="@color/black" />
+
+                                <TextView
+                                    android:id="@+id/address"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/customer"
+                                    android:fontFamily="@font/alata_regular"
+                                    android:text="Address"
+                                    android:textColor="@color/darkGrey"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/customer"
+                                    android:layout_alignParentEnd="true"
+                                    android:fontFamily="@font/alata_regular"
+                                    android:text="Viva la Franc"
+                                    android:textColor="@color/black" />
+                            </RelativeLayout>
+
+                            <ImageView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/line_bill" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>
