@@ -11,13 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 ImageButton btnAddFav,btnSeller, btnSearch;
 EditText searchProduct,searchProduct_2;
-CardView productCard;
+FrameLayout productCard;
 ImageButton finishLayout;
 
     @Override

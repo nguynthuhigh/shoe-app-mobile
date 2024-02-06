@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class SearchActivity extends AppCompatActivity {
-TextView textView;
+TextView contentSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +23,9 @@ TextView textView;
     }
 
     private void addControls() {
-        textView = findViewById(R.id.textView);
+        contentSearch = findViewById(R.id.contentSearch);
         Intent searchData = getIntent();
         String data = searchData.getStringExtra("dataSearch");
-        textView.setText(data);
+        contentSearch.setText("Search: " +data);
     }
 }
