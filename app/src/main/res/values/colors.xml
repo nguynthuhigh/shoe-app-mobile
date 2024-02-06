@@ -7,4 +7,10 @@
 =======
     <color name="green">#37D63E</color>
 >>>>>>> 60d196fb3c2229ebc2ecdec0559f6e9fe80b1c54
+
+    <color name="pink">#FF7EF4</color>
+    <color name="blue">#81D8F3</color>
+    <color name="pinkk">#FF82B4</color>
+    <color name="gray">#cccc</color>
+
 </resources>
