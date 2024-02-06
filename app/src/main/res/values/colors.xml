@@ -4,16 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="paymentBG">#F7F7F7</color>
     <color name="darkGrey">#535353</color>
-
     <color name="green">#37D63E</color>
-
     <color name ="color_checkout">#F7F7F7</color>
-
-
     <color name="pink">#FF7EF4</color>
     <color name="blue">#81D8F3</color>
     <color name="pinkk">#FF82B4</color>
     <color name="gray">#cccc</color>
-
-
 </resources>
