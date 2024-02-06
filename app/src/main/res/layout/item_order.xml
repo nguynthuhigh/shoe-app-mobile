@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:layout_width="350dp"
         android:layout_height="70dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp"
         android:layout_margin="5dp"
+        android:background="@drawable/border_order"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -78,5 +79,5 @@
                 </TextView>
             </LinearLayout>
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </LinearLayout>

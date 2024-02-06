@@ -8,25 +8,30 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:layout_marginTop="10dp"
-        android:id="@+id/menu_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:logo="@drawable/nike_logo"
-        android:layout_gravity="end"
-        android:paddingEnd="30dp"
-        android:paddingStart="30dp"
-        app:title=" "
 
-        >
 
-    </androidx.appcompat.widget.Toolbar>
-    <include
-        android:id="@+id/include_search_old"
-        layout="@layout/item_search"
-        >
-    </include>
+        <androidx.appcompat.widget.Toolbar
+            android:layout_marginTop="10dp"
+            android:id="@+id/menu_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:logo="@drawable/nike_logo"
+            android:layout_gravity="end"
+            android:paddingEnd="30dp"
+            android:paddingStart="30dp"
+            app:title=" "
+
+            >
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <include
+            android:id="@+id/include_search_old"
+            layout="@layout/item_search"
+          >
+
+        </include>
+
 
 
     <ScrollView
@@ -53,13 +58,51 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                    >
-                    <ImageView
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/dragon_banner"
-                        android:layout_marginRight="20dp">
-                    </ImageView>
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <FrameLayout
+                            android:layout_marginTop="5dp"
+
+                            android:layout_width="350dp"
+                            android:layout_height="150dp"
+                            android:background="@drawable/bg_home_new_shoe">
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_margin="15dp"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/alata_regular"
+                                    android:text="Nike Dunk Low GS Year of The Dragon"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/white">
+
+                                </TextView>
+                                <ImageButton
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:contentDescription="Explore new shoe"
+                                    android:background="@drawable/btn_explore"
+                                    android:src="@drawable/btn_explore">
+
+                                </ImageButton>
+                            </RelativeLayout>
+                        </FrameLayout>
+                        <ImageView
+                            android:layout_marginLeft="140dp"
+                            android:layout_marginTop="70dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/shoe_home"
+                            >
+
+                        </ImageView>
+                    </RelativeLayout>
 
                 </LinearLayout>
 
@@ -197,265 +240,23 @@
                 android:orientation="vertical"
                 android:paddingBottom="30dp">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="350dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
 
+
+                <include
+                    layout="@layout/item_popular"
                     >
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/bgpopular" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="2dp"
-                                app:srcCompat="@drawable/shoepopular" />
-                        </RelativeLayout>
-
-                        <LinearLayout
-                            android:layout_width="165dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="160dp"
-                                android:layout_height="20dp"
-                                android:text="Nike A Force One Preme"
-                                android:textSize="18sp"
-                                android:textStyle="bold"></TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Product's Category"
-                                android:textSize="15sp"></TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="7dp"
-                                android:text="$1500"
-                                android:textSize="20sp"
-                                android:textStyle="bold"></TextView>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="20dp"
-
-                            android:orientation="vertical">
-
-                            <ImageButton
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@android:color/transparent"
-                                android:contentDescription="Add to cart"
-                                android:src="@drawable/add" />
-
-                            <ImageButton
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@android:color/transparent"
-                                android:contentDescription="Add to favorite"
-                                android:src="@drawable/favorite" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="350dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-
+                </include>
+                <include
+                    layout="@layout/item_popular"
                     >
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/bgpopular" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="2dp"
-                                app:srcCompat="@drawable/shoepopular" />
-                        </RelativeLayout>
-
-                        <LinearLayout
-                            android:layout_width="165dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="160dp"
-                                android:layout_height="20dp"
-                                android:text="Nike A Force One Preme"
-                                android:textSize="18sp"
-                                android:textStyle="bold"></TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Product's Category"
-                                android:textSize="15sp"></TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="7dp"
-                                android:text="$1500"
-                                android:textSize="20sp"
-                                android:textStyle="bold"></TextView>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="20dp"
-
-                            android:orientation="vertical">
-
-                            <ImageButton
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/add" />
-
-                            <ImageButton
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/favorite" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="350dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-
-                    >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/bgpopular" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="2dp"
-                                app:srcCompat="@drawable/shoepopular" />
-                        </RelativeLayout>
-
-                        <LinearLayout
-                            android:layout_width="165dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="160dp"
-                                android:layout_height="20dp"
-                                android:text="Nike A Force One Preme"
-                                android:textSize="18sp"
-                                android:textStyle="bold"></TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Product's Category"
-                                android:textSize="15sp"></TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="7dp"
-                                android:text="$1500"
-                                android:textSize="20sp"
-                                android:textStyle="bold"></TextView>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="20dp"
-
-                            android:orientation="vertical">
-
-                            <ImageButton
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/add" />
-
-                            <ImageButton
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/favorite" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </include>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+
 
 
 </LinearLayout>
