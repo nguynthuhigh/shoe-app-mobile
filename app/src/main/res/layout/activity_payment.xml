@@ -151,7 +151,7 @@
                     android:layout_below="@+id/customer"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/alata_regular"
-                    android:text="Viva la Franc"
+                    android:text="yoyo"
                     android:textColor="@color/black" />
             </RelativeLayout>
 
