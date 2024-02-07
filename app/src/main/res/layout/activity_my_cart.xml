@@ -40,6 +40,12 @@
             <include
                 layout="@layout/item_cart">
             </include>
+            <include
+                layout="@layout/item_cart">
+            </include>
+            <include
+                layout="@layout/item_cart">
+            </include>
         </LinearLayout>
     </ScrollView>
 

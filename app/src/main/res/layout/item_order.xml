@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
     >
     <FrameLayout
         android:layout_width="350dp"
@@ -24,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Order ID: #01"
@@ -32,6 +34,7 @@
                     android:fontFamily="@font/alata_regular"
                     />
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date: 5 Feb,2024"
@@ -59,7 +62,7 @@
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-
+                    android:textColor="@color/black"
                     android:text="2 Products"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -67,6 +70,7 @@
 
                 </TextView>
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:gravity="end"

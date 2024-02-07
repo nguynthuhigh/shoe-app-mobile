@@ -3,11 +3,12 @@
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:orientation="horizontal"
+    android:gravity="center"
     >
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="26dp"
+
     >
     <EditText
         android:id="@+id/searchProduct"
@@ -19,6 +20,7 @@ android:orientation="horizontal"
         android:background="@drawable/bgsearch"
         android:textSize="15sp"
         android:hint="Search"
+        android:textColor="@color/black"
         >
     </EditText>
     <ImageButton

@@ -7,11 +7,17 @@
 
     tools:context=".detailsActivity">
 
+    <include
+        layout="@layout/item_menuback"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="88dp"></include>
+
     <TextView
+
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:text="Product's Name"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -95,6 +101,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView11"
         android:layout_width="145dp"
         android:layout_height="357dp"
         android:layout_marginTop="100dp"
@@ -199,6 +206,39 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button4" />
 
+    <LinearLayout
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="564dp"
+        android:background="@drawable/custom_button1"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/alata_regular"
+            android:text="Size: 40"
+            android:textSize="15sp">
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            app:srcCompat="@drawable/sort_down">
+
+        </ImageView>
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView8"
         android:layout_width="55dp"
@@ -268,6 +308,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
