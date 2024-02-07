@@ -14,21 +14,22 @@
     </include>
 
     <TextView
-        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:text="My Order"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_marginLeft="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         >
 
     </TextView>
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="25dp"
+
 
         android:scrollbars="none"
        >

@@ -4,7 +4,7 @@
 
     <item android:title="Favorite"
         android:id="@+id/favorite_header"
-        android:icon="@drawable/favorite_header"
+        android:icon="@drawable/favorite_menu"
         app:showAsAction="always"/>
     <item android:title="Bag"
         android:id="@+id/bag_header"
