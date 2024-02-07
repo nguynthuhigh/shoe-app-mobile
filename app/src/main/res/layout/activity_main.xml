@@ -7,7 +7,8 @@
 
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:layout_gravity="center">
 
 
         <androidx.appcompat.widget.Toolbar
@@ -35,9 +36,9 @@
 
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="24dp"
+        android:layout_gravity="center"
 
         android:scrollbars="none">
 
@@ -48,7 +49,7 @@
             <HorizontalScrollView
                 android:contentDescription="Banner"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
@@ -94,7 +95,7 @@
                             </RelativeLayout>
                         </FrameLayout>
                         <ImageView
-                            android:layout_marginLeft="140dp"
+                            android:layout_marginLeft="117dp"
                             android:layout_marginTop="70dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

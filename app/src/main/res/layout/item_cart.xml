@@ -95,6 +95,7 @@
 
                         android:layout_marginLeft="10dp">
                         <ImageButton
+                            android:id="@+id/decreasePro"
                             android:layout_marginTop="2dp"
 
                             android:layout_width="25dp"
@@ -104,6 +105,7 @@
                             android:layout_alignParentEnd="true"
                             />
                         <TextView
+                            android:id="@+id/viewQuantity"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:text="2"
@@ -115,6 +117,7 @@
 
                         </TextView>
                         <ImageButton
+                            android:id="@+id/increasePro"
                             android:layout_marginRight="1dp"
                             android:layout_marginTop="2dp"
                             android:layout_width="25dp"
