@@ -4,265 +4,283 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_checkout"
+    tools:context=".CheckoutActivity">
 
-    android:background="@color/paymentBG"
-    tools:context=".PaymentActivity"
-    android:orientation="vertical"
-    >
-    <include
-        layout="@layout/item_back">
-
-    </include>
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-
-
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/bg_checkout" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="98dp"
-        android:fontFamily="@font/alata_regular"
-        android:gravity="center"
-        android:text="@string/payment"
-        android:textSize="25sp" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="500dp"
-        android:layout_marginTop="30dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="10dp"
-        android:layout_marginLeft="60dp"
-        >
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="15dp">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:src="@drawable/ic_brand_nike" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/alata_regular"
-                android:paddingLeft="15dp"
-                android:text="Total"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/alata_regular"
-                android:paddingLeft="15dp"
-                android:text="14,000,000đ"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp">
-
-                <TextView
-                    android:id="@+id/orderID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/alata_regular"
-                    android:text="Order ID"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/alata_regular"
-                    android:text="#01"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/orderID"
-                    android:fontFamily="@font/alata_regular"
-                    android:text="Date"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/orderID"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/alata_regular"
-                    android:text="Feb 2, 2024"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/customer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/date"
-                    android:fontFamily="@font/alata_regular"
-                    android:text="Customer"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/date"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/alata_regular"
-                    android:text="PhongSongSong"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/customer"
-                    android:fontFamily="@font/alata_regular"
-                    android:text="Address"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/customer"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/alata_regular"
-                    android:text="yoyo"
-                    android:textColor="@color/black" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="10dp"
-                android:background="@android:color/darker_gray" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rectangle_payment_info">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/img1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/ic_cod" />
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:srcCompat="@drawable/rectangle_bottom_radius" />
 
                 <TextView
+                    android:id="@+id/txtPayment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/img1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/alata_regular"
-                    android:gravity="center"
-                    android:text="Cash on delivery"
+                    android:text="Payment"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="30sp" />
 
-                <RadioButton
-                    android:id="@+id/radio_cod"
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bg_checkout"
+                    android:layout_width="358dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:checked="true"
-                    app:buttonTint="@color/black" />
+                    android:layout_below="@+id/txtPayment"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="30dp"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="0dp"
+                    app:contentPaddingBottom="25dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/bg_checkout"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:paddingStart="15dp"
+                            android:paddingTop="15dp"
+                            android:src="@drawable/ic_brand_nike" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/alata_regular"
+                            android:layout_marginLeft="15dp"
+                            android:text="Total"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:fontFamily="@font/alata_regular"
+                            android:singleLine="true"
+                            android:text="14,000,000đ"
+                            android:textColor="@color/black"
+                            android:textSize="30sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp">
+
+                            <TextView
+                                android:id="@+id/orderID"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="Order ID"
+                                android:textColor="@color/darkGrey"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="#01"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/orderID"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="Date"
+                                android:textColor="@color/darkGrey"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/orderID"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="Feb 2, 2024"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/customer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/date"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="Customer"
+                                android:textColor="@color/darkGrey"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/date"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="PhongSongSong"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/customer"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="Address"
+                                android:textColor="@color/darkGrey"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/customer"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="yoyo"
+                                android:textColor="@color/black" />
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/line_bill" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/rectangle_payment_info">
+
+                            <ImageView
+                                android:id="@+id/img1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/ic_cod" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/img1"
+                                android:fontFamily="@font/alata_regular"
+                                android:gravity="center"
+                                android:text="Cash on delivery"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/radio_cod"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:checked="true"
+                                app:buttonTint="@color/black" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/rectangle_payment_info">
+
+                            <ImageView
+                                android:id="@+id/img2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/ic_momo" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/img2"
+                                android:fontFamily="@font/alata_regular"
+                                android:gravity="center_vertical"
+                                android:text="Pay with Momo\nNew"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:checked="false"
+                                app:buttonTint="@color/black" />
+
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            app:srcCompat="@drawable/line_bill" />
+
+                        <Button
+                            android:id="@+id/btnPay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:backgroundTint="@color/black"
+                            android:fontFamily="@font/alata_regular"
+                            android:text="Pay now"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
 
             </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rectangle_payment_info">
-
-                <ImageView
-                    android:id="@+id/img2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/ic_momo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/img2"
-                    android:fontFamily="@font/alata_regular"
-                    android:gravity="center_vertical"
-                    android:text="Pay with Momo\nNew"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:checked="false"
-                    app:buttonTint="@color/black" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray" />
-
-            <Button
-                android:id="@+id/btnPay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/black"
-                android:fontFamily="@font/alata_regular"
-                android:text="Pay now"
-                android:textStyle="bold" />
-
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
-    </RelativeLayout>
+    </ScrollView>
+
+
 </LinearLayout>

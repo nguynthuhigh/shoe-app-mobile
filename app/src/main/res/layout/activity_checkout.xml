@@ -46,7 +46,7 @@
                     android:layout_marginTop="30dp"
                     app:cardCornerRadius="30dp"
                     app:cardElevation="0dp"
-                    app:contentPaddingBottom="25dp">
+                    app:contentPaddingBottom="50dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -57,28 +57,18 @@
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
                             android:paddingStart="15dp"
                             android:paddingTop="15dp"
                             android:src="@drawable/ic_brand_nike" />
 
                         <TextView
+                            android:layout_marginBottom="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/alata_regular"
                             android:layout_marginLeft="15dp"
-                            android:text="Total"
+                            android:fontFamily="@font/alata_regular"
+                            android:text="Details"
                             android:textSize="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:fontFamily="@font/alata_regular"
-                            android:singleLine="true"
-                            android:text="14,000,000đ"
-                            android:textColor="@color/black"
-                            android:textSize="30sp" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -170,6 +160,14 @@
                             android:layout_height="wrap_content"
                             app:srcCompat="@drawable/line_bill" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:fontFamily="@font/alata_regular"
+                            android:text="Products List"
+                            android:textSize="18dp" />
+
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
@@ -178,37 +176,61 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/rectangle_payment_info">
 
-                            <ImageView
-                                android:id="@+id/img1"
+                            <RelativeLayout
+                                android:id="@+id/shoe1"
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    app:srcCompat="@drawable/bgshoe" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    app:srcCompat="@drawable/shoe" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/txtShoename"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_marginLeft="5dp"
-                                android:src="@drawable/ic_cod" />
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/shoe1"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="E Phọt Wan"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtShoename"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="10dp"
-                                android:layout_toRightOf="@+id/img1"
+                                android:layout_toRightOf="@+id/shoe1"
                                 android:fontFamily="@font/alata_regular"
-                                android:gravity="center"
-                                android:text="Cash on delivery"
+                                android:text="3,500,000đ"
                                 android:textColor="@color/black"
-                                android:textSize="12sp" />
+                                android:textSize="11sp" />
 
-                            <RadioButton
+                            <TextView
                                 android:id="@+id/radio_cod"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
                                 android:layout_alignParentEnd="true"
-                                android:layout_alignParentBottom="true"
-                                android:checked="true"
+                                android:fontFamily="@font/alata_regular"
+                                android:paddingTop="5dp"
+                                android:paddingRight="7dp"
+                                android:text="x2"
+                                android:textStyle="bold"
                                 app:buttonTint="@color/black" />
 
                         </RelativeLayout>
@@ -221,37 +243,129 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/rectangle_payment_info">
 
-                            <ImageView
-                                android:id="@+id/img2"
+                            <RelativeLayout
+                                android:id="@+id/shoe2"
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    app:srcCompat="@drawable/bgshoe" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    app:srcCompat="@drawable/shoe" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/txtShoename1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_marginLeft="5dp"
-                                android:src="@drawable/ic_momo" />
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/shoe2"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="E Phọt Wan"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_gravity="center"
+                                android:layout_below="@+id/txtShoename1"
+                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="10dp"
-                                android:layout_toRightOf="@+id/img2"
+                                android:layout_toRightOf="@+id/shoe2"
                                 android:fontFamily="@font/alata_regular"
-                                android:gravity="center_vertical"
-                                android:text="Pay with Momo\nNew"
+                                android:text="3,500,000đ"
                                 android:textColor="@color/black"
-                                android:textSize="12sp" />
+                                android:textSize="11sp" />
 
-                            <RadioButton
+                            <TextView
+                                android:id="@+id/radio_cod1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
                                 android:layout_alignParentEnd="true"
-                                android:layout_alignParentBottom="true"
-                                android:checked="false"
+                                android:fontFamily="@font/alata_regular"
+                                android:paddingTop="5dp"
+                                android:paddingRight="7dp"
+                                android:text="x2"
+                                android:textStyle="bold"
                                 app:buttonTint="@color/black" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp">
+
+                            <TextView
+                                android:id="@+id/quantity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="Quantity"
+                                android:textColor="@color/darkGrey"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="4"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/discount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/quantity"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="Discount"
+                                android:textColor="@color/darkGrey"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/quantity"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/total"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/discount"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="Total"
+                                android:textColor="@color/darkGrey"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/discount"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/alata_regular"
+                                android:text="14,000,000đ"
+                                android:textColor="@color/black" />
 
                         </RelativeLayout>
 
@@ -261,18 +375,6 @@
                             android:layout_marginTop="10dp"
                             app:srcCompat="@drawable/line_bill" />
 
-                        <Button
-                            android:id="@+id/btnPay"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="15dp"
-                            android:backgroundTint="@color/black"
-                            android:fontFamily="@font/alata_regular"
-                            android:text="Pay now"
-                            android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
