@@ -47,7 +47,7 @@
                     android:layout_marginTop="30dp"
                     app:cardCornerRadius="30dp"
                     app:cardElevation="0dp"
-                    app:contentPaddingBottom="50dp">
+                    app:contentPaddingBottom="15dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -157,9 +157,12 @@
                         </RelativeLayout>
 
                         <ImageView
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/line_bill" />
+                            app:srcCompat="@drawable/line" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -375,6 +378,18 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             app:srcCompat="@drawable/line_bill" />
+                        <Button
+                            android:layout_gravity="center"
+                            android:background="@drawable/btn_default"
+                            android:textColor="@color/white"
+                            android:layout_width="300dp"
+                            android:layout_height="50dp"
+                            android:textSize="20sp"
+                            android:text="Continue to payment"
+                            android:textAllCaps="false"
+                            >
+
+                        </Button>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
