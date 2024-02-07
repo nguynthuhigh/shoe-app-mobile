@@ -4,22 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.sneaker.shoeapp.Fragment.AllFragment;
+import com.sneaker.shoeapp.Fragment.FootballFragment;
+
 public class MainActivity extends AppCompatActivity {
-ImageButton btnAddFav,btnSeller, btnSearch;
-EditText searchProduct,searchProduct_2;
-FrameLayout productCard;
-ImageButton finishLayout;
+    ImageButton btnAddFav, btnSearch;
+    Button btnSeller,categoryAll,categoryFootball;
+    EditText searchProduct,searchProduct_2;
+    FrameLayout productCard;
+    ImageButton finishLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,25 +39,15 @@ ImageButton finishLayout;
     }
 
     private void addEvents() {
-        btnAddFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnSeller.setOnClickListener(new View.OnClickListener() {
+
+      btnSeller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this,"Chưa add được nha e",Toast.LENGTH_SHORT).show();
             }
         });
-        productCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, detailsActivity.class));
-            }
-        });
+
+
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,14 +58,27 @@ ImageButton finishLayout;
                 startActivity(intent);
             }
         });
-        /*finishLayout.setOnClickListener(new View.OnClickListener() {
+        categoryFootball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Fragment fragment = new FootballFragment();
+                loadFragment(fragment);
             }
-        });*/
+        });
+        categoryAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new AllFragment();
+                loadFragment(fragment);
+            }
+        });
     }
-
+    void loadFragment(Fragment fragment){
+        FragmentTransaction frgTrans = getSupportFragmentManager().beginTransaction();
+        frgTrans.replace(R.id.fragmentCategory,fragment);
+        frgTrans.addToBackStack(null);
+        frgTrans.commit();
+    }
     private void addControls() {
         btnSeller = findViewById(R.id.btnSeller);
         btnAddFav = findViewById(R.id.btnAddFav);
@@ -77,6 +87,10 @@ ImageButton finishLayout;
         productCard = findViewById(R.id.productCard);
         btnSearch = findViewById(R.id.btnSearch);
         finishLayout = findViewById(R.id.finishLayout);
+        categoryAll = findViewById(R.id.categoryAll);
+        categoryFootball = findViewById(R.id.categoryFootball);
+        Fragment fragment = new AllFragment();
+        loadFragment(fragment);
     }
 
     @Override

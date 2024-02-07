@@ -36,10 +36,12 @@
                     app:srcCompat="@drawable/bgshoe" />
 
                 <ImageView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="9dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    app:srcCompat="@drawable/shoe" />
+                    app:srcCompat="@drawable/ft_shoe" />
             </RelativeLayout>
 
             <TextView
