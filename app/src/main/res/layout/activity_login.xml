@@ -48,6 +48,7 @@
         android:fontFamily="@font/alata_regular"
         android:gravity="center_vertical"
         android:hint="Password"
+        android:inputType="textPassword"
         android:paddingStart="18dp"
         android:textColorHint="@color/white" />
 
