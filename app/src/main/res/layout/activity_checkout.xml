@@ -33,6 +33,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/alata_regular"
+                    android:gravity="center_horizontal"
                     android:text="Checkout"
                     android:textColor="@color/black"
                     android:textSize="30sp" />
@@ -62,10 +63,10 @@
                             android:src="@drawable/ic_brand_nike" />
 
                         <TextView
-                            android:layout_marginBottom="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
+                            android:layout_marginBottom="5dp"
                             android:fontFamily="@font/alata_regular"
                             android:text="Details"
                             android:textSize="20dp" />
@@ -303,9 +304,9 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:paddingStart="15dp"
                             android:paddingEnd="15dp">
 
