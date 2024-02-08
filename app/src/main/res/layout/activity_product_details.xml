@@ -6,160 +6,227 @@
     android:layout_height="match_parent"
     tools:context=".ProductDetailsActivity"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="345dp"
+    <include layout="@layout/item_back">
+
+    </include>
+    <ScrollView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignParentEnd="">
-            <TextView
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="Product's Name"
-                android:fontFamily="@font/alata_regular">
-            </TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:text="Product's Catgory"
-                android:fontFamily="@font/alata_regular">
-            </TextView>
-        </LinearLayout>
-        <Button
-            android:layout_width="56dp"
-            android:layout_height="22dp"
-            android:layout_alignParentEnd="true"
-            >
-
-        </Button>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="40dp"
-        android:layout_width="345dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-        <FrameLayout
-            android:layout_marginLeft="80dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@color/green">
-        </FrameLayout>
-        <FrameLayout
-            android:layout_marginTop="60dp"
-            android:layout_width="200dp"
-            android:layout_height="300dp"
-            android:background="@color/gray">
-        </FrameLayout>
-
-        <ImageView
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="220dp"
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/bg_details" />
-        <ImageView
-            android:layout_marginTop="20dp"
-
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/pro_details" />
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="250dp"
-            android:layout_marginLeft="250dp">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_radius_10dp"
-                android:layout_alignParentEnd="true"
-                >
-                <ImageView
-                    android:padding="2dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/heart">
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:text="Product's Name"
+                        android:fontFamily="@font/alata_regular">
+                    </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:text="Product's Catgory"
+                        android:fontFamily="@font/alata_regular">
+                    </TextView>
+                </LinearLayout>
+                <FrameLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:text="4,5"
+                    android:padding="0dp"
+                    android:textSize="10sp"
+                    android:background="@color/black"
+                    >
 
-                </ImageView>
-
-            </FrameLayout>
-            <LinearLayout
+                </FrameLayout>
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_marginTop="40dp"
-                android:layout_width="88dp"
-                android:layout_height="35dp"
-                android:background="@drawable/custom_button1"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.95"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="6dp"
-                    android:fontFamily="@font/alata_regular"
-                    android:textStyle="bold"
-                    android:text="Size: 40"
-                    android:textSize="13sp">
-
-                </TextView>
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <FrameLayout
+                    android:layout_marginLeft="80dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@color/green">
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_marginTop="60dp"
+                    android:layout_width="200dp"
+                    android:layout_height="300dp"
+                    android:background="@color/gray">
+                </FrameLayout>
 
                 <ImageView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="220dp"
+                    android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="8dp"
-                    app:srcCompat="@drawable/sort_down">
+                    app:srcCompat="@drawable/bg_details" />
+                <ImageView
+                    android:layout_marginTop="20dp"
 
-                </ImageView>
 
-            </LinearLayout>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/pro_details" />
+                <RelativeLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="280dp"
+                    android:layout_marginLeft="210dp">
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_radius_10dp"
+                        android:layout_alignParentEnd="true"
+                        >
+                        <ImageView
+                            android:padding="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/heart">
+
+                        </ImageView>
+
+                    </FrameLayout>
+                    <LinearLayout
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="40dp"
+                        android:layout_width="88dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/custom_button1"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.95"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/alata_regular"
+                            android:textStyle="bold"
+                            android:text="Size: 40"
+                            android:textSize="13sp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="8dp"
+                            app:srcCompat="@drawable/sort_down">
+
+                        </ImageView>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="80dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:background="@drawable/custom_button1"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.95"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+                        <FrameLayout
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/btn_default"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/alata_regular"
+                            android:textStyle="bold"
+                            android:text="Color"
+                            android:textSize="13sp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="8dp"
+                            app:srcCompat="@drawable/sort_down">
+
+                        </ImageView>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
             <LinearLayout
-                android:layout_marginTop="80dp"
-                android:layout_width="88dp"
-                android:layout_height="35dp"
-                android:background="@drawable/custom_button1"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.95"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="6dp"
-                    android:fontFamily="@font/alata_regular"
-                    android:textStyle="bold"
-                    android:text="Size: 40"
-                    android:textSize="13sp">
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$1000"
+                        android:textColor="@color/black"
+                        android:textSize="36sp"
+                        android:fontFamily="@font/alata_regular">
+                    </TextView>
+                    <TextView
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$1000"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:fontFamily="@font/alata_regular">
+                    </TextView>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:text="Descend deep into the desert, and strut your skills with the whole world watching in this special design. Wide stud placements help you make sharp cuts. An internal plate creates flexible support, perfect for creating otherworldly separation that turns modest gains into house calls."
+                    android:textColor="@color/black"
+                    android:textSize="21sp"
+                    android:fontFamily="@font/alata_regular">
 
                 </TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="8dp"
-                    app:srcCompat="@drawable/sort_down">
-
-                </ImageView>
-
             </LinearLayout>
+        </LinearLayout>
 
-        </RelativeLayout>
-    </RelativeLayout>
+    </ScrollView>
+
 </LinearLayout>

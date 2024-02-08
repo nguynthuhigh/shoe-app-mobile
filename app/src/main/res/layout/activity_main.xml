@@ -142,6 +142,9 @@
 
 
             </HorizontalScrollView>
+
+
+
             <FrameLayout
                 android:id="@+id/fragmentCategory"
                 android:layout_width="match_parent"
@@ -258,7 +261,14 @@
                     android:text="testLogin">
 
                 </Button>
+
             </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
         </LinearLayout>
     </ScrollView>
 
