@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -21,17 +22,10 @@
             android:paddingEnd="30dp"
             android:paddingStart="30dp"
             app:title=" "
-
             >
-
         </androidx.appcompat.widget.Toolbar>
 
-        <include
-            android:id="@+id/include_search_old"
-            layout="@layout/item_search"
-          >
 
-        </include>
 
 
 
@@ -39,7 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-
         android:scrollbars="none">
 
         <LinearLayout
@@ -112,6 +105,7 @@
             <HorizontalScrollView
                 android:contentDescription="Banner"
                 android:layout_marginLeft="5dp"
+                android:layout_marginTop="25dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
@@ -121,20 +115,29 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <Button
-                        android:background="@drawable/border_radius_15dp"
+                        android:background="@drawable/border_radius_10dp"
                         android:id="@+id/categoryAll"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="All">
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:text="All"
+                        android:textAllCaps="false"
+                        android:textSize="16dp"
+                        app:cornerRadius="10dp">
 
                     </Button>
                     <Button
+                        android:layout_marginLeft="10dp"
                         android:id="@+id/categoryFootball"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Football">
+                        android:layout_height="40dp"
+                        android:background="@drawable/border_radius_10dp"
+                        android:text="Football"
+                        android:textSize="16dp"
+                        android:textAllCaps="false">
 
                     </Button>
+
+
                 </LinearLayout>
 
 
@@ -144,6 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <RelativeLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -173,7 +177,7 @@
 
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="160dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -218,6 +222,7 @@
             </RelativeLayout>
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

@@ -8,14 +8,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.sneaker.shoeapp.Fragment.AllFragment;
@@ -49,15 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String dataSearch =searchProduct.getText().toString();
-                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
-                intent.putExtra("dataSearch",dataSearch);
-                startActivity(intent);
-            }
-        });
+
         categoryFootball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     void loadFragment(Fragment fragment){
         FragmentTransaction frgTrans = getSupportFragmentManager().beginTransaction();
         frgTrans.replace(R.id.fragmentCategory,fragment);
@@ -95,9 +92,24 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.header_menu,menu);
+        MenuItem mn_search = menu.findItem(R.id.ic_search);
+        SearchView searchView = (SearchView) mn_search.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
 
+                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+                intent.putExtra("dataSearch",query);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
     }
 
@@ -106,9 +118,6 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.bag_header){
             Intent intent = new Intent(MainActivity.this,MyCartActivity.class);
             startActivity(intent);
-        }
-        if(item.getItemId() == R.id.favorite_header){
-            Toast.makeText(MainActivity.this,"Favorite",Toast.LENGTH_SHORT).show();
         }
         if(item.getItemId() == R.id.account_header){
             Intent intent = new Intent(MainActivity.this,MyOrderActivity.class);

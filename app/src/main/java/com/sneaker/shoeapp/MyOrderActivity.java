@@ -43,9 +43,7 @@ public class MyOrderActivity extends AppCompatActivity {
             Intent intent = new Intent(MyOrderActivity.this,MyCartActivity.class);
             startActivity(intent);
         }
-        if(item.getItemId() == R.id.favorite_header){
-            Toast.makeText(MyOrderActivity.this,"Favorite",Toast.LENGTH_SHORT).show();
-        }
+
         if(item.getItemId() == R.id.account_header){
             Intent intent = new Intent(MyOrderActivity.this,MyOrderActivity.class);
             startActivity(intent);

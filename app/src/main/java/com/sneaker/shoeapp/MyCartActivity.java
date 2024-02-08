@@ -67,9 +67,7 @@ TextView viewQuantity;
             Intent intent = new Intent(MyCartActivity.this,MyCartActivity.class);
             startActivity(intent);
         }
-        if(item.getItemId() == R.id.favorite_header){
-            Toast.makeText(MyCartActivity.this,"Favorite",Toast.LENGTH_SHORT).show();
-        }
+
         if(item.getItemId() == R.id.account_header){
             Intent intent = new Intent(MyCartActivity.this,MyOrderActivity.class);
             startActivity(intent);

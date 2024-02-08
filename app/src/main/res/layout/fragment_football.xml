@@ -6,18 +6,25 @@
     tools:context=".Fragment.AllFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <GridLayout
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:columnCount="2">
-        <include layout="@layout/item_card_football"/>
-        <include layout="@layout/item_card_football"/>
-        <include layout="@layout/item_card_football"/>
-        <include layout="@layout/item_card_football"/>
-        <include layout="@layout/item_card_football"/>
-        <include layout="@layout/item_card_football"/>
+   <HorizontalScrollView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:scrollbars="none">
+       <LinearLayout
 
-    </GridLayout>
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:scrollbars="none"
+           >
+           <include layout="@layout/item_card_football"/>
+           <include layout="@layout/item_card_football"/>
+           <include layout="@layout/item_card_football"/>
+           <include layout="@layout/item_card_football"/>
+           <include layout="@layout/item_card_football"/>
+           <include layout="@layout/item_card_football"/>
+
+       </LinearLayout>
+       </HorizontalScrollView>
 
 </FrameLayout>
