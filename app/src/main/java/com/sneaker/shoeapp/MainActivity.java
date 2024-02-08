@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recycleProduct;
     ProductAdapter productAdapter;
+    CardView bg_proImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         frgTrans.addToBackStack(null);
         frgTrans.commit();
     }
+    @SuppressLint("ResourceAsColor")
     private void addControls() {
         btnSeller = findViewById(R.id.btnSeller);
         btnAddFav = findViewById(R.id.btnAddFav);
@@ -101,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
         finishLayout = findViewById(R.id.finishLayout);
         categoryAll = findViewById(R.id.categoryAll);
         categoryFootball = findViewById(R.id.categoryFootball);
+
+
+
         Fragment fragment = new AllFragment();
         loadFragment(fragment);
 
@@ -116,12 +123,12 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Product> getListPro() {
         List<Product> listPro= new ArrayList<Product>();
-        listPro.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1));
-        listPro.add(new Product("Dunk nike 2024",300,"men's shoe",R.drawable.shoe2));
-        listPro.add(new Product("Jordan",300,"men's shoe",R.drawable.shoe3));
-        listPro.add(new Product("Hulk",300,"men's shoe",R.drawable.shoe4));
-        listPro.add(new Product("White Shoe",300,"men's shoe",R.drawable.shoe5));
-        listPro.add(new Product("Hello",300,"men's shoe",R.drawable.shoe6));
+        listPro.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF"));
+        listPro.add(new Product("Dunk nike 2024",300,"hehe's shoe",R.drawable.shoe2,"FF422B"));
+        listPro.add(new Product("Jordan",300,"kid's shoe",R.drawable.shoe3,"C1C0C5"));
+        listPro.add(new Product("Hulk",300,"running's shoe",R.drawable.shoe4,"BAC07C"));
+        listPro.add(new Product("White Shoe",300,"football's shoe",R.drawable.shoe5,"8394E7"));
+        listPro.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B"));
         return listPro;
     }
 
