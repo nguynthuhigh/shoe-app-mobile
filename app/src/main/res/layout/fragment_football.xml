@@ -17,12 +17,7 @@
            android:orientation="horizontal"
            android:scrollbars="none"
            >
-           <include layout="@layout/item_card_football"/>
-           <include layout="@layout/item_card_football"/>
-           <include layout="@layout/item_card_football"/>
-           <include layout="@layout/item_card_football"/>
-           <include layout="@layout/item_card_football"/>
-           <include layout="@layout/item_card_football"/>
+
 
        </LinearLayout>
        </HorizontalScrollView>

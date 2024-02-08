@@ -6,6 +6,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,15 +18,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.sneaker.shoeapp.Adapter.ProductAdapter;
 import com.sneaker.shoeapp.Fragment.AllFragment;
 import com.sneaker.shoeapp.Fragment.FootballFragment;
+import com.sneaker.shoeapp.model.Product;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton btnAddFav, btnSearch;
@@ -32,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout productCard;
     ImageButton finishLayout;
 
+    RecyclerView recycleProduct;
+    ProductAdapter productAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(main_header);
         addControls();
         addEvents();
+
     }
+
+
 
     private void addEvents() {
 
@@ -88,6 +103,26 @@ public class MainActivity extends AppCompatActivity {
         categoryFootball = findViewById(R.id.categoryFootball);
         Fragment fragment = new AllFragment();
         loadFragment(fragment);
+
+        recycleProduct = findViewById(R.id.recycleProduct);
+        productAdapter = new ProductAdapter(this);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        recycleProduct.setLayoutManager(linearLayoutManager);
+        productAdapter.setData(getListPro());
+        recycleProduct.setAdapter(productAdapter);
+
+    }
+
+    private List<Product> getListPro() {
+        List<Product> listPro= new ArrayList<Product>();
+        listPro.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1));
+        listPro.add(new Product("Dunk nike 2024",300,"men's shoe",R.drawable.shoe2));
+        listPro.add(new Product("Jordan",300,"men's shoe",R.drawable.shoe3));
+        listPro.add(new Product("Hulk",300,"men's shoe",R.drawable.shoe4));
+        listPro.add(new Product("White Shoe",300,"men's shoe",R.drawable.shoe5));
+        listPro.add(new Product("Hello",300,"men's shoe",R.drawable.shoe6));
+        return listPro;
     }
 
     @Override
