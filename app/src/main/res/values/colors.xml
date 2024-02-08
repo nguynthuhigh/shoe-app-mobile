@@ -13,5 +13,6 @@
     <color name="blue">#81D8F3</color>
     <color name="pinkk">#FF82B4</color>
     <color name="gray">#cccc</color>
+    <color name="gray_bg">#F6F6F6</color>
 
 </resources>

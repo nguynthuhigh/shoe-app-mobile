@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/white"
+    android:background="@color/gray_bg"
     android:orientation="vertical"
     tools:context=".MainActivity"
     android:layout_gravity="center">
@@ -30,7 +30,7 @@
 
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scrollbars="none">
@@ -39,7 +39,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New"
+                    android:textStyle="bold"
+                    android:textSize="40sp"
+                    android:fontFamily="@font/alata_regular">
+
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Collection"
+                    android:textSize="40sp"
+                    android:fontFamily="@font/alata_regular"
+                    >
+
+                </TextView>
+            </LinearLayout>
             <HorizontalScrollView
+                android:layout_gravity="center"
                 android:contentDescription="Banner"
                 android:layout_marginTop="10dp"
 
@@ -88,11 +113,11 @@
                             </RelativeLayout>
                         </FrameLayout>
                         <ImageView
-                            android:layout_marginLeft="117dp"
-                            android:layout_marginTop="70dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/shoe_home"
+                            android:layout_marginLeft="107dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_width="250dp"
+                            android:layout_height="180dp"
+                            app:srcCompat="@drawable/shoe3"
                             >
 
                         </ImageView>
@@ -103,10 +128,11 @@
 
             </HorizontalScrollView>
             <HorizontalScrollView
+                android:layout_gravity="center"
                 android:contentDescription="Banner"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="25dp"
-                android:layout_width="wrap_content"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
                 >
@@ -114,26 +140,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <Button
-                        android:background="@drawable/border_radius_10dp"
                         android:id="@+id/categoryAll"
                         android:layout_width="60dp"
                         android:layout_height="40dp"
+                        android:background="@drawable/btn_cate"
                         android:text="All"
                         android:textAllCaps="false"
                         android:textSize="16dp"
-                        app:cornerRadius="10dp">
+                        app:cornerRadius="10dp"
+                        android:fontFamily="@font/alata_regular">
 
                     </Button>
+
                     <Button
                         android:layout_marginLeft="10dp"
                         android:id="@+id/categoryFootball"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:background="@drawable/border_radius_10dp"
+                        android:background="@drawable/btn_cate"
                         android:text="Football"
                         android:textSize="16dp"
-                        android:textAllCaps="false">
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/alata_regular">
 
                     </Button>
 
@@ -149,89 +179,103 @@
                 android:id="@+id/fragmentCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <RelativeLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="30dp"
 
+                android:layout_width="350dp"
+                android:layout_height="wrap_content">
                 <RelativeLayout
-
-                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="200dp">
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:srcCompat="@drawable/bgsell" />
+                    <RelativeLayout
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="20dp"
-                        app:srcCompat="@drawable/shoesell" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="160dp"
-                    android:layout_marginTop="30dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BestSelling"
-                        android:textSize="17sp" />
+                        android:layout_marginRight="180dp">
 
-                    <TextView
-                        android:textColor="@color/black"
-                        android:layout_width="185dp"
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            app:srcCompat="@drawable/bgsell"
+                            android:layout_marginLeft="5dp"/>
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="210dp"
+                            android:layout_marginRight="10dp"
+
+                            app:srcCompat="@drawable/shoe3"
+                            android:rotation="-35"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+
                         android:layout_height="wrap_content"
-                        android:text="Nike Air Force One Preme"
-                        android:textSize="21sp"
-                        android:textStyle="bold">
+                        android:layout_marginLeft="170dp"
+                        android:layout_marginTop="30dp"
+                        android:orientation="vertical">
 
-                    </TextView>
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Best Seller"
+                            android:textSize="17sp" />
 
-                    <TextView
-                        android:textColor="@color/black"
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:text="$1000"
-                        android:textSize="30sp"
-                        android:textStyle="bold">
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="175dp"
+                            android:layout_height="wrap_content"
+                            android:text="Nike Air Force One Preme"
+                            android:textSize="21sp"
+                            android:textStyle="bold">
 
-                    </TextView>
+                        </TextView>
 
-                    <Button
-                        android:id="@+id/btnSeller"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/border_radius_15dp"
-                        android:layout_width="111dp"
-                        android:layout_height="29dp"
-                        android:textColor="@color/black"
-                        android:text="Add to cart"
-                        android:textAllCaps="false"
-                        />
-                </LinearLayout>
-            </RelativeLayout>
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:text="$1000"
+                            android:textSize="30sp"
+                            android:textStyle="bold">
+
+                        </TextView>
+
+                        <Button
+                            android:id="@+id/btnSeller"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/border_radius_15dp"
+                            android:layout_width="111dp"
+                            android:layout_height="29dp"
+                            android:textColor="@color/black"
+                            android:text="Add to cart"
+                            android:textAllCaps="false"
+                            />
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
                 android:textColor="@color/black"
-                android:layout_width="wrap_content"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+
                 android:text="Most popular"
-                android:textSize="20sp"
-                android:textStyle="bold">
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/alata_regular">
 
             </TextView>
 
@@ -254,13 +298,7 @@
                     >
 
                 </include>
-                <Button
-                    android:id="@+id/testLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="testLogin">
 
-                </Button>
 
             </LinearLayout>
 
