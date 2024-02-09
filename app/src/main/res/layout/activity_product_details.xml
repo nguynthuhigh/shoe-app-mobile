@@ -78,6 +78,7 @@
                     android:background="@drawable/bg_details_new"
                     android:rotation="-20">
                 </FrameLayout>
+
                 <FrameLayout
                     android:id="@+id/bg_pro_details_2"
                     android:layout_marginLeft="60dp"
@@ -250,6 +251,7 @@
                 android:orientation="horizontal"
                 >
                 <Button
+                    android:id="@+id/add_to_cart"
                     android:layout_width="163dp"
                     android:layout_height="50dp"
                     android:text="Add to Cart"

@@ -7,8 +7,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     >
+
     <FrameLayout
-        android:background="@drawable/border_cart"
+        android:id="@+id/bg_item_card_custom"
+        android:background="@drawable/bg_item_card_custom"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_width="355dp"
@@ -34,6 +36,7 @@
                         android:layout_height="85dp"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/proName_cart"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:text="Nike Air Force One Vừa Mua ở Việt Nam"
@@ -48,6 +51,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <TextView
+                                android:id="@+id/proPrice_cart"
                                 android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -80,6 +84,7 @@
 
                     </ImageButton>
                     <ImageView
+                        android:id="@+id/proImg_cart"
                         android:layout_marginTop="30dp"
                         android:layout_marginLeft="140dp"
                         android:layout_width="wrap_content"
@@ -133,5 +138,4 @@
 
         </LinearLayout>
     </FrameLayout>
-
 </LinearLayout>
