@@ -100,8 +100,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             proCategory = itemView.findViewById(R.id.proCategory);
             proPrice = itemView.findViewById(R.id.proPrice);
            productCard = itemView.findViewById(R.id.productCard);
-
-
        }
    }
 }
