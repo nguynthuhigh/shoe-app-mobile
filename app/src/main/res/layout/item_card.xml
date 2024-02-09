@@ -33,7 +33,8 @@
                     android:layout_height="100dp"
                     app:cardBackgroundColor="@color/green"
                     app:cardCornerRadius="25dp"
-                    android:layout_marginBottom="2dp">
+                    android:layout_marginBottom="2dp"
+                    >
                     <ImageView
                         android:id="@+id/proImg"
                         android:layout_marginLeft="1dp"

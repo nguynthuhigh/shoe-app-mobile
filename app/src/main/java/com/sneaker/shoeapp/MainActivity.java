@@ -129,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
         listPro.add(new Product("Hulk",300,"running's shoe",R.drawable.shoe4,"BAC07C"));
         listPro.add(new Product("White Shoe",300,"football's shoe",R.drawable.shoe5,"8394E7"));
         listPro.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B"));
+        listPro.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD"));
+        listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D"));
+        listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858"));
         return listPro;
     }
 
