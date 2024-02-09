@@ -6,19 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ProductDetailsActivity"
     android:orientation="vertical">
-    <include layout="@layout/item_back">
+    <include layout="@layout/item_menuback">
 
     </include>
     <ScrollView
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <RelativeLayout
+
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -34,7 +35,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="40sp"
+                        android:textSize="30sp"
                         android:text="Product's Name"
                         android:fontFamily="@font/alata_regular">
                     </TextView>
@@ -42,7 +43,7 @@
                         android:id="@+id/dt_proCate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:textColor="#928A8A"
                         android:textSize="20sp"
                         android:text="Product's Catgory"
                         android:fontFamily="@font/alata_regular">
@@ -63,43 +64,51 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_marginTop="20dp"
-                android:layout_width="345dp"
+                android:layout_width="390dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
+
                 <FrameLayout
-                    android:layout_marginLeft="80dp"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:background="@drawable/bg_details_red">
+                    android:id="@+id/bg_pro_details_main"
+                    android:layout_width="310dp"
+                    android:layout_height="170dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/bg_details_new"
+                    android:rotation="-20">
                 </FrameLayout>
                 <FrameLayout
-                    android:layout_marginTop="60dp"
-                    android:layout_width="200dp"
-                    android:layout_height="300dp"
-                    android:background="@drawable/bg_details_blue">
+                    android:id="@+id/bg_pro_details_2"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="70dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/bg_details_item_2">
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/bg_pro_details"
+                    android:layout_marginLeft="335dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@drawable/bg_details_item_2">
                 </FrameLayout>
 
-                <ImageView
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="220dp"
-                    android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/bg_details" />
                 <ImageView
                     android:id="@+id/dt_proImage"
-                    android:layout_marginTop="20dp"
-
-
-                    android:layout_width="320dp"
-                    android:layout_height="350dp"
-                    app:srcCompat="@drawable/shoe1"
-                    android:rotation="-15"/>
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="43dp"
+                    android:layout_width="325dp"
+                    android:layout_height="185dp"
+                    app:srcCompat="@drawable/shoe8"
+                    android:rotation="-25"/>
                 <RelativeLayout
-                    android:layout_width="300dp"
+
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="280dp"
-                    android:layout_marginLeft="210dp">
+                    android:layout_marginTop="220dp"
+                    android:layout_marginLeft="165dp">
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -161,12 +170,15 @@
                         app:layout_constraintHorizontal_bias="0.95"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
-                        <FrameLayout
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/proColor"
                             android:layout_width="22dp"
                             android:layout_height="22dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/btn_default"/>
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginTop="6dp"
+                            app:cardBackgroundColor="@color/green"
+                            app:cardCornerRadius="7dp"
+                            />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -263,6 +275,7 @@
 
                 </Button>
             </RelativeLayout>
+
         </LinearLayout>
 
     </ScrollView>
