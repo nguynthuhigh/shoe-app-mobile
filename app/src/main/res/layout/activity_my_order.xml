@@ -37,18 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <include
-                layout="@layout/item_order">
-            </include>
-            <include
-                layout="@layout/item_order">
-            </include>
-            <include
-                layout="@layout/item_order">
-            </include>
-            <include
-                layout="@layout/item_order">
-            </include>
+
         </LinearLayout>
     </ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
