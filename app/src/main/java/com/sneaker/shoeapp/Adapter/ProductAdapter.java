@@ -19,6 +19,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sneaker.shoeapp.Interface.ClickItemProduct;
 import com.sneaker.shoeapp.ProductDetailsActivity;
 import com.sneaker.shoeapp.R;
 import com.sneaker.shoeapp.model.Product;
@@ -27,11 +28,12 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>  {
-    private Context context;
-    private List<Product> ListProduct;
 
-    public ProductAdapter(Context context) {
-        this.context = context;
+    private List<Product> ListProduct;
+    private ClickItemProduct clickItemProduct;
+    public ProductAdapter(List<Product> ListProduct, ClickItemProduct clickItemProduct) {
+        this.clickItemProduct = clickItemProduct;
+        this.ListProduct = ListProduct;
     }
     public void setData(List<Product> list){
         this.ListProduct = list;
@@ -63,19 +65,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentDetails(pro);
+                clickItemProduct.onClickItemProduct(pro);
             }
         });
     }
 
-    private void IntentDetails(Product product) {
-        Intent intent = new Intent(context, ProductDetailsActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("obj_product",product);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
 
-    }
 
     @Override
     public int getItemCount() {
@@ -97,8 +92,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
            bg_pro = itemView.findViewById(R.id.bg_proImg);
            proImg = itemView.findViewById(R.id.proImg);
            proName = itemView.findViewById(R.id.proName);
-            proCategory = itemView.findViewById(R.id.proCategory);
-            proPrice = itemView.findViewById(R.id.proPrice);
+           proCategory = itemView.findViewById(R.id.proCategory);
+           proPrice = itemView.findViewById(R.id.proPrice);
            productCard = itemView.findViewById(R.id.productCard);
        }
    }
