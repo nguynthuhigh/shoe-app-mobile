@@ -8,6 +8,7 @@ public class Product implements Serializable{
     private String Category;
     private int Image;
     private  String color;
+    private boolean isCate;
 
     public String getColor() {
         return color;
@@ -18,12 +19,21 @@ public class Product implements Serializable{
     }
 
 
-    public Product(String proName, Integer price, String category, int image, String color) {
+    public Product(String proName, Integer price, String category, int image, String color, boolean isCate) {
         ProName = proName;
         Price = price;
         Category = category;
         Image = image;
         this.color = color;
+        this.isCate = isCate;
+    }
+
+    public boolean isCate() {
+        return isCate;
+    }
+
+    public void setCate(boolean cate) {
+        isCate = cate;
     }
 
     public String getProName() {

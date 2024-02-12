@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/gray_bg"
+    android:background="@drawable/bg_home_1"
     android:orientation="vertical"
     tools:context=".MainActivity"
     android:layout_gravity="center">
@@ -86,7 +86,7 @@
 
                             android:layout_width="350dp"
                             android:layout_height="150dp"
-                            android:background="@drawable/bg_home_new_shoe">
+                            android:background="@drawable/bg_banner_gradient">
                             <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
@@ -101,7 +101,7 @@
 
                                 </TextView>
                                 <ImageButton
-                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginLeft="20dp"
                                     android:layout_marginTop="100dp"
                                     android:layout_height="wrap_content"
                                     android:layout_width="wrap_content"
@@ -113,11 +113,11 @@
                             </RelativeLayout>
                         </FrameLayout>
                         <ImageView
-                            android:layout_marginLeft="107dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_width="250dp"
-                            android:layout_height="180dp"
-                            app:srcCompat="@drawable/shoe3"
+                            android:layout_marginLeft="125dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_width="220dp"
+                            android:layout_height="120dp"
+                            app:srcCompat="@drawable/shoe9"
                             >
 
                         </ImageView>
@@ -179,10 +179,10 @@
                 android:id="@+id/fragmentCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <androidx.cardview.widget.CardView
+            <FrameLayout
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                app:cardCornerRadius="30dp"
+                app:cardCornerRadius="20dp"
 
                 android:layout_width="350dp"
                 android:layout_height="wrap_content">
@@ -262,7 +262,7 @@
                             />
                     </LinearLayout>
                 </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+            </FrameLayout>
 
 
             <TextView
@@ -288,16 +288,13 @@
 
 
 
-                <include
-                    layout="@layout/item_popular"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_popular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     >
 
-                </include>
-                <include
-                    layout="@layout/item_popular"
-                    >
-
-                </include>
+                </androidx.recyclerview.widget.RecyclerView>
 
 
             </LinearLayout>
