@@ -9,7 +9,7 @@
         android:startColor="#FFFFFF"
         android:endColor="#5D90DD"
 
-        android:angle="135"
+
         android:type="linear"
         />
     <corners
