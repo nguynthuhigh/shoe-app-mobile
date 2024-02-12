@@ -15,6 +15,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout productCard;
     ImageButton finishLayout;
 
-    RecyclerView recycleProduct;
+    RecyclerView rcv_popular;
     ProductAdapter productAdapter;
     CardView bg_proImg;
     @Override
@@ -111,7 +112,17 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment fragment = new FootballFragment();
         loadFragment(fragment);
-
+        rcv_popular = findViewById(R.id.rcv_popular);
+        productAdapter = new ProductAdapter(getListPro(), new ClickItemProduct() {
+            @Override
+            public void onClickItemProduct(Product product) {
+                IntentDetails(product);
+            }
+        },this);
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
+        rcv_popular.setLayoutManager(linearLayoutManager);
+        productAdapter.setData(getListPro());
+        rcv_popular.setAdapter(productAdapter);
 
 
     }
@@ -121,20 +132,16 @@ public class MainActivity extends AppCompatActivity {
         bundle.putSerializable("obj_product",product);
         intent.putExtras(bundle);
         startActivity(intent);
-    }/*
-    private List<Product> getListPro() {
+    }
+  private List<Product> getListPro() {
         List<Product> listPro= new ArrayList<Product>();
-        listPro.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF"));
-        listPro.add(new Product("Dunk nike 2024",300,"hehe's shoe",R.drawable.shoe2,"FF422B"));
-        listPro.add(new Product("Jordan",300,"kid's shoe",R.drawable.shoe3,"C1C0C5"));
-        listPro.add(new Product("Hulk",300,"running's shoe",R.drawable.shoe4,"BAC07C"));
-        listPro.add(new Product("White Shoe",300,"football's shoe",R.drawable.shoe5,"8394E7"));
-        listPro.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B"));
-        listPro.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD"));
-        listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D"));
-        listPro.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858"));
+        listPro.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF",false));
+        listPro.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B",false));
+        listPro.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",false));
+        listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D",false));
+        listPro.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",false));
         return listPro;
-    }*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

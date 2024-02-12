@@ -44,18 +44,7 @@ ListProduct productList;
       //  loadData();
     }
 
-    private void loadData() {
-        cartAdapter.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF"));
-        cartAdapter.add(new Product("Dunk nike 2024",300,"hehe's shoe",R.drawable.shoe2,"FF422B"));
-        cartAdapter.add(new Product("Jordan",300,"kid's shoe",R.drawable.shoe3,"C1C0C5"));
-        cartAdapter.add(new Product("Hulk",300,"running's shoe",R.drawable.shoe4,"BAC07C"));
-        cartAdapter.add(new Product("White Shoe",300,"football's shoe",R.drawable.shoe5,"8394E7"));
-        cartAdapter.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B"));
-        cartAdapter.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD"));
-        cartAdapter.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D"));
-        cartAdapter.add(new Product("Nike Vapor Edge Elite 360 2 NRG",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858"));
 
-    }
 
     private void addEvents() {
  /*
