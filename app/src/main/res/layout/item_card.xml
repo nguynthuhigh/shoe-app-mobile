@@ -10,7 +10,7 @@
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="15dp"
 
 
         >
@@ -27,12 +27,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
-                <androidx.cardview.widget.CardView
+                <FrameLayout
                     android:id="@+id/bg_proImg"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    app:cardBackgroundColor="@color/green"
-                    app:cardCornerRadius="25dp"
+                    android:background="@drawable/bg_item_card_custom"
+
                     android:layout_marginBottom="2dp"
                     >
                     <ImageView
@@ -41,9 +41,8 @@
                         android:layout_width="130dp"
                         android:layout_height="100dp"
                         android:rotation="-15"
-
                         />
-                </androidx.cardview.widget.CardView>
+                </FrameLayout>
 
 
             </RelativeLayout>

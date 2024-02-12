@@ -1,15 +1,24 @@
 package com.sneaker.shoeapp.Adapter;
 
+
+
+import androidx.core.content.ContextCompat;
+
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,7 +68,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         holder.proPrice.setText("$"+pro.getPrice()+"");
         int color = Color.parseColor("#"+pro.getColor());
-        holder.bg_pro.setCardBackgroundColor(color);
+        Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.bg_item_card_custom);
+
+        // Check if the drawable is not null before setting the background
+        if (drawable instanceof GradientDrawable) {
+            setColorBg((GradientDrawable) drawable, pro, holder.bg_pro);
+        }
+
         holder.proImg.setImageResource(pro.getImage());
 
         holder.productCard.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +83,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 clickItemProduct.onClickItemProduct(pro);
             }
         });
+        holder.btnAddFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.btnAddFav.setImageResource(R.drawable.heart);
+            }
+        });
     }
-
+    public void setColorBg(GradientDrawable gradientDrawable, Product pro, FrameLayout layout){
+        int colorInt = Color.parseColor("#" + pro.getColor());
+        gradientDrawable.setColors(new int[]{0xFFFFFFFF, colorInt});
+        layout.setBackground(gradientDrawable);
+    }
 
 
     @Override
@@ -81,12 +106,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder{
-        CardView bg_pro;
+        FrameLayout bg_pro;
         ImageView proImg;
         TextView proName;
         TextView proCategory;
         TextView proPrice;
         FrameLayout productCard;
+        ImageButton btnAddFav;
+
        public ProductViewHolder(@NonNull View itemView) {
            super(itemView);
            bg_pro = itemView.findViewById(R.id.bg_proImg);
@@ -95,6 +122,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
            proCategory = itemView.findViewById(R.id.proCategory);
            proPrice = itemView.findViewById(R.id.proPrice);
            productCard = itemView.findViewById(R.id.productCard);
+           btnAddFav = itemView.findViewById(R.id.btnAddFav);
        }
    }
 }
