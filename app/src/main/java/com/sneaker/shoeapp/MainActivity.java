@@ -109,21 +109,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Fragment fragment = new AllFragment();
+        Fragment fragment = new FootballFragment();
         loadFragment(fragment);
 
-        recycleProduct = findViewById(R.id.recycleProduct);
-        productAdapter = new ProductAdapter(getListPro(), new ClickItemProduct() {
-            @Override
-            public void onClickItemProduct(Product product) {
-                IntentDetails(product);
-            }
-        });
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        recycleProduct.setLayoutManager(linearLayoutManager);
-        productAdapter.setData(getListPro());
-        recycleProduct.setAdapter(productAdapter);
 
     }
     private void IntentDetails(Product product) {
@@ -132,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         bundle.putSerializable("obj_product",product);
         intent.putExtras(bundle);
         startActivity(intent);
-    }
+    }/*
     private List<Product> getListPro() {
         List<Product> listPro= new ArrayList<Product>();
         listPro.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF"));
@@ -145,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D"));
         listPro.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858"));
         return listPro;
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -177,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         if(item.getItemId() == R.id.account_header){
-            Intent intent = new Intent(MainActivity.this,MyOrderActivity.class);
+            Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

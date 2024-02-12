@@ -27,22 +27,27 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
-                <FrameLayout
-                    android:id="@+id/bg_proImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:background="@drawable/bg_item_card_custom"
+               <androidx.cardview.widget.CardView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:cardCornerRadius="15dp">
+                   <FrameLayout
+                       android:id="@+id/bg_proImg"
+                       android:layout_width="match_parent"
+                       android:layout_height="100dp"
+                       android:background="@drawable/bg_item_card_custom"
 
-                    android:layout_marginBottom="2dp"
-                    >
-                    <ImageView
-                        android:id="@+id/proImg"
-                        android:layout_marginLeft="1dp"
-                        android:layout_width="130dp"
-                        android:layout_height="100dp"
-                        android:rotation="-15"
-                        />
-                </FrameLayout>
+                       android:layout_marginBottom="2dp"
+                       >
+                       <ImageView
+                           android:id="@+id/proImg"
+                           android:layout_marginLeft="1dp"
+                           android:layout_width="130dp"
+                           android:layout_height="100dp"
+                           android:rotation="-15"
+                           />
+                   </FrameLayout>
+               </androidx.cardview.widget.CardView>
 
 
             </RelativeLayout>

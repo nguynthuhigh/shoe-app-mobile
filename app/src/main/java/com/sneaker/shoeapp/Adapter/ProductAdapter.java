@@ -2,9 +2,12 @@ package com.sneaker.shoeapp.Adapter;
 
 
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import androidx.core.content.ContextCompat;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -40,9 +43,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     private List<Product> ListProduct;
     private ClickItemProduct clickItemProduct;
-    public ProductAdapter(List<Product> ListProduct, ClickItemProduct clickItemProduct) {
+    Context context;
+    public ProductAdapter(List<Product> ListProduct, ClickItemProduct clickItemProduct, Context context) {
         this.clickItemProduct = clickItemProduct;
         this.ListProduct = ListProduct;
+        this.context = context;
     }
     public void setData(List<Product> list){
         this.ListProduct = list;
@@ -57,25 +62,29 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+
         Product pro = ListProduct.get(position);
         if(pro  == null){
             return;
         }
-        //holder.proImg.setLayoutParams(new ViewGroup.LayoutParams(130, 95));
-
-        holder.proName.setText(pro.getProName());
-        holder.proCategory.setText(pro.getCategory());
-
-        holder.proPrice.setText("$"+pro.getPrice()+"");
-        int color = Color.parseColor("#"+pro.getColor());
-        Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.bg_item_card_custom);
-
-        // Check if the drawable is not null before setting the background
-        if (drawable instanceof GradientDrawable) {
-            setColorBg((GradientDrawable) drawable, pro, holder.bg_pro);
-        }
-
         holder.proImg.setImageResource(pro.getImage());
+       // @SuppressLint("UseCompatLoadingForDrawables") GradientDrawable gradientDrawable =(GradientDrawable) context.getResources().getDrawable(R.drawable.bg_item_card_custom);
+
+
+       // int colorInt = Color.parseColor("#" + pro.getColor());
+      //  gradientDrawable.setColors(new int[]{ 0xFFFFFFFF, colorInt});
+      //  holder.bg_pro.setBackground(gradientDrawable);
+        GradientDrawable gradientDrawable = new GradientDrawable(
+                GradientDrawable.Orientation.TL_BR,
+                new int[]{ Color.parseColor("#" + pro.getColor()),Color.WHITE});
+        gradientDrawable.setGradientRadius(45);
+
+        holder.bg_pro.setBackground(gradientDrawable);
+        holder.proName.setText(pro.getProName());
+
+        holder.proCategory.setText(pro.getCategory());
+        holder.proPrice.setText("$"+pro.getPrice()+"");
+
 
         holder.productCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,9 +100,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         });
     }
     public void setColorBg(GradientDrawable gradientDrawable, Product pro, FrameLayout layout){
-        int colorInt = Color.parseColor("#" + pro.getColor());
-        gradientDrawable.setColors(new int[]{0xFFFFFFFF, colorInt});
-        layout.setBackground(gradientDrawable);
+
     }
 
 
@@ -106,6 +113,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder{
+
         FrameLayout bg_pro;
         ImageView proImg;
         TextView proName;
