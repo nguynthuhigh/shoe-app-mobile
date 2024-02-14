@@ -33,7 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,6 +65,7 @@
                 </TextView>
             </LinearLayout>
             <HorizontalScrollView
+                android:overScrollMode="never"
                 android:layout_gravity="center"
                 android:contentDescription="Banner"
                 android:layout_marginTop="10dp"

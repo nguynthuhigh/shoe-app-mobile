@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
             }
         },this);
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
+        rcv_popular.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rcv_popular.setLayoutManager(linearLayoutManager);
         productAdapter.setData(getListPro());
         rcv_popular.setAdapter(productAdapter);
@@ -201,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.header_menu,menu);
         MenuItem mn_search = menu.findItem(R.id.ic_search);
         SearchView searchView = (SearchView) mn_search.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
