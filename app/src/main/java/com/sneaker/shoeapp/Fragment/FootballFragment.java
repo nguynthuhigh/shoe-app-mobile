@@ -53,7 +53,9 @@ public class FootballFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         rcv_ft.setLayoutManager(gridLayoutManager);
         productAdapter.setData(getListPro());
+        rcv_ft.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rcv_ft.setAdapter(productAdapter);
+
 
         return view;
     }

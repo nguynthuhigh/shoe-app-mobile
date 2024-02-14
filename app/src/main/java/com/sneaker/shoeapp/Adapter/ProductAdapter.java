@@ -174,7 +174,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView proPrice_popular,proCate_popular,proName_popular;
         ImageView proImg_popular;
         FrameLayout proBg_popular;
-        CardView item_popular;
+        FrameLayout item_popular;
 
         public ProductPopularViewHolder(@NonNull View itemView) {
             super(itemView);

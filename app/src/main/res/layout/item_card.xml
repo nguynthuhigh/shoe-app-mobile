@@ -7,13 +7,12 @@
 
 
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:id="@+id/productCard"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
+        android:background="@drawable/border_item_card"
        >
 
 
@@ -30,8 +29,9 @@
 
                <androidx.cardview.widget.CardView
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   app:cardCornerRadius="15dp">
+                   android:layout_height="100dp"
+                   app:cardCornerRadius="15dp"
+                   app:cardElevation="0dp">
                    <FrameLayout
                        android:id="@+id/bg_proImg"
                        android:layout_width="match_parent"
@@ -120,5 +120,5 @@
             </RelativeLayout>
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </LinearLayout>

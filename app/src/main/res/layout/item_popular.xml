@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center">
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:id="@+id/item_popular"
         android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_margin="6dp"
-        app:cardCornerRadius="15dp"
-        app:cardBackgroundColor="@color/white"
+        android:background="@drawable/border_item_card"
 
         >
 
@@ -115,5 +114,5 @@
 
             </LinearLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </LinearLayout>

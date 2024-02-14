@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -41,7 +42,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton btnAddFav, btnSearch;
-    Button btnSeller,categoryAll,categoryFootball;
+    Button btnSeller,categoryAll,categoryFootball,btnLogin,btnRegister,btnFav,btnPayment,btnCheckout,btnOrderDetails;
     EditText searchProduct,searchProduct_2;
     FrameLayout productCard;
     ImageButton finishLayout;
@@ -88,8 +89,50 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(fragment);
             }
         });
-    }
 
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLayout(LoginActivity.class);
+            }
+        });
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLayout(RegisterActivity.class);
+            }
+        });
+        btnFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLayout(FavouriteActivity.class);
+            }
+        });
+        btnPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLayout(PaymentActivity.class);
+            }
+        });
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLayout(CheckoutActivity.class);
+            }
+        });
+        btnOrderDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLayout(OrderDetailsActivity.class);
+            }
+        });
+
+    }
+    private void changeLayout(Class context){
+        Intent intent = new Intent(MainActivity.this,context);
+        startActivity(intent);
+    }
     void loadFragment(Fragment fragment){
         FragmentTransaction frgTrans = getSupportFragmentManager().beginTransaction();
         frgTrans.replace(R.id.fragmentCategory,fragment);
@@ -98,6 +141,16 @@ public class MainActivity extends AppCompatActivity {
     }
     @SuppressLint("ResourceAsColor")
     private void addControls() {
+        btnLogin = findViewById(R.id.btnLogin);
+        btnRegister = findViewById(R.id.btnRegister);
+        btnFav = findViewById(R.id.btnFav);
+        btnPayment = findViewById(R.id.btnPayment);
+        btnCheckout = findViewById(R.id.btnCheckout);
+        btnOrderDetails = findViewById(R.id.btnOrderDetails);
+
+
+
+
         btnSeller = findViewById(R.id.btnSeller);
         btnAddFav = findViewById(R.id.btnAddFav);
         searchProduct = findViewById(R.id.searchProduct);
@@ -120,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
             }
         },this);
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
+        rcv_popular.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rcv_popular.setLayoutManager(linearLayoutManager);
         productAdapter.setData(getListPro());
         rcv_popular.setAdapter(productAdapter);
@@ -148,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.header_menu,menu);
         MenuItem mn_search = menu.findItem(R.id.ic_search);
         SearchView searchView = (SearchView) mn_search.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

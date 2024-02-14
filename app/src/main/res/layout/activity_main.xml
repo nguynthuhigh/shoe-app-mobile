@@ -33,7 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,6 +65,7 @@
                 </TextView>
             </LinearLayout>
             <HorizontalScrollView
+                android:overScrollMode="never"
                 android:layout_gravity="center"
                 android:contentDescription="Banner"
                 android:layout_marginTop="10dp"
@@ -128,6 +130,7 @@
 
             </HorizontalScrollView>
             <HorizontalScrollView
+
                 android:layout_gravity="center"
                 android:contentDescription="Banner"
                 android:layout_marginLeft="5dp"
@@ -137,15 +140,18 @@
                 android:scrollbars="none"
                 >
                 <LinearLayout
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <Button
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         android:id="@+id/categoryAll"
                         android:layout_width="60dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/btn_cate"
+                        android:background="@drawable/border_item_card"
                         android:text="All"
                         android:textAllCaps="false"
                         android:textSize="16dp"
@@ -155,11 +161,13 @@
                     </Button>
 
                     <Button
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:id="@+id/categoryFootball"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:background="@drawable/btn_cate"
+                        android:background="@drawable/border_item_card"
                         android:text="Football"
                         android:textSize="16dp"
                         android:textAllCaps="false"
@@ -178,7 +186,8 @@
             <FrameLayout
                 android:id="@+id/fragmentCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"/>
             <FrameLayout
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
@@ -299,11 +308,31 @@
 
             </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycleProduct"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
+            <androidx.gridlayout.widget.GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:columnCount="4"
+                >
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:text="Login"/>
+                <Button
+                    android:id="@+id/btnRegister"
+                    android:text="Register"/>
+                <Button
+                    android:id="@+id/btnFav"
+                    android:text="Favorite"/>
+                <Button
+                    android:id="@+id/btnPayment"
+                    android:text="Payment"/>
+                <Button
+                    android:id="@+id/btnCheckout"
+                    android:text="Checkout"/>
+                <Button
+                    android:id="@+id/btnOrderDetails"
+                    android:text="Order"/>
+            </androidx.gridlayout.widget.GridLayout>
         </LinearLayout>
     </ScrollView>
 
