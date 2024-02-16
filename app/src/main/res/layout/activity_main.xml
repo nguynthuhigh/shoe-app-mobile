@@ -146,17 +146,19 @@
                     android:orientation="horizontal">
 
                     <Button
+
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:id="@+id/categoryAll"
                         android:layout_width="60dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/border_item_card"
+                        android:background="@drawable/btn_cate"
                         android:text="All"
                         android:textAllCaps="false"
                         android:textSize="16dp"
                         app:cornerRadius="10dp"
-                        android:fontFamily="@font/alata_regular">
+                        android:fontFamily="@font/alata_regular"
+                        android:textColor="@color/white">
 
                     </Button>
 

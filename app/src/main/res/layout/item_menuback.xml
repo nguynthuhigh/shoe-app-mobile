@@ -23,12 +23,12 @@
             app:title=" "
             />
         <ImageButton
-            android:id="@+id/finishLayout"
+            android:id="@+id/btnBack"
             android:layout_width="31dp"
             android:layout_height="31dp"
             android:src="@drawable/back"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
             >
 

@@ -34,7 +34,7 @@ public class MyOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_order);
         Toolbar main_header = findViewById(R.id.menu_header);
         setSupportActionBar(main_header);
-        finishLayout = findViewById(R.id.finishLayout);
+        finishLayout = findViewById(R.id.btnBack);
         finishLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
