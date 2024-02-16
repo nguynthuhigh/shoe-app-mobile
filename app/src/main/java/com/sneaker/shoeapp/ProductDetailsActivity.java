@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     FrameLayout bg_pro_details,bg_pro_details_2,bg_pro_details_main;
     CardView proColor;
     Button add_to_cart;
+    ImageButton btnBack;
     Product pro;
 
     @Override
@@ -60,6 +62,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 
@@ -73,5 +81,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         bg_pro_details_main = findViewById(R.id.bg_pro_details_main);
         add_to_cart = findViewById(R.id.add_to_cart);
         proColor = findViewById(R.id.proColor);
+        btnBack = findViewById(R.id.btnBack);
     }
 }

@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
         categoryFootball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                changeStateButton(categoryFootball,R.drawable.btn_cate,R.color.white);
+                changeStateButton(categoryAll,R.drawable.border_item_card_nonbg,R.color.black);
+
                 Fragment fragment = new FootballFragment();
                 loadFragment(fragment);
             }
@@ -85,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
         categoryAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                changeStateButton(categoryAll,R.drawable.btn_cate,R.color.white);
+                changeStateButton(categoryFootball,R.drawable.border_item_card_nonbg,R.color.black);
+
                 Fragment fragment = new AllFragment();
                 loadFragment(fragment);
             }
@@ -129,6 +135,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    private void changeStateButton(Button btn,int drawable,int color){
+        Drawable borderDrawable = getResources().getDrawable(drawable);
+        btn.setBackground(borderDrawable);
+        int colorR = getResources().getColor(color);
+        btn.setTextColor(colorR);
+    }
+
     private void changeLayout(Class context){
         Intent intent = new Intent(MainActivity.this,context);
         startActivity(intent);
@@ -149,15 +162,13 @@ public class MainActivity extends AppCompatActivity {
         btnOrderDetails = findViewById(R.id.btnOrderDetails);
 
 
-
-
         btnSeller = findViewById(R.id.btnSeller);
         btnAddFav = findViewById(R.id.btnAddFav);
         searchProduct = findViewById(R.id.searchProduct);
         searchProduct_2 = findViewById(R.id.searchProduct_2);
         productCard = findViewById(R.id.productCard);
         btnSearch = findViewById(R.id.btnSearch);
-        finishLayout = findViewById(R.id.finishLayout);
+        finishLayout = findViewById(R.id.btnBack);
         categoryAll = findViewById(R.id.categoryAll);
         categoryFootball = findViewById(R.id.categoryFootball);
 
