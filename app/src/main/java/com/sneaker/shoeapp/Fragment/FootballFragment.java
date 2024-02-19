@@ -55,8 +55,6 @@ public class FootballFragment extends Fragment {
         productAdapter.setData(getListPro());
         rcv_ft.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rcv_ft.setAdapter(productAdapter);
-
-
         return view;
     }
     private void IntentDetails(Product product) {
@@ -68,7 +66,7 @@ public class FootballFragment extends Fragment {
     }
     private List<Product> getListPro() {
         List<Product> listPro= new ArrayList<Product>();
-        listPro.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"BAC07C",true));
+        listPro.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B",true));
         listPro.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",true));
         listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D",true));
         listPro.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe10,"FF422B",true));

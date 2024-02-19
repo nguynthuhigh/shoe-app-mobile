@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="whiteLight">#F8F8F8</color>
     <color name="paymentBG">#F7F7F7</color>
     <color name="darkGrey">#535353</color>
     <color name="green">#37D63E</color>
@@ -13,6 +14,6 @@
     <color name="blue">#81D8F3</color>
     <color name="pinkk">#FF82B4</color>
     <color name="gray">#cccc</color>
-    <color name="gray_bg">#F6F6F6</color>
-
+    <color name="grayne">#F6F6F6</color>
+    <color name="red">#CC8A4343</color>
 </resources>

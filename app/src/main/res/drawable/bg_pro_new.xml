@@ -2,16 +2,17 @@
 <shape
     android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid
-        android:color="#F54444"
-        >
+    <gradient
+        android:startColor="#CC8A4343"
+        android:endColor="@color/darkBlue"
+        android:angle="135">
 
-    </solid>
+    </gradient>
 
     <corners
-        android:bottomRightRadius="50dp"
-        android:topRightRadius="50dp"
-        android:topLeftRadius="50dp"
+        android:bottomRightRadius="20dp"
+        android:topRightRadius="20dp"
+        android:topLeftRadius="20dp"
         >
 
     </corners>

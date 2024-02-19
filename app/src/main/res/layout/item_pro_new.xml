@@ -3,70 +3,93 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <FrameLayout
-        android:padding="15dp"
-        android:layout_width="170dp"
-        android:layout_height="200dp"
-        android:background="@drawable/bg_pro_new">
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:layout_margin="5dp"
+        app:cardElevation="0dp"
+        >
+        <FrameLayout
+            android:id="@+id/productCard"
+            android:padding="15dp"
+            android:layout_width="170dp"
+            android:layout_height="200dp"
+            android:background="@drawable/bg_pro_new"
+            >
+            <LinearLayout
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                >
-                <TextView
+                android:orientation="vertical">
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$1000"
-                    android:textSize="25sp"
-                    android:layout_alignParentStart="true"
+                    >
+                    <TextView
+                        android:id="@+id/proPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$1000"
+                        android:textSize="25sp"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/alata_regular"
+
+                        >
+
+                    </TextView>
+                    <FrameLayout
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/bg_circle_gray">
+                        <ImageButton
+                            android:id="@+id/btnAddFav"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/favorite_white"
+                            android:background="@android:color/transparent">
+
+                        </ImageButton>
+                    </FrameLayout>
+
+                </RelativeLayout>
+                <ImageView
+
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/proImg"
+                    android:layout_width="120dp"
+                    android:layout_height="70dp"
+                    app:srcCompat="@drawable/shoe10"
+                    android:rotation="-10"/>
+                <TextView
+                    android:id="@+id/proCategory"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product's Category"
                     android:textColor="@color/white"
                     android:fontFamily="@font/alata_regular"
-
-                    >
-
-                </TextView>
-                <ImageButton
-                    android:layout_marginTop="7dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_alignParentEnd="true"
+                    android:textSize="13sp"
+                    />
+                <TextView
+                    android:id="@+id/proName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/favorite_white"
-                    android:background="@android:color/transparent">
-
-                </ImageButton>
-            </RelativeLayout>
-            <ImageView
-                android:layout_marginLeft="2dp"
-                android:id="@+id/imageView6"
-                android:layout_width="120dp"
-                android:layout_height="70dp"
-                app:srcCompat="@drawable/shoe10"
-                android:rotation="-10"/>
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product's Category"
-                android:textColor="@color/white"
-                android:fontFamily="@font/alata_regular"
-                android:textSize="13sp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product's Category"
-                android:textColor="@color/white"
-                android:fontFamily="@font/alata_regular"
-                android:textSize="16sp"
-                />
-        </LinearLayout>
+                    android:text="Product's Category"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/alata_regular"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
 
 
-    </FrameLayout>
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </LinearLayout>

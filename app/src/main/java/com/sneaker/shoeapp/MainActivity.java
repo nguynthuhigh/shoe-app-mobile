@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.sneaker.shoeapp.Adapter.ProductAdapter;
 import com.sneaker.shoeapp.Fragment.AllFragment;
 import com.sneaker.shoeapp.Fragment.FootballFragment;
+import com.sneaker.shoeapp.Fragment.RunningFragment;
 import com.sneaker.shoeapp.Interface.ClickItemProduct;
 import com.sneaker.shoeapp.model.Product;
 
@@ -42,7 +43,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton btnAddFav, btnSearch;
-    Button btnSeller,categoryAll,categoryFootball,btnLogin,btnRegister,btnFav,btnPayment,btnCheckout,btnOrderDetails;
+    Button btnSeller,categoryAll,categoryFootball,categoryRunning,btnLogin,btnRegister,btnFav,btnPayment,btnCheckout,btnOrderDetails;
     EditText searchProduct,searchProduct_2;
     FrameLayout productCard;
     ImageButton finishLayout;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 changeStateButton(categoryFootball,R.drawable.btn_cate,R.color.white);
                 changeStateButton(categoryAll,R.drawable.border_item_card_nonbg,R.color.black);
-
+                changeStateButton(categoryRunning,R.drawable.border_item_card_nonbg,R.color.black);
                 Fragment fragment = new FootballFragment();
                 loadFragment(fragment);
             }
@@ -90,12 +91,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 changeStateButton(categoryAll,R.drawable.btn_cate,R.color.white);
                 changeStateButton(categoryFootball,R.drawable.border_item_card_nonbg,R.color.black);
-
+                changeStateButton(categoryRunning,R.drawable.border_item_card_nonbg,R.color.black);
                 Fragment fragment = new AllFragment();
                 loadFragment(fragment);
             }
         });
-
+        categoryRunning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStateButton(categoryRunning,R.drawable.btn_cate,R.color.white);
+                changeStateButton(categoryFootball,R.drawable.border_item_card_nonbg,R.color.black);
+                changeStateButton(categoryAll,R.drawable.border_item_card_nonbg,R.color.black);
+                Fragment fragment = new RunningFragment();
+                loadFragment(fragment);
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,10 +181,10 @@ public class MainActivity extends AppCompatActivity {
         finishLayout = findViewById(R.id.btnBack);
         categoryAll = findViewById(R.id.categoryAll);
         categoryFootball = findViewById(R.id.categoryFootball);
+        categoryRunning = findViewById(R.id.categoryRunning);
 
 
-
-        Fragment fragment = new FootballFragment();
+        Fragment fragment = new AllFragment();
         loadFragment(fragment);
         rcv_popular = findViewById(R.id.rcv_popular);
         productAdapter = new ProductAdapter(getListPro(), new ClickItemProduct() {
