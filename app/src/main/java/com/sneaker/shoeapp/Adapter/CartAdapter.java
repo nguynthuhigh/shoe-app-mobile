@@ -45,7 +45,9 @@ public class CartAdapter extends ArrayAdapter<Product> {
         proImg_cart = viewCustom.findViewById(R.id.proImg_cart);
         bg_item_card_custom = viewCustom.findViewById(R.id.bg_item_card_custom);
         Product pro = getItem(position);
-
+        if(pro == null){
+            return layoutInflater.inflate(R.layout.layout_cart_null,null);
+        }
         proName_cart.setText(pro.getProName());
         proPrice_cart.setText(pro.getPrice()+"");
         proImg_cart.setImageResource(pro.getImage());

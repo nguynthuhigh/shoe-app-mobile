@@ -59,7 +59,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(TYPE_USER_CATE == viewType){
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card,parent,false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pro_new,parent,false);
             return new ProductViewHolder(view);
         }else if(TYPE_USER_POPULAR == viewType){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_popular,parent,false);
@@ -83,12 +83,23 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             // int colorInt = Color.parseColor("#" + pro.getColor());
             //  gradientDrawable.setColors(new int[]{ 0xFFFFFFFF, colorInt});
             //  holder.bg_pro.setBackground(gradientDrawable);
+
+            Integer color =Color.parseColor("#" + pro.getColor());
+            int originalRed = Color.red(color);
+            int originalGreen = Color.green(color);
+            int originalBlue = Color.blue(color);
+            float brightnessFactor = 2f;
+            int brighterRed = Math.min((int) (originalRed * brightnessFactor), 255);
+            int brighterGreen = Math.min((int) (originalGreen * brightnessFactor), 255);
+            int brighterBlue = Math.min((int) (originalBlue * brightnessFactor), 255);
+            int brighterColorInt = Color.rgb(brighterRed, brighterGreen, brighterBlue);
+
             GradientDrawable gradientDrawable = new GradientDrawable(
                     GradientDrawable.Orientation.TL_BR,
-                    new int[]{ Color.parseColor("#" + pro.getColor()),Color.WHITE});
+                    new int[]{ color, brighterColorInt});
 
 
-            productViewHolder.bg_pro.setBackground(gradientDrawable);
+            productViewHolder.productCard.setBackground(gradientDrawable);
             productViewHolder.proName.setText(pro.getProName());
 
             productViewHolder.proCategory.setText(pro.getCategory());
@@ -159,7 +170,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
        public ProductViewHolder(@NonNull View itemView) {
            super(itemView);
-           bg_pro = itemView.findViewById(R.id.bg_proImg);
+       ///    bg_pro = itemView.findViewById(R.id.bg_proImg);
            proImg = itemView.findViewById(R.id.proImg);
            proName = itemView.findViewById(R.id.proName);
            proCategory = itemView.findViewById(R.id.proCategory);

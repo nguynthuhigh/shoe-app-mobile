@@ -1,66 +1,66 @@
 package com.sneaker.shoeapp.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sneaker.shoeapp.Adapter.ProductAdapter;
+import com.sneaker.shoeapp.Interface.ClickItemProduct;
+import com.sneaker.shoeapp.ProductDetailsActivity;
 import com.sneaker.shoeapp.R;
+import com.sneaker.shoeapp.model.Product;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AllFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.GZIPInputStream;
+
+
 public class AllFragment extends Fragment {
+    RecyclerView rcv_all;
+    View view;
+    ProductAdapter productAdapter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public AllFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AllFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AllFragment newInstance(String param1, String param2) {
-        AllFragment fragment = new AllFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all, container, false);
+        view = inflater.inflate(R.layout.fragment_all, container, false);
+        rcv_all = view.findViewById(R.id.rcv_all);
+        productAdapter = new ProductAdapter(getList(), new ClickItemProduct() {
+            @Override
+            public void onClickItemProduct(Product product) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("obj_product",product);
+                Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        },getContext());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
+        rcv_all.setLayoutManager(gridLayoutManager);
+        productAdapter.setData(getList());
+        rcv_all.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        rcv_all.setAdapter(productAdapter);
+        return view;
+    }
+
+    private List<Product> getList() {
+        List<Product> list = new ArrayList<>();
+        list.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe2,"FF422B",true));
+        list.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",true));
+        list.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe5,"A59D2D",true));
+        list.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",true));
+        return list;
     }
 }
