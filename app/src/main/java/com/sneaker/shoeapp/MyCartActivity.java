@@ -47,29 +47,23 @@ ListProduct productList;
 
 
     private void addEvents() {
- /*
-        increasePro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int qty = Integer.parseInt(viewQuantity.getText().toString());
-                qty++;
-                viewQuantity.setText(qty+"");
-            }
-        });
-      decreasePro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int qty = Integer.parseInt(viewQuantity.getText().toString());
-                qty--;
-                viewQuantity.setText(qty+"");
-            }
-        });*/
+
+      //decreasePro.setOnClickListener(new View.OnClickListener() {
+       //     @Override
+         //   public void onClick(View v) {
+        //        int qty = Integer.parseInt(viewQuantity.getText().toString());
+        //        qty--;
+          //      viewQuantity.setText(qty+"");
+           // }
+        //});
+
+
     }
 
     private void addControls() {
         decreasePro = findViewById(R.id.decreasePro);
-        increasePro = findViewById(R.id.increasePro);
-      //  viewQuantity = findViewById(R.id.viewQuantity);
+      //  increasePro = findViewById(R.id.increasePro);
+        viewQuantity = findViewById(R.id.viewQuantity);
         listItem_cart = findViewById(R.id.listItem_cart);
         Bundle bundle = getIntent().getExtras();
         Product pro = (Product) bundle.getSerializable("pro_details");

@@ -113,7 +113,7 @@
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
-                <TextView
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -121,7 +121,10 @@
                     android:text="Sign Up"
                     android:textColor="#4764FD"
                     android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                  android:background="@android:color/transparent"
+                    android:id="@+id/btnSignUp"
+                    />
 
             </LinearLayout>
         </LinearLayout>
