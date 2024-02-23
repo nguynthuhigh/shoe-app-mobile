@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.sneaker.shoeapp.Adapter.CartAdapter;
 import com.sneaker.shoeapp.Adapter.ProductAdapter;
+import com.sneaker.shoeapp.Interface.ClickItemCart;
 import com.sneaker.shoeapp.model.ListProduct;
 import com.sneaker.shoeapp.model.Product;
 
@@ -26,10 +27,11 @@ import java.util.List;
 
 public class MyCartActivity extends AppCompatActivity {
 ImageButton decreasePro,increasePro;
-TextView viewQuantity;
+
 ListView listItem_cart;
 CartAdapter cartAdapter;
 ListProduct productList;
+ImageButton btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,6 +49,7 @@ ListProduct productList;
 
 
     private void addEvents() {
+<<<<<<< HEAD
 
       //decreasePro.setOnClickListener(new View.OnClickListener() {
        //     @Override
@@ -58,25 +61,46 @@ ListProduct productList;
         //});
 
 
+=======
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+>>>>>>> c59e382918375fc89b3c77a62b84f9f51f9fb6e3
     }
 
     private void addControls() {
         decreasePro = findViewById(R.id.decreasePro);
+<<<<<<< HEAD
       //  increasePro = findViewById(R.id.increasePro);
         viewQuantity = findViewById(R.id.viewQuantity);
+=======
+        increasePro = findViewById(R.id.increasePro);
+        btnBack = findViewById(R.id.btnBack);
+      //  viewQuantity = findViewById(R.id.viewQuantity);
+>>>>>>> c59e382918375fc89b3c77a62b84f9f51f9fb6e3
         listItem_cart = findViewById(R.id.listItem_cart);
         Bundle bundle = getIntent().getExtras();
-        Product pro = (Product) bundle.getSerializable("pro_details");
-        cartAdapter = new CartAdapter(this,R.layout.item_cart);
+        Product pro = new Product();
+        if(bundle ==null) {
+            setContentView(R.layout.layout_cart_null);
+        }
+        else pro = (Product) bundle.getSerializable("pro_details");
+        cartAdapter = new CartAdapter(this, R.layout.item_cart);
         productList = new ListProduct();
         productList.add(pro);
         listItem_cart.setAdapter(cartAdapter);
+
+
         if(productList.getProductList() != null){
             for (Product p:productList.getProductList()
                  ) {
                 cartAdapter.add(p);
             }
         }
+
 
 
     }

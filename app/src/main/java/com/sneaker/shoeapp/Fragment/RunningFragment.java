@@ -62,10 +62,10 @@ public class RunningFragment extends Fragment {
 
     private List<Product> getList() {
         List<Product> productList = new ArrayList<>();
-        productList.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe1,"CACBCF",true));
-        productList.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe3,"5D90DD",true));
-        productList.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe4,"A59D2D",true));
-        productList.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe5,"585858",true));
+        productList.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe1,"CACBCF",2));
+        productList.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe3,"5D90DD",2));
+        productList.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe4,"A59D2D",2));
+        productList.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe5,"585858",2));
         return productList;
     }
 }

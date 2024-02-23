@@ -57,10 +57,10 @@ public class AllFragment extends Fragment {
 
     private List<Product> getList() {
         List<Product> list = new ArrayList<>();
-        list.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe2,"FF422B",true));
-        list.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",true));
-        list.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe5,"A59D2D",true));
-        list.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",true));
+        list.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe2,"FF422B",2));
+        list.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",2));
+        list.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe5,"A59D2D",2));
+        list.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",2));
         return list;
     }
 }
