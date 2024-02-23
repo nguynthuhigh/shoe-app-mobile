@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="30dp"
+    android:layout_marginTop="5dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="0dp">
+            <RelativeLayout
+                android:id="@+id/item_banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/darkBlue">
+
+                <FrameLayout
+
+                    android:layout_marginTop="5dp"
+                    android:layout_width="350dp"
+                    android:layout_height="150dp"
+                   >
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/item_banner_name"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/alata_regular"
+                            android:text="Nike Dunk Low GS Year of The Dragon"
+                            android:textColor="@color/white"
+                            android:textSize="20sp">
+
+                        </TextView>
+                        <ImageButton
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:contentDescription="Explore new shoe"
+                            android:background="@drawable/btn_explore"
+                            android:src="@drawable/btn_explore">
+
+                        </ImageButton>
+                    </RelativeLayout>
+                </FrameLayout>
+                <ImageView
+                    android:id="@+id/item_banner_img"
+                    android:layout_marginLeft="125dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_width="220dp"
+                    android:layout_height="120dp"
+                    app:srcCompat="@drawable/shoe9"
+                    >
+
+                </ImageView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+</LinearLayout>
