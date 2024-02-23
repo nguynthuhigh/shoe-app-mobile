@@ -16,9 +16,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sneaker.shoeapp.Adapter.OrderAdapter;
+import com.sneaker.shoeapp.Interface.ClickItemOrder;
 import com.sneaker.shoeapp.model.Order;
 import com.sneaker.shoeapp.model.Product;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,18 +51,27 @@ public class MyOrderActivity extends AppCompatActivity {
         rcv_order = findViewById(R.id.rcv_order);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         rcv_order.setLayoutManager(linearLayoutManager);
-        orderAdapter.setData(getListOrder());
+        orderAdapter.setData(getListOrder(), new ClickItemOrder() {
+            @Override
+            public void onClickedItem(Order order) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("order_obj", order);
+                Intent intent = new Intent(MyOrderActivity.this,OrderDetailsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         rcv_order.setAdapter(orderAdapter);
     }
 
     private List<Order> getListOrder() {
         List<Order> orderList = new ArrayList<>();
 
-        orderList.add(new Order(1,2024,true,5,1200));
-        orderList.add(new Order(2,2024,false,4,5200));
-        orderList.add(new Order(3,2024,true,100,520000));
-        orderList.add(new Order(4,2024,true,20,1200));
-        orderList.add(new Order(5,2024,true,5,15000));
+        orderList.add(new Order(1,2024,true,5,1200,"HCM"));
+        orderList.add(new Order(2,2024,false,4,5200,"HN"));
+        orderList.add(new Order(3,2024,true,100,520000,"DAKLAK"));
+        orderList.add(new Order(4,2024,false,20,1200,"GIALAI"));
+        orderList.add(new Order(5,2024,true,5,15000,"QUANGNAM"));
         return orderList;
     }
 

@@ -3,21 +3,33 @@ package com.sneaker.shoeapp.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Order{
-    Integer id;
-    Integer date;
-    Boolean status;
-    Integer quantity;
-    Integer total_value;
+public class Order implements Serializable {
+    private Integer id;
+    private Integer date;
+    private Boolean status;
+    private Integer quantity;
+    private Integer total_value;
 
-    public Order(Integer id, Integer date, Boolean status, Integer quantity, Integer total_value) {
+
+
+    private String address;
+
+
+    public Order(Integer id, Integer date, Boolean status, Integer quantity, Integer total_value,String address) {
         this.id = id;
         this.date = date;
         this.status = status;
         this.quantity = quantity;
         this.total_value = total_value;
+        this.address = address;
+    }
+    public String getAddress() {
+        return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
     public Integer getId() {
         return id;
     }
