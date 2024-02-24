@@ -23,6 +23,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +47,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ClickItemProduct clickItemProduct;
     private static int TYPE_USER_POPULAR =1;
     private static int TYPE_USER_CATE =2;
+    private static int TYPE_PRO_BANNER = 3;
     Context context;
     public ProductAdapter(List<Product> ListProduct, ClickItemProduct clickItemProduct, Context context) {
         this.clickItemProduct = clickItemProduct;
@@ -64,15 +67,18 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }else if(TYPE_USER_POPULAR == viewType){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_popular,parent,false);
             return new ProductPopularViewHolder(view);
+        }else if(TYPE_PRO_BANNER == viewType){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_banner_home,parent,false);
+            return new ProBannerViewHolder(view);
         }
         return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        Product pro = ListProduct.get(position);
         if(TYPE_USER_CATE == holder.getItemViewType()){
             ProductViewHolder productViewHolder = (ProductViewHolder) holder;
-            Product pro = ListProduct.get(position);
             if(pro  == null){
                 return;
             }
@@ -120,8 +126,9 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
         }
         else if(TYPE_USER_POPULAR == holder.getItemViewType()){
-            Product pro = ListProduct.get(position);
+
             ProductPopularViewHolder productPopularViewHolder = (ProductPopularViewHolder) holder;
+
             productPopularViewHolder.proImg_popular.setImageResource(pro.getImage());
             productPopularViewHolder.proName_popular.setText(pro.getProName());
             productPopularViewHolder.proCate_popular.setText(pro.getCategory());
@@ -137,6 +144,23 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
         }
+        else if(TYPE_PRO_BANNER == holder.getItemViewType()){
+            ProBannerViewHolder proBannerViewHolder = (ProBannerViewHolder) holder;
+
+            proBannerViewHolder.item_banner_img.setImageResource(pro.getImage());
+            proBannerViewHolder.item_banner_name.setText(pro.getProName());
+            GradientDrawable gradientDrawable = new GradientDrawable(
+                    GradientDrawable.Orientation.TL_BR,
+                    new int[]{ Color.parseColor("#" + pro.getColor()),Color.WHITE});
+            proBannerViewHolder.item_banner.setBackground(gradientDrawable);
+            proBannerViewHolder.item_banner.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickItemProduct.onClickItemProduct(pro);
+                }
+            });
+
+        }
     }
 
 
@@ -146,8 +170,14 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemViewType(int position) {
         Product product = ListProduct.get(position);
-        if(product.isCate()) return TYPE_USER_CATE;
-        else return TYPE_USER_POPULAR;
+        if(product.getType() == 1) return TYPE_USER_POPULAR;
+        else if(product.getType() == 2) {
+            return TYPE_USER_CATE;
+        }
+        else if(product.getType() == 3){
+            return TYPE_PRO_BANNER;
+        }
+        return 0;
     }
 
     @Override
@@ -156,6 +186,19 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return ListProduct.size();
         }
         return 0;
+    }
+    public class ProBannerViewHolder extends  RecyclerView.ViewHolder{
+        RelativeLayout item_banner;
+        TextView item_banner_name;
+        ImageView item_banner_img;
+
+        public ProBannerViewHolder(@NonNull View itemView) {
+            super(itemView);
+            item_banner_img = itemView.findViewById(R.id.item_banner_img);
+            item_banner_name = itemView.findViewById(R.id.item_banner_name);
+
+            item_banner = itemView.findViewById(R.id.item_banner);
+        }
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder{

@@ -27,7 +27,7 @@
                     app:srcCompat="@drawable/rectangle_bottom_radius" />
 
                 <TextView
-                    android:id="@+id/txtCheckout"
+                    android:id="@+id/orderID_Detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -42,7 +42,7 @@
                     android:id="@+id/bg_checkout"
                     android:layout_width="358dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtCheckout"
+                    android:layout_below="@+id/orderID_Detail"
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="30dp"
                     app:cardCornerRadius="30dp"
@@ -56,7 +56,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:paddingStart="15dp"
                             android:paddingTop="15dp"
@@ -70,7 +70,7 @@
                             android:fontFamily="@font/alata_regular"
                             android:text="Details"
                             android:textColor="@color/black"
-                            android:textSize="15dp" />
+                            android:textSize="15sp" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -89,6 +89,7 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/orderStatus_Detail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -108,6 +109,7 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/orderDate_Detail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/orderID"
@@ -148,6 +150,7 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/orderAddress_Detail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/customer"
@@ -195,72 +198,7 @@
                             android:textColor="@color/black"
                             android:textSize="18dp" />
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="15dp"
-                            android:background="@drawable/rectangle_payment_info">
 
-                            <RelativeLayout
-                                android:id="@+id/shoe1"
-                                android:layout_width="70dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="5dp">
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-
-                                    app:srcCompat="@drawable/bgshoe" />
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-
-                                    app:srcCompat="@drawable/shoe" />
-                            </RelativeLayout>
-
-                            <TextView
-                                android:id="@+id/txtShoename"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="10dp"
-                                android:layout_toRightOf="@+id/shoe1"
-                                android:fontFamily="@font/alata_regular"
-                                android:text="E Phọt Wan"
-                                android:textColor="@color/black"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/txtShoename"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="10dp"
-                                android:layout_toRightOf="@+id/shoe1"
-                                android:fontFamily="@font/alata_regular"
-                                android:text="3,500,000đ"
-                                android:textColor="@color/black"
-                                android:textSize="11sp" />
-
-                            <TextView
-                                android:id="@+id/radio_cod"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:fontFamily="@font/alata_regular"
-                                android:paddingTop="5dp"
-                                android:paddingRight="7dp"
-                                android:text="x2"
-                                android:textStyle="bold"
-                                app:buttonTint="@color/black" />
-
-                        </RelativeLayout>
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -347,6 +285,7 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/orderQuantity_Detail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -386,6 +325,7 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/orderValue_Detail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/discount"
@@ -402,6 +342,7 @@
                             android:layout_marginTop="10dp"
                             app:srcCompat="@drawable/line_bill" />
                         <Button
+                            android:id="@+id/close_order_details"
                             android:layout_gravity="center"
                             android:background="@drawable/btn_default"
                             android:textColor="@color/white"
