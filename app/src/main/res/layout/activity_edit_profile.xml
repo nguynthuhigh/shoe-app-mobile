@@ -34,15 +34,16 @@
     </TextView>
 
     <Button
+        android:contentDescription="btnEditName"
         android:id="@+id/btnRename"
-        android:contentDescription="vv"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_margin="5dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/icon_editname"/>
 
     <Button
+        android:id="@+id/btnChangeAvt"
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
         android:layout_width="300dp"
@@ -62,6 +63,7 @@
     </Button>
 
     <Button
+        android:id="@+id/btnChangeEmail"
         android:layout_marginTop="15dp"
         android:layout_gravity="center"
         android:layout_width="300dp"
@@ -80,6 +82,8 @@
 
     </Button>
     <Button
+        android:id="@+id/btnChangePassword"
+
         android:layout_marginTop="15dp"
         android:layout_gravity="center"
         android:layout_width="300dp"
@@ -121,7 +125,7 @@
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/border_radius_30dp"
         android:drawableStart="@drawable/icon_save"
         android:drawableEnd="@drawable/icon_nextarrow"

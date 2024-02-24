@@ -11,40 +11,48 @@
     </include>
     <ImageView
         android:layout_marginTop="50dp"
-        android:id="@+id/imageView5"
+        android:id="@+id/imgEditName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/avt" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Username"
-        android:textSize="22sp"
-        android:fontFamily="@font/alata_regular"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:textColor="@color/black">
+        app:srcCompat="@drawable/avt"
 
-    </TextView>
+        />
+
+
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/alata_regular"
+            android:text="Username"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:textStyle="bold">
+
+        </TextView>
+
+
     <Button
         android:id="@+id/btnEdit_profile"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="55dp"
-        android:text="Edit profile"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        android:fontFamily="@font/alata_regular"
-        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/border_radius_30dp"
         android:drawableStart="@drawable/person"
         android:drawableEnd="@drawable/view_more"
+        android:fontFamily="@font/alata_regular"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:background="@drawable/border_radius_30dp"
-        >
+        android:text="Edit profile"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold">
 
     </Button>
+
     <Button
         android:id="@+id/btnView_order"
         android:layout_marginTop="15dp"
@@ -59,6 +67,26 @@
         android:drawableStart="@drawable/order"
         android:drawableEnd="@drawable/view_more"
         android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@drawable/border_radius_30dp"
+        >
+
+    </Button>
+
+    <Button
+        android:id="@+id/btnView_favourite"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:text="My Favourite"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:fontFamily="@font/alata_regular"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/icon_heart"
+        android:drawableEnd="@drawable/view_more"
+        android:paddingLeft="18dp"
         android:paddingRight="20dp"
         android:background="@drawable/border_radius_30dp"
         >
