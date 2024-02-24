@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:title="Màu đỏ"
+    android:id="@+id/contextRed"/>
+    <item android:title="Màu vàng"
+        android:id="@+id/contextYellow"/>
+    <item android:title="Màu trắng"
+        android:id="@+id/contextWhite"/>
+    <item android:title="Màu xanh"
+        android:id="@+id/contextBlue"/>
+    <item android:title="Màu đen"
+        android:id="@+id/contextBlack"/>
+    <item android:title="Màu xám"
+        android:id="@+id/contextGray"/>
+</menu>

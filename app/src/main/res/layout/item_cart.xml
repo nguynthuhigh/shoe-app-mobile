@@ -109,16 +109,16 @@
                             android:background="@android:color/transparent"
                             android:layout_alignParentEnd="true"
                             />
+
                         <TextView
                             android:id="@+id/viewQuantity"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:text="2"
+                            android:layout_width="29dp"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:textSize="20sp"
+                            android:text="2"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            >
+                            android:textSize="20sp"
+                            android:textStyle="bold">
 
                         </TextView>
                         <ImageButton

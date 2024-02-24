@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="38"
+        android:id="@+id/contextsize38"/>
+    <item android:title="39"
+        android:id="@+id/contextsize39"/>
+    <item android:title="40"
+        android:id="@+id/contextsize40"/>
+    <item android:title="41"
+        android:id="@+id/contextsize41"/>
+    <item android:title="42"
+        android:id="@+id/contextsize42"/>
+    <item android:title="43"
+        android:id="@+id/contextsize43"/>
+    <item android:title="44"
+        android:id="@+id/contextsize44"/>
+    <item android:title="45"
+        android:id="@+id/contextsize45"/>
+</menu>

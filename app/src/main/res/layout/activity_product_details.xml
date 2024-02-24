@@ -146,18 +146,20 @@
                             android:fontFamily="@font/alata_regular"
                             android:textStyle="bold"
                             android:text="Size: 40"
+                            android:id="@+id/txtTextSize"
                             android:textSize="13sp">
 
                         </TextView>
 
-                        <ImageView
+                        <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="3dp"
+                            android:id="@+id/btnPopupSize"
                             app:srcCompat="@drawable/sort_down">
 
-                        </ImageView>
+                        </ImageButton>
 
                     </LinearLayout>
                     <LinearLayout
@@ -192,15 +194,16 @@
 
                         </TextView>
 
-                        <ImageView
+                        <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="8dp"
+                            android:id="@+id/btnPopupColor"
                             app:srcCompat="@drawable/sort_down">
 
-                        </ImageView>
+                        </ImageButton>
 
                     </LinearLayout>
 

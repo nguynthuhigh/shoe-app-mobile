@@ -8,6 +8,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/back"
+
         android:background="@android:color/transparent">
     </ImageButton>
 </LinearLayout>

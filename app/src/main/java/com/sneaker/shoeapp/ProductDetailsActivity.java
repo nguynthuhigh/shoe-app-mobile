@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.sneaker.shoeapp.model.Product;
@@ -20,11 +23,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
     TextView dt_proName;
     ImageView dt_proImage;
     TextView dt_proPrice;
-    TextView dt_proCate;
+    TextView dt_proCate,txtTextSize;
     FrameLayout bg_pro_details,bg_pro_details_2,bg_pro_details_main;
     CardView proColor;
     Button add_to_cart;
-    ImageButton btnBack;
+    ImageButton btnBack,btnPopupSize,btnPopupColor;
     Product pro;
 
     @Override
@@ -44,8 +47,99 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_new), pro,bg_pro_details_main);
         proColor.setCardBackgroundColor(Color.parseColor("#" + pro.getColor()));
         addEvents();
+        xuLyPopupSize();
+        xulyPopupColor();
 
     }
+
+    private void xulyPopupColor() {
+        btnPopupColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu=new PopupMenu(ProductDetailsActivity.this,btnPopupColor);
+                MenuInflater mnPopupColor=popupMenu.getMenuInflater();
+                mnPopupColor.inflate(R.menu.popupcolor,popupMenu.getMenu());
+                popupMenu.show();
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId()==R.id.contextRed){
+                            proColor.setCardBackgroundColor(Color.RED);return true;
+                        }
+                        if(item.getItemId()==R.id.contextBlue){
+                            proColor.setCardBackgroundColor(Color.BLUE);return true;
+                        }
+                        if(item.getItemId()==R.id.contextBlack){
+                            proColor.setCardBackgroundColor(Color.BLACK);return true;
+                        }
+                        if(item.getItemId()==R.id.contextWhite){
+                            proColor.setCardBackgroundColor(Color.WHITE);return true;
+                        }
+                        if(item.getItemId()==R.id.contextYellow){
+                            proColor.setCardBackgroundColor(Color.YELLOW);return true;
+                        }
+                        if(item.getItemId()==R.id.contextGray){
+                            proColor.setCardBackgroundColor(Color.GRAY);return true;
+                        }
+                        return true;
+                    }
+                });
+            }
+        });
+    }
+
+    private void xuLyPopupSize() {
+        btnPopupSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu=new PopupMenu(ProductDetailsActivity.this,btnPopupSize);
+                MenuInflater mnPopupSize=popupMenu.getMenuInflater();
+                mnPopupSize.inflate(R.menu.popupsize,popupMenu.getMenu());
+                popupMenu.show();
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId()==R.id.contextsize38){
+                            txtTextSize.setText("Size: 38");
+                            return true;
+                        }
+                        if (item.getItemId()==R.id.contextsize39){
+                            txtTextSize.setText("Size: 39");
+                            return true;
+                        }
+                        if (item.getItemId()==R.id.contextsize40){
+                            txtTextSize.setText("Size: 40");
+                            return true;
+                        }
+                        if (item.getItemId()==R.id.contextsize41){
+                            txtTextSize.setText("Size: 41");
+                            return true;
+                        }
+                        if (item.getItemId()==R.id.contextsize42){
+                            txtTextSize.setText("Size: 42");
+                            return true;
+                        }
+                        if (item.getItemId()==R.id.contextsize43){
+                            txtTextSize.setText("Size: 43");
+                            return true;
+                        }
+                        if (item.getItemId()==R.id.contextsize44){
+                            txtTextSize.setText("Size: 44");
+                            return true;
+                        }
+                        if (item.getItemId()==R.id.contextsize45){
+                            txtTextSize.setText("Size: 45");
+                            return true;
+                        }
+
+
+                        return true;
+                    }
+                });
+            }
+        });
+    }
+
     public void setColorBg(GradientDrawable gradientDrawable, Product pro, FrameLayout layout){
         int colorInt = Color.parseColor("#" + pro.getColor());
         gradientDrawable.setColors(new int[]{0xFFFFFFFF, colorInt});
@@ -82,5 +176,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         add_to_cart = findViewById(R.id.add_to_cart);
         proColor = findViewById(R.id.proColor);
         btnBack = findViewById(R.id.btnBack);
+        btnPopupSize=findViewById(R.id.btnPopupSize);
+        txtTextSize=findViewById(R.id.txtTextSize);
+        btnPopupColor=findViewById(R.id.btnPopupColor);
     }
 }
