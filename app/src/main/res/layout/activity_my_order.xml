@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="My Order"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
@@ -29,8 +29,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
         android:scrollbars="none"
        >
         <LinearLayout
@@ -40,11 +38,11 @@
 
         </LinearLayout>
     </ScrollView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_order"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
