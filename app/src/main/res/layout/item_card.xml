@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="110dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/favorite" />
+                    android:src="@drawable/heart" />
             </RelativeLayout>
         </LinearLayout>
 

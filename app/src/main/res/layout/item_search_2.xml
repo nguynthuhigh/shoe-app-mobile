@@ -5,8 +5,8 @@
     android:orientation="vertical">
     <EditText
         android:id="@+id/searchProduct_2"
-        android:layout_gravity="center"
-        android:layout_width="355dp"
+        android:layout_marginLeft="60dp"
+        android:layout_width="250dp"
         android:layout_height="60dp"
         android:drawableStart="@drawable/search"
         android:paddingLeft="30dp"
