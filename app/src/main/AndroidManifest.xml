@@ -31,10 +31,10 @@
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name=".ProfileActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".EditProfileActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
@@ -43,34 +43,30 @@
             android:exported="false" />
         <activity
             android:name=".ProductDetailsActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".FavouriteActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".CheckoutActivity"
-            android:exported="true" />
-<<<<<<< HEAD
-
-=======
->>>>>>> d6548a048a723a67c3498bba3073491c2c0abcb3
+            android:exported="false" />
         <activity
             android:name=".MyCartActivity"
             android:exported="false" />
         <activity
             android:name=".PaymentActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MyOrderActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".SearchActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".FavouriteActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -13,9 +13,9 @@
         android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="My Favorite"
+        android:text="My Favorites"
 
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textColor="@color/black"
         >
     </TextView>
