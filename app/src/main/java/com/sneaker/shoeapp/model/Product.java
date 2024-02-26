@@ -2,25 +2,11 @@ package com.sneaker.shoeapp.model;
 
 import java.io.Serializable;
 
-public class Product implements Serializable{
-    private String ProName;
+public class Product implements Serializable {
+    private String ProName, Category, color;
     private Integer Price;
-    private String Category;
     private int Image;
-    private  String color;
-
-
-
     private int type;
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public Product() {
     }
 
@@ -32,6 +18,17 @@ public class Product implements Serializable{
         this.color = color;
         this.type = type;
     }
+
+
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
 
     public int getType() {
         return type;

@@ -49,13 +49,13 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".CheckoutActivity"
             android:exported="false" />
         <activity
             android:name=".MyCartActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".PaymentActivity"
             android:exported="false" />

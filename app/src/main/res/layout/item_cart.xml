@@ -1,114 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
 
     <FrameLayout
         android:id="@+id/bg_item_card_custom"
-        android:background="@drawable/bg_item_card_custom"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_width="355dp"
         android:layout_height="150dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/bg_item_card_custom"
         app:cardCornerRadius="15dp"
         app:cardElevation="7dp">
+
         <LinearLayout
-            android:layout_margin="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <RelativeLayout
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="85dp"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/proName_cart"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:text="Nike Air Force One Vừa Mua ở Việt Nam"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
                             android:fontFamily="@font/alata_regular"
-                            android:textColor="@color/white">
+                            android:text="Nike Air Force One Vừa Mua ở Việt Nam"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold">
 
                         </TextView>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:id="@+id/proPrice_cart"
-                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/alata_regular"
                                 android:text="$150"
-                                android:textStyle="bold"
+                                android:textColor="@color/white"
                                 android:textSize="20sp"
-                                android:fontFamily="@font/alata_regular">
+                                android:textStyle="bold">
 
                             </TextView>
+
                             <TextView
-                                android:textColor="@color/white"
-                                android:layout_marginLeft="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:fontFamily="@font/alata_regular"
                                 android:text="$150"
 
-                                android:textSize="17sp"
-                                android:fontFamily="@font/alata_regular">
+                                android:textColor="@color/white"
+                                android:textSize="17sp">
 
                             </TextView>
                         </LinearLayout>
                     </LinearLayout>
+
                     <ImageButton
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/remove_item"
-                        android:background="@android:color/transparent"
                         android:layout_alignParentEnd="true"
-                        >
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/remove_item" />
 
-                    </ImageButton>
                     <ImageView
                         android:id="@+id/proImg_cart"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginLeft="140dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/shoe5">
-                    </ImageView>
+                        android:layout_marginLeft="140dp"
+                        android:layout_marginTop="30dp"
+                        app:srcCompat="@drawable/shoe5" />
+
                     <LinearLayout
                         android:layout_width="83dp"
                         android:layout_height="32dp"
-                        android:orientation="horizontal"
-                        android:background="@drawable/func_border"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="95dp"
+                        android:background="@drawable/func_border"
+                        android:orientation="horizontal">
 
-                        android:layout_marginLeft="10dp">
                         <ImageButton
                             android:id="@+id/decreasePro"
-                            android:layout_marginTop="2dp"
-
                             android:layout_width="25dp"
+
                             android:layout_height="25dp"
-                            android:src="@drawable/decrease_pro"
-                            android:background="@android:color/transparent"
                             android:layout_alignParentEnd="true"
-                            />
+                            android:layout_marginTop="2dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/decrease_pro" />
 
                         <TextView
                             android:id="@+id/viewQuantity"
@@ -121,16 +125,16 @@
                             android:textStyle="bold">
 
                         </TextView>
+
                         <ImageButton
                             android:id="@+id/increasePro"
-                            android:layout_marginRight="1dp"
-                            android:layout_marginTop="2dp"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/add_pro"
-                            android:background="@android:color/transparent"
                             android:layout_alignParentEnd="true"
-                            />
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="1dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/add_pro" />
                     </LinearLayout>
                 </RelativeLayout>
 

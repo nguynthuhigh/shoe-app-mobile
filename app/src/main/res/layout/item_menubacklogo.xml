@@ -33,37 +33,5 @@
 
         </ImageButton>
 
-        <ImageButton
-            android:id="@+id/btnFv"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginLeft="300dp"
-            android:src="@drawable/favorite"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/transparent">
-
-        </ImageButton>
-
-        <ImageButton
-            android:id="@+id/btnCart"
-            android:layout_marginLeft="330dp"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/shopping_bag"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/transparent">
-
-        </ImageButton>
-
-        <ImageButton
-            android:id="@+id/btnPro"
-            android:layout_marginLeft="360dp"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/account_circle"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/transparent">
-
-        </ImageButton>
     </RelativeLayout>
 </LinearLayout>
