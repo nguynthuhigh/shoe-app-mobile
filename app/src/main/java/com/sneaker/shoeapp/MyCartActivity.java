@@ -42,29 +42,10 @@ ImageButton btnBack;
         addControls();
         addEvents();
 
-
-      //  loadData();
-    }
-
-
-
-    private void addEvents() {
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
     }
 
     private void addControls() {
-        decreasePro = findViewById(R.id.decreasePro);
-
-        increasePro = findViewById(R.id.increasePro);
         btnBack = findViewById(R.id.btnBack);
-      //  viewQuantity = findViewById(R.id.viewQuantity);
 
         listItem_cart = findViewById(R.id.listItem_cart);
         Bundle bundle = getIntent().getExtras();
@@ -81,33 +62,20 @@ ImageButton btnBack;
 
         if(productList.getProductList() != null){
             for (Product p:productList.getProductList()
-                 ) {
+            ) {
                 cartAdapter.add(p);
             }
         }
 
-
-
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.header_menu,menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.bag_header){
-            Intent intent = new Intent(MyCartActivity.this,MyCartActivity.class);
-            startActivity(intent);
-        }
-
-        if(item.getItemId() == R.id.account_header){
-            Intent intent = new Intent(MyCartActivity.this,MyOrderActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
+    private void addEvents() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
