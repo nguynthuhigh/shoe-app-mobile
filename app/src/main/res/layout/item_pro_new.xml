@@ -13,6 +13,7 @@
         <FrameLayout
             android:id="@+id/productCard"
             android:padding="15dp"
+
             android:layout_width="170dp"
             android:layout_height="200dp"
             android:background="@drawable/bg_pro_new"
@@ -42,7 +43,7 @@
                     <FrameLayout
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:layout_marginTop="7dp"
+
                         android:layout_alignParentEnd="true"
                         android:background="@drawable/bg_circle_gray">
                         <ImageButton

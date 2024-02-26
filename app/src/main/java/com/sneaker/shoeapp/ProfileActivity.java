@@ -35,6 +35,13 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnView_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, MyOrderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void addControls() {

@@ -42,45 +42,11 @@ ImageButton btnBack;
         addControls();
         addEvents();
 
-
-      //  loadData();
-    }
-
-
-
-    private void addEvents() {
-//<<<<<<< HEAD
-
-      //decreasePro.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-         //   public void onClick(View v) {
-        //        int qty = Integer.parseInt(viewQuantity.getText().toString());
-        //        qty--;
-          //      viewQuantity.setText(qty+"");
-           // }
-        //});
-
-
-//=======
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-//>>>>>>> c59e382918375fc89b3c77a62b84f9f51f9fb6e3
     }
 
     private void addControls() {
-        decreasePro = findViewById(R.id.decreasePro);
-//<<<<<<< HEAD
-      //  increasePro = findViewById(R.id.increasePro);
-       // viewQuantity = findViewById(R.id.viewQuantity);
-//=======
-        increasePro = findViewById(R.id.increasePro);
         btnBack = findViewById(R.id.btnBack);
-      //  viewQuantity = findViewById(R.id.viewQuantity);
-//>>>>>>> c59e382918375fc89b3c77a62b84f9f51f9fb6e3
+
         listItem_cart = findViewById(R.id.listItem_cart);
         Bundle bundle = getIntent().getExtras();
         Product pro = new Product();
@@ -96,33 +62,20 @@ ImageButton btnBack;
 
         if(productList.getProductList() != null){
             for (Product p:productList.getProductList()
-                 ) {
+            ) {
                 cartAdapter.add(p);
             }
         }
 
-
-
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.header_menu,menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.bag_header){
-            Intent intent = new Intent(MyCartActivity.this,MyCartActivity.class);
-            startActivity(intent);
-        }
-
-        if(item.getItemId() == R.id.account_header){
-            Intent intent = new Intent(MyCartActivity.this,MyOrderActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
+    private void addEvents() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

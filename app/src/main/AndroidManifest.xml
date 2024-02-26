@@ -48,11 +48,11 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".FavouriteActivity"
             android:exported="false" />
         <activity
             android:name=".CheckoutActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MyCartActivity"
             android:exported="false" />
@@ -66,7 +66,7 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".FavouriteActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
