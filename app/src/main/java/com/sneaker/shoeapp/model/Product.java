@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Product implements Serializable{
     private String ProName;
-    private Integer Price;
+    private Integer Price,ID;
     private String Category;
     private int Image;
     private  String color;
@@ -72,4 +72,13 @@ public class Product implements Serializable{
     public void setImage(int image) {
         Image = image;
     }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+    
 }

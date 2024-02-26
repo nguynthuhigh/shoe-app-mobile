@@ -53,10 +53,7 @@
         <activity
             android:name=".CheckoutActivity"
             android:exported="true" />
-<<<<<<< HEAD
 
-=======
->>>>>>> d6548a048a723a67c3498bba3073491c2c0abcb3
         <activity
             android:name=".MyCartActivity"
             android:exported="false" />

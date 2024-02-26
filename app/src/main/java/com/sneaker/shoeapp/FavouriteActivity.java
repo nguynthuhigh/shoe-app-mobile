@@ -39,11 +39,11 @@ public class FavouriteActivity extends AppCompatActivity {
 
     private void loadData() {
 
-        arr_Favorite.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF",false));
-        arr_Favorite.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B",false));
-        arr_Favorite.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",false));
-        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D",false));
-        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",false));
+        arr_Favorite.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF",0));
+        arr_Favorite.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B",0));
+        arr_Favorite.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",0));
+        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D",0));
+        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",0));
     }
 
     private void addControls() {

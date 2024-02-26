@@ -49,38 +49,23 @@ ImageButton btnBack;
 
 
     private void addEvents() {
-<<<<<<< HEAD
 
-      //decreasePro.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-         //   public void onClick(View v) {
-        //        int qty = Integer.parseInt(viewQuantity.getText().toString());
-        //        qty--;
-          //      viewQuantity.setText(qty+"");
-           // }
-        //});
-
-
-=======
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
->>>>>>> c59e382918375fc89b3c77a62b84f9f51f9fb6e3
+
     }
 
     private void addControls() {
         decreasePro = findViewById(R.id.decreasePro);
-<<<<<<< HEAD
-      //  increasePro = findViewById(R.id.increasePro);
-        viewQuantity = findViewById(R.id.viewQuantity);
-=======
+
         increasePro = findViewById(R.id.increasePro);
         btnBack = findViewById(R.id.btnBack);
       //  viewQuantity = findViewById(R.id.viewQuantity);
->>>>>>> c59e382918375fc89b3c77a62b84f9f51f9fb6e3
+
         listItem_cart = findViewById(R.id.listItem_cart);
         Bundle bundle = getIntent().getExtras();
         Product pro = new Product();

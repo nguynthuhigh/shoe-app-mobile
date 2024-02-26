@@ -75,6 +75,7 @@
                         </LinearLayout>
                     </LinearLayout>
                     <ImageButton
+                        android:id="@+id/removePro"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/remove_item"
