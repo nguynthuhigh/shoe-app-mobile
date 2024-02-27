@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity"
     android:orientation="vertical"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="30dp">
     <include layout="@layout/item_back">
 
     </include>
 
     <ImageView
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,27 +20,35 @@
 
 
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Username"
-        android:textSize="22sp"
-        android:layout_marginLeft="10dp"
-        android:fontFamily="@font/alata_regular"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:textColor="@color/black">
+        android:gravity="center"
+        >
 
-    </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textSize="22sp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/alata_regular"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="@color/black">
 
-    <Button
-        android:contentDescription="btnEditName"
-        android:id="@+id/btnRename"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:layout_gravity="center"
-        android:background="@drawable/icon_editname"/>
+        </TextView>
+
+        <Button
+            android:contentDescription="btnEditName"
+            android:id="@+id/btnRename"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:background="@drawable/icon_editname"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnChangeAvt"
@@ -64,7 +72,7 @@
 
     <Button
         android:id="@+id/btnChangeEmail"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:layout_width="300dp"
         android:layout_height="55dp"
@@ -84,7 +92,7 @@
     <Button
         android:id="@+id/btnChangePassword"
 
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:layout_width="300dp"
         android:layout_height="55dp"
@@ -104,7 +112,7 @@
 
     <Button
         android:id="@+id/btnView_order"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:layout_width="300dp"
         android:layout_height="55dp"
@@ -125,7 +133,7 @@
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/border_radius_30dp"
         android:drawableStart="@drawable/icon_save"
         android:drawableEnd="@drawable/icon_nextarrow"

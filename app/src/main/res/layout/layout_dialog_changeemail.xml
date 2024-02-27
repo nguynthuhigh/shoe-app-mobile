@@ -6,72 +6,52 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".DialogChangePasswordActivity">
+    android:layout_margin="20dp"
+    android:background="@drawable/bg_corner_gray_30"
+    >
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textColor="@color/black"
         android:gravity="center"
-        android:text="Change password"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="40dp"
+        android:textColor="@color/black"
+        android:padding="12sp"
+        android:background="@drawable/bg_corner_white_silver_20"
+        android:text="Change email"
+        />
+
 
     <EditText
+        android:id="@+id/editNewEmail"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:background="@drawable/border_radius_30dp"
+        android:background="@drawable/bg_corner_20"
         android:textSize="25dp"
         android:textColorHint="@color/darkGrey"
         android:paddingStart="20dp"
-        android:hint="Old Password"
-        />
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="text"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/border_radius_30dp"
-        android:textSize="25dp"
-        android:textColorHint="@color/darkGrey"
-        android:paddingStart="20dp"
-        android:hint="New Password"
-        />
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="text"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/border_radius_30dp"
-        android:textSize="25dp"
-        android:textColorHint="@color/darkGrey"
-        android:paddingStart="20dp"
-        android:hint="Confirm Password"
+        android:hint="New Email..."
         />
 
     <LinearLayout
-        android:id="@+id/btnSavePass"
+        android:id="@+id/btnSaveEmail"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:paddingStart="12dp"
-        android:background="@drawable/border_radius_30dp"
+        android:background="@drawable/bg_corner_gray_30"
         android:orientation="horizontal">
 
         <ImageButton
             android:contentDescription="imgSave"
-
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
