@@ -1,33 +1,25 @@
 package com.sneaker.shoeapp.Adapter;
 
 
-import static java.security.AccessController.getContext;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sneaker.shoeapp.Interface.ClickItemCart;
-import com.sneaker.shoeapp.MyCartActivity;
 import com.sneaker.shoeapp.R;
 import com.sneaker.shoeapp.model.Product;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
@@ -41,10 +33,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     FrameLayout bg_item_card_custom;
     ImageButton increasePro, decreasePro;
     ClickItemCart clickItemCart;
+
     public CartAdapter(Activity context, ArrayList<Product> productArrayList) {
         this.context = context;
         this.productArrayList = productArrayList;
     }
+
     //    public CartAdapter(@NonNull Activity context, int resource) {
 //        super(context, resource);
 //        this.context = context;
@@ -64,7 +58,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         Product product = productArrayList.get(position);
         holder.proImg_cart.setImageResource(product.getImage());
         holder.proName_cart.setText(product.getProName());
-        holder.proPrice_cart.setText(product.getPrice()+"");
+        holder.proPrice_cart.setText(product.getPrice() + "");
+        holder.viewQuantity.setText(0 + "");
     }
 
     @Override
@@ -91,7 +86,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         }
     }
 
-
+    public void setColorBg(GradientDrawable gradientDrawable, Product pro, FrameLayout layout) {
+        int colorInt = Color.parseColor("#" + pro.getColor());
+        gradientDrawable.setColors(new int[]{0xFFFFFFFF, colorInt});
+        layout.setBackground(gradientDrawable);
+    }
 
 
 //    @NonNull
@@ -114,7 +113,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 //        proPrice_cart.setText(pro.getPrice() + "");
 //        proImg_cart.setImageResource(pro.getImage());
 
-//        setColorBg((GradientDrawable) context.getResources().getDrawable(R.drawable.bg_item_card_custom), pro, bg_item_card_custom);
+//        setColorBg((GradientDrawable) context.getResources().getDrawable(R.drawable.bg_item_card_custom), product, bg_item_card_custom);
 //        increasePro.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -139,9 +138,5 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 //        return viewCustom;
 //    }
 
-    public void setColorBg(GradientDrawable gradientDrawable, Product pro, FrameLayout layout) {
-        int colorInt = Color.parseColor("#" + pro.getColor());
-        gradientDrawable.setColors(new int[]{0xFFFFFFFF, colorInt});
-        layout.setBackground(gradientDrawable);
-    }
+
 }

@@ -43,7 +43,7 @@ public class MyCartActivity extends AppCompatActivity {
         Toolbar main_header = findViewById(R.id.menu_header_back);
         setSupportActionBar(main_header);
         addControls();
-//        addEvents();
+        addEvents();
         loadData();
     }
 
