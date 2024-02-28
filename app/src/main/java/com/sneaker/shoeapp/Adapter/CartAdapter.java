@@ -3,6 +3,7 @@ package com.sneaker.shoeapp.Adapter;
 
 import static java.security.AccessController.getContext;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     //    Activity context;
+    Product product;
     ArrayList<Product> productArrayList;
     Integer resource;
     Activity context;
@@ -40,7 +42,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     ImageButton increasePro, decreasePro;
     ClickItemCart clickItemCart;
     public CartAdapter(Activity context, ArrayList<Product> productArrayList) {
-        super();
         this.context = context;
         this.productArrayList = productArrayList;
     }
@@ -57,6 +58,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return new ViewHolder(viewProduct);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = productArrayList.get(position);
@@ -74,6 +76,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         TextView proName_cart, proPrice_cart, viewQuantity;
         ImageView proImg_cart;
         ImageButton decreasePro, increasePro;
+        FrameLayout bg_item_card_custom;
+        Product product;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,6 +87,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             proImg_cart = itemView.findViewById(R.id.proImg_cart);
             decreasePro = itemView.findViewById(R.id.decreasePro);
             increasePro = itemView.findViewById(R.id.increasePro);
+            bg_item_card_custom = itemView.findViewById(R.id.bg_item_card_custom);
         }
     }
 
@@ -97,7 +102,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 //        proName_cart = viewCustom.findViewById(R.id.proName_cart);
 //        proPrice_cart = viewCustom.findViewById(R.id.proPrice_cart);
 //        proImg_cart = viewCustom.findViewById(R.id.proImg_cart);
-//        bg_item_card_custom = viewCustom.findViewById(R.id.bg_item_card_custom);
+//        FrameLayout bg_item_card_custom;
 //        increasePro = viewCustom.findViewById(R.id.increasePro);
 //        decreasePro = viewCustom.findViewById(R.id.decreasePro);
 //        viewQuantity = viewCustom.findViewById(R.id.viewQuantity);

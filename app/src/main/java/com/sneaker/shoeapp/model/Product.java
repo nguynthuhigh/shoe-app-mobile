@@ -1,5 +1,8 @@
 package com.sneaker.shoeapp.model;
 
+import android.graphics.drawable.GradientDrawable;
+import android.widget.FrameLayout;
+
 import java.io.Serializable;
 
 public class Product implements Serializable {
