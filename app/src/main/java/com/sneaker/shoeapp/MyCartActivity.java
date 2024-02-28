@@ -47,6 +47,7 @@ public class MyCartActivity extends AppCompatActivity {
         loadData();
     }
 
+<<<<<<< HEAD
     private void loadData() {
         productArrayList.add(new Product("ShitBox", 10000, "Sport", R.drawable.shoe8, "red", 1));
         productArrayList.add(new Product("ShitBox", 10000, "Sport", R.drawable.shoe8, "red", 1));
@@ -131,4 +132,42 @@ public class MyCartActivity extends AppCompatActivity {
 //        }
 //        return super.onOptionsItemSelected(item);
 //    }
+=======
+    }
+
+    private void addControls() {
+        btnBack = findViewById(R.id.btnBack);
+
+        listItem_cart = findViewById(R.id.listItem_cart);
+        Bundle bundle = getIntent().getExtras();
+        Product pro = new Product();
+        if(bundle ==null) {
+            setContentView(R.layout.layout_cart_null);
+        }
+        else pro = (Product) bundle.getSerializable("pro_details");
+        cartAdapter = new CartAdapter(this, R.layout.item_cart);
+        productList = new ListProduct();
+        productList.add(pro);
+        listItem_cart.setAdapter(cartAdapter);
+
+
+        if(productList.getProductList() != null){
+            for (Product p:productList.getProductList()
+            ) {
+                cartAdapter.add(p);
+            }
+        }
+
+    }
+
+
+    private void addEvents() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+>>>>>>> 98b7e84d9b38eee27ae35f5242ba448d88261fb2
 }

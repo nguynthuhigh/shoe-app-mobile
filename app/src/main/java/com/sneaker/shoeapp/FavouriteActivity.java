@@ -38,37 +38,22 @@ public class FavouriteActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(FavouriteActivity.this,MyCartActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnPro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(FavouriteActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void loadData() {
 
-        arr_Favorite.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF",2));
-        arr_Favorite.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B",2));
-        arr_Favorite.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",2));
-        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D",2));
-        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",2));
+        arr_Favorite.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF",0));
+        arr_Favorite.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B",0));
+        arr_Favorite.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",0));
+        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D",0));
+        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",0));
+
     }
 
     private void addControls() {
         recyclerFavo=findViewById(R.id.recyclerFavorite);
         btnBack=findViewById(R.id.btnBack);
-        btnFv=findViewById(R.id.btnFv);
-        btnCart=findViewById(R.id.btnCart);
-        btnPro=findViewById(R.id.btnPro);
+
         arr_Favorite=new ArrayList<>();
         favoriteAdapter=new FavoriteAdapter(this,arr_Favorite);
         recyclerFavo.setAdapter(favoriteAdapter);

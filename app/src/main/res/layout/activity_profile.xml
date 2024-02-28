@@ -55,7 +55,7 @@
 
     <Button
         android:id="@+id/btnView_order"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="55dp"
@@ -75,7 +75,7 @@
 
     <Button
         android:id="@+id/btnView_favourite"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="55dp"
@@ -94,7 +94,7 @@
     </Button>
     <Button
         android:id="@+id/btnLog_out"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:layout_width="250dp"
         android:layout_height="55dp"

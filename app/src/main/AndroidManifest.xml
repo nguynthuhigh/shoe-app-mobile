@@ -48,11 +48,16 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
             android:name=".MainActivity"
             android:exported="true" />
+=======
+            android:name=".FavouriteActivity"
+            android:exported="false" />
+>>>>>>> 98b7e84d9b38eee27ae35f5242ba448d88261fb2
         <activity
             android:name=".CheckoutActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MyCartActivity"
             android:exported="true" />
@@ -66,7 +71,7 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".FavouriteActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

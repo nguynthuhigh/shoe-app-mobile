@@ -5,9 +5,16 @@ import android.widget.FrameLayout;
 
 import java.io.Serializable;
 
+<<<<<<< HEAD
 public class Product implements Serializable {
     private String ProName, Category, color;
     private Integer Price;
+=======
+public class Product implements Serializable{
+    private String ProName;
+    private Integer Price,ID;
+    private String Category;
+>>>>>>> 98b7e84d9b38eee27ae35f5242ba448d88261fb2
     private int Image;
     private int type;
     public Product() {
@@ -72,4 +79,13 @@ public class Product implements Serializable {
     public void setImage(int image) {
         Image = image;
     }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+    
 }
