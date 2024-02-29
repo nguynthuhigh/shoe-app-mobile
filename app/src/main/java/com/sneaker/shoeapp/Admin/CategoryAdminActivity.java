@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sneaker.shoeapp.Database.DataBaseHelper;
@@ -20,6 +21,7 @@ import java.util.List;
 public class CategoryAdminActivity extends AppCompatActivity {
 Button saveCategory,outputCategory;
 EditText nameCate;
+TextView textCate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ EditText nameCate;
                 DataBaseHelper dataBaseHelper = new DataBaseHelper(CategoryAdminActivity.this);
                 List<Category> category= dataBaseHelper.getCategory();
                 Toast.makeText(CategoryAdminActivity.this,category.toString(),Toast.LENGTH_SHORT).show();
+                textCate.setText(category.toString());
             }
         });
 
@@ -61,6 +64,7 @@ EditText nameCate;
         outputCategory = findViewById(R.id.outputCategory);
         saveCategory = findViewById(R.id.saveCategory);
         nameCate = findViewById(R.id.nameCate);
+
     }
 
 

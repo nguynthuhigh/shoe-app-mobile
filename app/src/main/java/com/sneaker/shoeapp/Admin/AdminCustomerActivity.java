@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.sneaker.shoeapp.R;
 
-public class CustomerTableActivity extends AppCompatActivity {
+public class AdminCustomerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_table);
+        setContentView(R.layout.activity_admin_customer);
     }
 }
