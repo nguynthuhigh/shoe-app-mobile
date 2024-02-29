@@ -1,26 +1,22 @@
 package com.sneaker.shoeapp.model;
 
+import android.graphics.drawable.GradientDrawable;
+import android.widget.FrameLayout;
+
 import java.io.Serializable;
 
+<<<<<<< HEAD
+public class Product implements Serializable {
+    private String ProName, Category, color;
+    private Integer Price;
+=======
 public class Product implements Serializable{
     private String ProName;
     private Integer Price,ID;
     private String Category;
+>>>>>>> 98b7e84d9b38eee27ae35f5242ba448d88261fb2
     private int Image;
-    private  String color;
-
-
-
     private int type;
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public Product() {
     }
 
@@ -32,6 +28,17 @@ public class Product implements Serializable{
         this.color = color;
         this.type = type;
     }
+
+
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
 
     public int getType() {
         return type;

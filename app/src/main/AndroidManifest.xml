@@ -35,14 +35,19 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
+            android:name=".MainActivity"
+            android:exported="true" />
+=======
             android:name=".FavouriteActivity"
             android:exported="false" />
+>>>>>>> 98b7e84d9b38eee27ae35f5242ba448d88261fb2
         <activity
             android:name=".CheckoutActivity"
             android:exported="true" />
         <activity
             android:name=".MyCartActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".PaymentActivity"
             android:exported="false" />
