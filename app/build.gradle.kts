@@ -1,8 +1,17 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
+    signingConfigs {
+        create("shoeApp_config") {
+            storeFile = file("C:\\Android\\keystore.jks")
+            storePassword = "123456"
+            keyAlias = "shoeApp"
+            keyPassword = "123456"
+        }
+    }
     namespace = "com.sneaker.shoeapp"
     compileSdk = 34
 
@@ -23,6 +32,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("shoeApp_config")
         }
     }
     compileOptions {
@@ -32,6 +42,10 @@ android {
 }
 
 dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
