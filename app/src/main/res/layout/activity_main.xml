@@ -288,6 +288,9 @@
                 <Button
                     android:id="@+id/btnOrderDetails"
                     android:text="Order"/>
+                <Button
+                    android:id="@+id/inputCate"
+                    android:text="Order"/>
             </androidx.gridlayout.widget.GridLayout>
         </LinearLayout>
     </ScrollView>

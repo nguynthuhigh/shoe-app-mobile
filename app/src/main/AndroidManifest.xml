@@ -14,21 +14,23 @@
         android:theme="@style/Theme.ShoeApp"
         tools:targetApi="31">
         <activity
-            android:name=".DialogChangePasswordActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Dialog"/>
+            android:name=".Admin.PaymentTableActivity"
+            android:exported="false" />
         <activity
-            android:name=".DialogChangeEmailActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Dialog"/>
+            android:name=".Admin.ColorTableActivity"
+            android:exported="false" />
         <activity
-            android:name=".DialogChangeAvatarActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Dialog"/>
+            android:name=".Admin.TableSizeActivity"
+            android:exported="false" />
         <activity
-            android:name=".DialogEditUsernameActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Dialog" />
+            android:name=".Admin.SizeTableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.AdminCustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.CategoryAdminActivity"
+            android:exported="false" />
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
@@ -48,13 +50,8 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-<<<<<<< HEAD
-            android:name=".MainActivity"
-            android:exported="true" />
-=======
             android:name=".FavouriteActivity"
             android:exported="false" />
->>>>>>> 98b7e84d9b38eee27ae35f5242ba448d88261fb2
         <activity
             android:name=".CheckoutActivity"
             android:exported="true" />

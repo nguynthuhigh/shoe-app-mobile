@@ -47,7 +47,6 @@ public class MyCartActivity extends AppCompatActivity {
         loadData();
     }
 
-<<<<<<< HEAD
     private void loadData() {
         productArrayList.add(new Product("ShitBox", 10000, "Sport", R.drawable.shoe8, "red", 1));
         productArrayList.add(new Product("ShitBox", 10000, "Sport", R.drawable.shoe8, "red", 1));
@@ -63,54 +62,23 @@ public class MyCartActivity extends AppCompatActivity {
 
 
     private void addEvents() {
-        btnBack.setOnClickListener(v -> finish());
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-//<<<<<<< HEAD
-        //decreasePro.setOnClickListener(new View.OnClickListener() {
-        //     @Override
-        //   public void onClick(View v) {
-        //        int qty = Integer.parseInt(viewQuantity.getText().toString());
-        //        qty--;
-        //      viewQuantity.setText(qty+"");
-        // }
-        //});
-//=======
-//>>>>>>> c59e382918375fc89b3c77a62b84f9f51f9fb6e3
     }
 
     private void addControls() {
-        decreasePro = findViewById(R.id.decreasePro);
-//<<<<<<< HEAD
-        //  increasePro = findViewById(R.id.increasePro);
-        // viewQuantity = findViewById(R.id.viewQuantity);
-//=======
-        increasePro = findViewById(R.id.increasePro);
-        btnBack = findViewById(R.id.btnBack);
-        //  viewQuantity = findViewById(R.id.viewQuantity);
-//>>>>>>> c59e382918375fc89b3c77a62b84f9f51f9fb6e3
+
         recyclerMyCart = findViewById(R.id.recyclerMyCart);
         productArrayList = new ArrayList<>();
         cartAdapter = new CartAdapter(this, productArrayList);
         recyclerMyCart.setAdapter(cartAdapter);
         recyclerMyCart.setLayoutManager(new LinearLayoutManager(this));
-
-        ////////
-
-//        Bundle bundle = getIntent().getExtras();
-//        Product pro = new Product();
-//        if (bundle == null) {
-//            setContentView(R.layout.layout_cart_null);
-//        } else pro = (Product) bundle.getSerializable("pro_details");
-//
-//        productList = new ListProduct();
-//        productList.add(pro);
-//
-//        if (productList.getProductList() != null) {
-//            for (Product p : productList.getProductList()
-//            ) {
-//                cartAdapter.add(p);
-//            }
-//        }
+        btnBack = findViewById(R.id.btnBack);
 
     }
 
@@ -119,55 +87,18 @@ public class MyCartActivity extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == R.id.bag_header) {
-//            Intent intent = new Intent(MyCartActivity.this, MyCartActivity.class);
-//            startActivity(intent);
-//        }
-//
-//        if (item.getItemId() == R.id.account_header) {
-//            Intent intent = new Intent(MyCartActivity.this, MyOrderActivity.class);
-//            startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-=======
-    }
-
-    private void addControls() {
-        btnBack = findViewById(R.id.btnBack);
-
-        listItem_cart = findViewById(R.id.listItem_cart);
-        Bundle bundle = getIntent().getExtras();
-        Product pro = new Product();
-        if(bundle ==null) {
-            setContentView(R.layout.layout_cart_null);
-        }
-        else pro = (Product) bundle.getSerializable("pro_details");
-        cartAdapter = new CartAdapter(this, R.layout.item_cart);
-        productList = new ListProduct();
-        productList.add(pro);
-        listItem_cart.setAdapter(cartAdapter);
-
-
-        if(productList.getProductList() != null){
-            for (Product p:productList.getProductList()
-            ) {
-                cartAdapter.add(p);
-            }
+   @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.bag_header) {
+            Intent intent = new Intent(MyCartActivity.this, MyCartActivity.class);
+            startActivity(intent);
         }
 
-    }
+        if (item.getItemId() == R.id.account_header) {
+            Intent intent = new Intent(MyCartActivity.this, MyOrderActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+   }
 
-
-    private void addEvents() {
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
->>>>>>> 98b7e84d9b38eee27ae35f5242ba448d88261fb2
 }

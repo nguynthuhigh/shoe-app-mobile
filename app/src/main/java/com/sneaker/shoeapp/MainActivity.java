@@ -32,6 +32,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.sneaker.shoeapp.Adapter.ProductAdapter;
+import com.sneaker.shoeapp.Admin.CategoryAdminActivity;
 import com.sneaker.shoeapp.Fragment.AllFragment;
 import com.sneaker.shoeapp.Fragment.FootballFragment;
 import com.sneaker.shoeapp.Fragment.RunningFragment;
@@ -43,7 +44,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton btnAddFav, btnSearch;
-    Button btnSeller,categoryAll,categoryFootball,categoryRunning,btnLogin,btnRegister,btnFav,btnPayment,btnCheckout,btnOrderDetails;
+    Button btnSeller,categoryAll,categoryFootball,categoryRunning,btnLogin,btnRegister,btnFav,btnPayment,btnCheckout,btnOrderDetails,inputCate;
     EditText searchProduct,searchProduct_2;
     FrameLayout productCard;
     ImageButton finishLayout;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rcv_popular,rcv_banner;
     ProductAdapter productAdapter,productAdapter_banner;
     CardView bg_proImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,6 +145,12 @@ public class MainActivity extends AppCompatActivity {
                 changeLayout(OrderDetailsActivity.class);
             }
         });
+        inputCate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLayout(CategoryAdminActivity.class);
+            }
+        });
 
     }
     private void changeStateButton(Button btn,int drawable,int color){
@@ -170,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         btnPayment = findViewById(R.id.btnPayment);
         btnCheckout = findViewById(R.id.btnCheckout);
         btnOrderDetails = findViewById(R.id.btnOrderDetails);
-
+        inputCate = findViewById(R.id.inputCate);
 
         btnSeller = findViewById(R.id.btnSeller);
         btnAddFav = findViewById(R.id.btnAddFav);
