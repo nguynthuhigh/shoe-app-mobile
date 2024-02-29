@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.sneaker.shoeapp">
 
     <application
         android:allowBackup="true"
@@ -19,9 +20,7 @@
         <activity
             android:name=".Admin.ColorTableActivity"
             android:exported="false" />
-        <activity
-            android:name=".Admin.TableSizeActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Admin.SizeTableActivity"
             android:exported="false" />

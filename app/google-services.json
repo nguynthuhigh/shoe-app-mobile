@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "346443282038",
+    "project_id": "shoe-app-mobile-3b284",
+    "storage_bucket": "shoe-app-mobile-3b284.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346443282038:android:5c8883945e5f13bb4c5157",
+        "android_client_info": {
+          "package_name": "com.sneaker.shoeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK0VH5RzR8Qw8w10KhOwEHr6-z2r9EiXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
