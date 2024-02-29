@@ -15,6 +15,8 @@ import com.sneaker.shoeapp.MainActivity;
 import com.sneaker.shoeapp.R;
 import com.sneaker.shoeapp.model.Category;
 
+import java.util.List;
+
 public class CategoryAdminActivity extends AppCompatActivity {
 Button saveCategory,outputCategory;
 EditText nameCate;
@@ -46,24 +48,9 @@ EditText nameCate;
         outputCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataBaseHelper dbHelper = new DataBaseHelper(CategoryAdminActivity.this);
-                SQLiteDatabase db = dbHelper.getReadableDatabase();
-                Cursor cursor = db.rawQuery("SELECT * FROM TABLE_CATEGORY", null);
-
-                if (cursor != null && cursor.moveToFirst()) {
-                    do {
-                        // Lấy dữ liệu từ cột COLUMN_CATE_NAME
-                        String data = cursor.getString(cursor.getColumnIndexOrThrow("CATE_NAME"));
-
-                        // Hiển thị dữ liệu
-                        Toast.makeText(CategoryAdminActivity.this, data, Toast.LENGTH_SHORT).show();
-                    } while (cursor.moveToNext());
-
-                    // Đóng Cursor sau khi sử dụng
-                    cursor.close();
-                } else {
-                    Toast.makeText(CategoryAdminActivity.this, "No data found", Toast.LENGTH_SHORT).show();
-                }
+                DataBaseHelper dataBaseHelper = new DataBaseHelper(CategoryAdminActivity.this);
+                List<Category> category= dataBaseHelper.getCategory();
+                Toast.makeText(CategoryAdminActivity.this,category.toString(),Toast.LENGTH_SHORT).show();
             }
         });
 

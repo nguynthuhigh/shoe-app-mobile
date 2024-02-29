@@ -2,6 +2,7 @@ package com.sneaker.shoeapp.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -9,6 +10,8 @@ import com.sneaker.shoeapp.model.Category;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -59,7 +62,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //CART DETAILS
     private static final String COLUMN_CART_ID_DETAILS ="CART_ID_DETAILS";
     private static final String COLUMN_TOTAL_VALUE_CART_DETAILS ="TOTAL_VALUE_CART_DETAILS";
-    private static final String COLUMN_QUANTITY_CART_DETAILS ="";
+    private static final String COLUMN_QUANTITY_CART_DETAILS ="QUANTITY_CART_DETAILS";
     private static final String COLUMN_CART_ID_CART_DETAILS ="ID_CART_DETAILS";
     private static final String COLUMN_PRO_ID_CART_DETAILS ="RO_ID_CART_DETAILS";
     //ORDER
@@ -99,12 +102,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_LIST_IMG_ID ="LIST_IMG_ID";
     private static final String COLUMN_IMG_PATH ="IMG_PATH";
     private static final String COLUMN_PRO_ID_LIST_IMG ="PRO_ID_LIST_IMG";
-    private static final String COLUMN_ ="";
+
     public static final String TABLE_FAV = "TABLE_FAV";
+    public static final String TABLE_CART_DETAILS = "TABLE_CART_DETAILS";
 
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "shoeApp.db", null, 1);
+        super(context, "shoeApp.db", null, 2);
 
     }
 
@@ -158,7 +162,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + COLUMN_TEMP_VALUE + " INTEGER, "
                 + COLUMN_CUS_ID_CART + " INTEGER, "
                 + "FOREIGN KEY (" + COLUMN_CUS_ID_CART + ") REFERENCES "+ TABLE_CUSTOMER + "(" + COLUMN_CUS_ID + "));";
-        String CREATE_TABLE_CART_DETAILS = "CREATE TABLE " + TABLE_CART + " ("
+        String CREATE_TABLE_CART_DETAILS = "CREATE TABLE " + TABLE_CART_DETAILS + " ("
                 + COLUMN_CART_ID_DETAILS + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_TOTAL_VALUE_CART_DETAILS + " INTEGER,"
                 + COLUMN_QUANTITY_CART_DETAILS + " INTEGER, "
@@ -197,10 +201,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + COLUMN_ORDER_DETAILS_ORDER_ID + " INTEGER, "
                 + "FOREIGN KEY (" + COLUMN_ORDER_DETAILS_PRO_ID + ") REFERENCES "+ TABLE_PRO_DETAILS + "(" + COLUMN_ID_PRO_DETAILS + "),"
                 + "FOREIGN KEY (" + COLUMN_ORDER_DETAILS_ORDER_ID + ") REFERENCES "+ TABLE_ORDER + "(" + COLUMN_ORDER_ID + "));";
-
+        db.execSQL(CREATE_TABLE_Category);
         db.execSQL(CREATE_TABLE_AdminUser);
         db.execSQL(CREATE_TABLE_CUSTOMER);
-        db.execSQL(CREATE_TABLE_Category);
         db.execSQL(CREATE_TABLE_PRODUCT);
         db.execSQL(CREATE_TABLE_SIZE);
         db.execSQL(CREATE_TABLE_COLOR);
@@ -224,11 +227,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public boolean addCategory(Category category){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_CATE_NAME,category.getName());
-        long insert =  db.insert(COLUMN_CATE_NAME,null,contentValues);
-        if(insert == -1){
+        contentValues.put(COLUMN_CATE_NAME, category.getName());
+
+        long insert = db.insert(TABLE_CATE, null, contentValues);
+
+        if (insert == -1){
             return false;
+        } else {
+            return true;
         }
-        else {return  true;}
+    }
+
+    public List<Category> getCategory(){
+        List<Category> list = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_CATE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.moveToFirst()){
+            do{
+                String nameCate = cursor.getString(1);
+                Category category = new Category(nameCate);
+                list.add(category);
+            }
+            while (cursor.moveToNext());
+        }
+        else{
+
+        }
+        cursor.close();
+        db.close();
+        return list;
     }
 }
