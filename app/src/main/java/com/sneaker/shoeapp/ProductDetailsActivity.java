@@ -17,7 +17,19 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.sneaker.shoeapp.Adapter.CartAdapter;
+import com.sneaker.shoeapp.Adapter.ProductAdapter;
 import com.sneaker.shoeapp.model.Product;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProductDetailsActivity extends AppCompatActivity {
     TextView dt_proName;
@@ -29,6 +41,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
     Button add_to_cart;
     ImageButton btnBack,btnPopupSize,btnPopupColor;
     Product pro;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +54,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         pro = (Product) bundle.get("obj_product");
         dt_proPrice.setText(pro.getPrice() + "");
         dt_proCate.setText(pro.getCategory());
-        dt_proImage.setImageResource(pro.getImage());
+        Glide.with(ProductDetailsActivity.this).load(pro.getImage()).into(dt_proImage);
+
         dt_proName.setText(pro.getProName());
 
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_item_2), pro,bg_pro_details);
@@ -149,11 +165,25 @@ public class ProductDetailsActivity extends AppCompatActivity {
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProductDetailsActivity.this, MyCartActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("pro_details",pro);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                Map<String,Object> data = new HashMap<>();
+                data.put("quantity",1);
+                data.put("total_price",pro.getPrice());
+                data.put("proID",pro.getId());
+
+                DocumentReference documentReference = db.collection("User").document(user.getUid());
+                CollectionReference newCollection = documentReference.collection("AddToCart");
+
+                newCollection.add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Intent intent = new Intent(ProductDetailsActivity.this, MyCartActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+
+
+
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {

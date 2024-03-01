@@ -12,31 +12,39 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.sneaker.shoeapp.Interface.ClickItemCart;
 import com.sneaker.shoeapp.R;
+import com.sneaker.shoeapp.model.Cart;
 import com.sneaker.shoeapp.model.Product;
 
 import java.util.ArrayList;
+import java.util.logging.SocketHandler;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-    //    Activity context;
-    Product product;
-    ArrayList<Product> productArrayList;
-    Integer resource;
-    Activity context;
-    TextView proName_cart, proPrice_cart, viewQuantity;
-    ImageView proImg_cart;
-    FrameLayout bg_item_card_custom;
-    ImageButton increasePro, decreasePro;
-    ClickItemCart clickItemCart;
 
-    public CartAdapter(Activity context, ArrayList<Product> productArrayList) {
+
+    ArrayList<Cart> productArrayList;
+    ClickItemCart clickItemCart;
+    Activity context;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
+
+    public CartAdapter(Activity context, ArrayList<Cart> productArrayList, ClickItemCart clickItemCart) {
         this.context = context;
         this.productArrayList = productArrayList;
+        this.clickItemCart = clickItemCart;
     }
 
     //    public CartAdapter(@NonNull Activity context, int resource) {
@@ -55,11 +63,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product product = productArrayList.get(position);
-        holder.proImg_cart.setImageResource(product.getImage());
-        holder.proName_cart.setText(product.getProName());
-        holder.proPrice_cart.setText(product.getPrice() + "");
-        holder.viewQuantity.setText(0 + "");
+        Cart cart = productArrayList.get(position);
+
+        Glide.with(context).load(cart.getImage()).into(holder.proImg_cart);
+        holder.proName_cart.setText(cart.getProName());
+        holder.proPrice_cart.setText(cart.getPrice() + "");
+        Integer quantity = (int) cart.getQuantity();
+        holder.viewQuantity.setText(quantity + " ");
+        holder.removePro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickItemCart.removePro(position,cart);
+
+            }
+        });
     }
 
     @Override
@@ -70,12 +87,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView proName_cart, proPrice_cart, viewQuantity;
         ImageView proImg_cart;
-        ImageButton decreasePro, increasePro;
+        ImageButton decreasePro, increasePro,removePro;
         FrameLayout bg_item_card_custom;
         Product product;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            removePro = itemView.findViewById(R.id.removePro);
             proName_cart = itemView.findViewById(R.id.proName_cart);
             proPrice_cart = itemView.findViewById(R.id.proPrice_cart);
             viewQuantity = itemView.findViewById(R.id.viewQuantity);

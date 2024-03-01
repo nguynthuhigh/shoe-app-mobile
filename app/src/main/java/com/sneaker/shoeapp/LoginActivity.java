@@ -36,30 +36,31 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
-  /*      btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email_user = emailLogin.getText().toString().trim();
                 String password_user = pwLogin.getText().toString().trim();
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 mAuth.signInWithEmailAndPassword(email_user, password_user)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
+                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
 
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                 //   updateUI(user);
-                                } else {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
 
-                                    Toast.makeText(LoginActivity.this, "Wrong password or email.",
-                                            Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
-                                }
+                            } else {
+
+                                Toast.makeText(LoginActivity.this, "fail.",
+                                        Toast.LENGTH_SHORT).show();
                             }
-                        });
-            }*
-        });*/
+                        }
+                    });
+            }
+        });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

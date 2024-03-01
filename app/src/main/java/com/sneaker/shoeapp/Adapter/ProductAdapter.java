@@ -33,6 +33,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.sneaker.shoeapp.Interface.ClickItemProduct;
 import com.sneaker.shoeapp.ProductDetailsActivity;
 import com.sneaker.shoeapp.R;
@@ -82,7 +83,10 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if(pro  == null){
                 return;
             }
-            productViewHolder.proImg.setImageResource(pro.getImage());
+            Glide.with(context)
+                    .load(pro.getImage())
+                    .into(productViewHolder.proImg);
+
             // @SuppressLint("UseCompatLoadingForDrawables") GradientDrawable gradientDrawable =(GradientDrawable) context.getResources().getDrawable(R.drawable.bg_item_card_custom);
 
 
@@ -128,8 +132,11 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         else if(TYPE_USER_POPULAR == holder.getItemViewType()){
 
             ProductPopularViewHolder productPopularViewHolder = (ProductPopularViewHolder) holder;
+            Glide.with(context)
+                    .load(pro.getImage())
+                    .into(productPopularViewHolder.proImg_popular);
 
-            productPopularViewHolder.proImg_popular.setImageResource(pro.getImage());
+
             productPopularViewHolder.proName_popular.setText(pro.getProName());
             productPopularViewHolder.proCate_popular.setText(pro.getCategory());
             GradientDrawable gradientDrawable = new GradientDrawable(
@@ -146,8 +153,9 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         else if(TYPE_PRO_BANNER == holder.getItemViewType()){
             ProBannerViewHolder proBannerViewHolder = (ProBannerViewHolder) holder;
-
-            proBannerViewHolder.item_banner_img.setImageResource(pro.getImage());
+            Glide.with(context)
+                    .load(pro.getImage())
+                    .into(proBannerViewHolder.item_banner_img);
             proBannerViewHolder.item_banner_name.setText(pro.getProName());
             GradientDrawable gradientDrawable = new GradientDrawable(
                     GradientDrawable.Orientation.TL_BR,

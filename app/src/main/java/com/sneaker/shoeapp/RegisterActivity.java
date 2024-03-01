@@ -14,10 +14,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.sneaker.shoeapp.model.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 Button btnSignUp;
-EditText inputEmail,confirmPass,inputPass;
+EditText inputEmail,confirmPass,inputPass,inputName;
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    CollectionReference userCollection = firestore.collection("User");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +39,7 @@ EditText inputEmail,confirmPass,inputPass;
     }
 
     private void addEvents() {
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +53,11 @@ EditText inputEmail,confirmPass,inputPass;
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+                                        Map<String, Object> userinfo = new HashMap<>();
+                                        userinfo.put("id", mAuth.getCurrentUser().getUid());
+                                        userinfo.put("username", inputName.getText().toString());
+
+                                        firestore.collection("User").document(mAuth.getCurrentUser().getUid()).set(userinfo);
                                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                         startActivity(intent);
                                         finishAffinity();
@@ -66,5 +83,6 @@ EditText inputEmail,confirmPass,inputPass;
         inputEmail = findViewById(R.id.inputEmail);
         confirmPass = findViewById(R.id.confirmPass);
         inputPass = findViewById(R.id.inputPass);
+        inputName = findViewById(R.id.inputName);
     }
 }
