@@ -223,8 +223,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Product> getListPro_banner() {
         List<Product> listPro= new ArrayList<Product>();
-        listPro.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",3));
-        listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D",3));
+        listPro.add(new Product("Nike Vapor Edge Elite 360 2",2200.0,"Hello's Football Cleats","1","585858",3,"1"));
+        listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220.0,"Men's Football Cleats","1","A59D2D",3,"1"));
 
         return listPro;
     }
@@ -238,11 +238,11 @@ public class MainActivity extends AppCompatActivity {
     }
   private List<Product> getListPro() {
         List<Product> listPro= new ArrayList<Product>();
-        listPro.add(new Product("Dunk nike year of dragon",200,"men's shoe",R.drawable.shoe1,"CACBCF",1));
-        listPro.add(new Product("Hello",300,"hello's shoe",R.drawable.shoe6,"FF422B",1));
-        listPro.add(new Product("Hehe boi",300,"nguyn's shoe",R.drawable.shoe7,"5D90DD",1));
-        listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220,"Men's Football Cleats",R.drawable.shoe8,"A59D2D",1));
-        listPro.add(new Product("Nike Vapor Edge Elite 360 2",2200,"Hello's Football Cleats",R.drawable.shoe9,"585858",1));
+        listPro.add(new Product("Dunk nike year of dragon",200.0,"men's shoe","1","CACBCF",1,"1"));
+        listPro.add(new Product("Hello",300.0,"hello's shoe","1","FF422B",1,"1"));
+        listPro.add(new Product("Hehe boi",300.0,"nguyn's shoe","1","5D90DD",1,"1"));
+        listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220.0,"Men's Football Cleats","1","A59D2D",1,"1"));
+        listPro.add(new Product("Nike Vapor Edge Elite 360 2",2200.0,"Hello's Football Cleats","1","585858",1,"1"));
         return listPro;
     }
 

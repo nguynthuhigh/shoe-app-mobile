@@ -7,25 +7,32 @@ import java.io.Serializable;
 
 
 public class Product implements Serializable {
-    private String ProName, color;
+    private String ProName, color,id;
 
-    private Integer Price,ID;
+    private Double Price;
     private String Category;
-    private int Image;
+    private String Image;
     private int type;
     public Product() {
     }
 
-    public Product(String proName, Integer price, String category, int image, String color, int type) {
+    public Product(String proName, Double price, String category, String image, String color, int type, String id) {
         ProName = proName;
         Price = price;
         Category = category;
         Image = image;
         this.color = color;
         this.type = type;
+        this.id = id;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getColor() {
         return color;
@@ -52,11 +59,11 @@ public class Product implements Serializable {
         ProName = proName;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return Price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         Price = price;
     }
 
@@ -68,20 +75,14 @@ public class Product implements Serializable {
         Category = category;
     }
 
-    public int getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         Image = image;
     }
 
-    public Integer getID() {
-        return ID;
-    }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
-    }
     
 }
