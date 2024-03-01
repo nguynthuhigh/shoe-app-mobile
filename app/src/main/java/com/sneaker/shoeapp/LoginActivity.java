@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,26 +40,50 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Drawable icERR = getResources().getDrawable(R.drawable.ic_errorlogin);
+                icERR.setBounds(0,0,icERR.getIntrinsicWidth(),icERR.getIntrinsicHeight());
+                String email_user = emailLogin.getText().toString().trim();
+                String password_user = pwLogin.getText().toString().trim();
+                if (email_user.isEmpty())
+                {
+                    emailLogin.setCompoundDrawables(null,null,icERR,null);
+                    emailLogin.setError("Nhập mẹ mày acc vào",icERR);
+                }
+                if (password_user.isEmpty()){
+                    pwLogin.setCompoundDrawables(null,null,icERR,null);
+                    pwLogin.setError("Nhập mật khẩu vào",icERR);
+                }
+                if (!email_user.isEmpty() && !password_user.isEmpty()){
+                    emailLogin.setCompoundDrawables(null,null,null,null);
+                    pwLogin.setCompoundDrawables(null,null,null,null);
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 String email_user = emailLogin.getText().toString().trim();
                 String password_user = pwLogin.getText().toString().trim();
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 mAuth.signInWithEmailAndPassword(email_user, password_user)
-                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
 
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                startActivity(intent);
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                    startActivity(intent);
 
-                            } else {
+                                } else {
 
-                                Toast.makeText(LoginActivity.this, "fail.",
-                                        Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "fail.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
