@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.AdminCustomerActivity">
+    tools:context=".Admin.AdminCustomerActivity"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/inputName_Pro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </EditText>
+    <EditText
+        android:id="@+id/inputName_Img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Img">
+
+    </EditText>
+    <EditText
+        android:inputType="number"
+        android:id="@+id/inputPrice_Pro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Price">
+
+    </EditText>
+    <EditText
+        android:id="@+id/inputName_Cate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cate">
+
+    </EditText>
+    <EditText
+        android:inputType="number"
+        android:id="@+id/inputName_Discount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Discount">
+
+    </EditText>
+    <EditText
+        android:id="@+id/inputColor_Pro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Color">
+
+    </EditText>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+</LinearLayout>

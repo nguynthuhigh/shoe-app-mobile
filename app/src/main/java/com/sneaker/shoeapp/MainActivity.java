@@ -31,7 +31,15 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.sneaker.shoeapp.Adapter.ProductAdapter;
+import com.sneaker.shoeapp.Admin.AdminCustomerActivity;
 import com.sneaker.shoeapp.Admin.CategoryAdminActivity;
 import com.sneaker.shoeapp.Fragment.AllFragment;
 import com.sneaker.shoeapp.Fragment.FootballFragment;
@@ -52,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rcv_popular,rcv_banner;
     ProductAdapter productAdapter,productAdapter_banner;
     CardView bg_proImg;
+    FirebaseFirestore db;
+    List<Product>listProBanner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar main_header = findViewById(R.id.menu_header);
         setSupportActionBar(main_header);
+        db = FirebaseFirestore.getInstance();
         addControls();
         addEvents();
 
@@ -142,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         btnOrderDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeLayout(OrderDetailsActivity.class);
+                changeLayout(AdminCustomerActivity.class);
             }
         });
         inputCate.setOnClickListener(new View.OnClickListener() {
@@ -205,8 +216,11 @@ public class MainActivity extends AppCompatActivity {
         rcv_popular.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rcv_popular.setLayoutManager(linearLayoutManager);
         rcv_popular.setAdapter(productAdapter);
+
+
         //Pro Banner
-        productAdapter_banner = new ProductAdapter(getListPro_banner(), new ClickItemProduct() {
+        listProBanner = new ArrayList<>();
+        productAdapter_banner = new ProductAdapter(listProBanner, new ClickItemProduct() {
             @Override
             public void onClickItemProduct(Product product) {
                 IntentDetails(product);
@@ -218,13 +232,29 @@ public class MainActivity extends AppCompatActivity {
         rcv_banner.setLayoutManager(linearLayoutManager_2);
         rcv_banner.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rcv_banner.setAdapter(productAdapter_banner);
+        CollectionReference collectionReference = db.collection("Product");
+        Query query = collectionReference.document().getParent().whereEqualTo("category", "football").limit(4);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot dc : task.getResult()) {
 
+                        listProBanner.add(new Product(dc.getString("namePro"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),3,dc.getId()));
+                        productAdapter_banner.notifyDataSetChanged();
+                    }
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"ERROR",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
-    private List<Product> getListPro_banner() {
+    private List<Product> getListPro_banners() {
         List<Product> listPro= new ArrayList<Product>();
-        listPro.add(new Product("Nike Vapor Edge Elite 360 2",2200.0,"Hello's Football Cleats","1","585858",3,"1"));
-        listPro.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220.0,"Men's Football Cleats","1","A59D2D",3,"1"));
+
+
 
         return listPro;
     }

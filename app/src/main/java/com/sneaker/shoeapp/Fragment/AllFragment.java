@@ -82,14 +82,14 @@ public class AllFragment extends Fragment {
                for(DocumentChange dc: value.getDocumentChanges()){
 
                    String namePro = dc.getDocument().getString("proName");
-                    Double price = Double.valueOf(dc.getDocument().getString("price"));
+                //    Double price = Double.valueOf(dc.getDocument().getString("price"));
                    String color = dc.getDocument().getString("color");
                    String image = dc.getDocument().getString("image");
                    String cate = dc.getDocument().getString("category");
                    String id = dc.getDocument().getId();
 
 
-                   productList.add(new Product(namePro, price, cate, image, color, 2,id));
+                   productList.add(new Product(namePro, 1000.0, cate, image, color, 2,id));
 
 
 

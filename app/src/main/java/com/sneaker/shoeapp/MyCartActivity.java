@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,33 +13,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sneaker.shoeapp.Adapter.CartAdapter;
-import com.sneaker.shoeapp.Adapter.ProductAdapter;
 import com.sneaker.shoeapp.Interface.ClickItemCart;
 import com.sneaker.shoeapp.model.Cart;
 import com.sneaker.shoeapp.model.ListProduct;
-import com.sneaker.shoeapp.model.Product;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MyCartActivity extends AppCompatActivity {
     RecyclerView recyclerMyCart;
@@ -66,7 +59,8 @@ public class MyCartActivity extends AppCompatActivity {
         }
         addControls();
         addEvents();
-
+        reloadCart();
+       // loadData();
     }
 
 
@@ -83,45 +77,26 @@ public class MyCartActivity extends AppCompatActivity {
     }
 
     private void addControls() {
-
         recyclerMyCart = findViewById(R.id.recyclerMyCart);
         productArrayList = new ArrayList<>();
-
-        db.collection("User").document(user.getUid()).collection("AddToCart").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error !=null){
-                    return;
-                }
-                for (DocumentChange dc : value.getDocumentChanges()) {
-                    Double quantity = dc.getDocument().getDouble("quantity");
-                    Double total_price = dc.getDocument().getDouble("total_price");
-                    String proID=dc.getDocument().getString("proID");
-                    db.collection("Product").document(proID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            String namePro =  documentSnapshot.getString("name");
-                            String imgPro = documentSnapshot.getString("image");
-                            String color = documentSnapshot.getString("color");
-                            productArrayList.add(new Cart(namePro,1.1,"FT",imgPro,color,2,"2",quantity,total_price,dc.getDocument().getId()));
-                            cartAdapter.notifyDataSetChanged();
-                        }
-                    });
-
-
-                }
-
-            }
-        });
-
         cartAdapter = new CartAdapter(this, productArrayList, new ClickItemCart() {
             @Override
-            public void increasePro() {
-
+            public void increasePro(int position_item, Cart cart) {
+                db.collection("User")
+                    .document(user.getUid())
+                    .collection("AddToCart")
+                    .document(cart.getId_cart())
+                    .update("quantity",cart.getQuantity() + 1)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            cart.setQuantity(cart.getQuantity() + 1);
+                            cartAdapter.notifyItemChanged(position_item);
+                        }
+                    });
             }
-
             @Override
-            public void decreasePro() {
+            public void decreasePro(int position_item, Cart cart) {
 
             }
 
@@ -131,48 +106,42 @@ public class MyCartActivity extends AppCompatActivity {
                         .document(user.getUid())
                         .collection("AddToCart")
                         .document(cart.getId_cart())
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(MyCartActivity.this,"Remove successfully!", Toast.LENGTH_SHORT).show();
-                                productArrayList.remove(position_item);
-                                cartAdapter.notifyItemRemoved(position_item);
-                                reloadCart();
-                            }
-                        });
+                        .delete();
+
+                productArrayList.remove(position_item);
+
+                cartAdapter.notifyItemRemoved(position_item);
+
             }
         });
+
         recyclerMyCart.setAdapter(cartAdapter);
         recyclerMyCart.setLayoutManager(new LinearLayoutManager(this));
         btnBack = findViewById(R.id.btnBack);
+
+
     }
 
     private void reloadCart() {
-        db.collection("User").document(user.getUid()).collection("AddToCart").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("User").document(user.getUid()).collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error !=null){
-                    return;
-                }
-                for (DocumentChange dc : value.getDocumentChanges()) {
-                    Double quantity = dc.getDocument().getDouble("quantity");
-                    Double total_price = dc.getDocument().getDouble("total_price");
-                    String proID=dc.getDocument().getString("proID");
-                    db.collection("Product").document(proID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot dc : task.getResult()) {
+                    Double quantity = dc.getDouble("quantity");
+                    Double total_price = dc.getDouble("total_price");
+                    String proID = dc.getString("proID");
+
+                    db.collection("Product").document(proID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            String namePro =  documentSnapshot.getString("name");
-                            String imgPro = documentSnapshot.getString("image");
-                            String color = documentSnapshot.getString("color");
-                            productArrayList.add(new Cart(namePro,1.1,"FT",imgPro,color,2,"2",quantity,total_price,dc.getDocument().getId()));
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            String namePro = task.getResult().getString("name");
+                            String imgPro = task.getResult().getString("image");
+                            String color = task.getResult().getString("color");
+                            productArrayList.add(new Cart(namePro, 1.1, "FT", imgPro, color, 2, "2", quantity, total_price, dc.getId()));
                             cartAdapter.notifyDataSetChanged();
                         }
                     });
-
-
                 }
-
             }
         });
 

@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sneaker.shoeapp.Interface.ClickItemCart;
+import com.sneaker.shoeapp.MyCartActivity;
 import com.sneaker.shoeapp.R;
 import com.sneaker.shoeapp.model.Cart;
 import com.sneaker.shoeapp.model.Product;
@@ -73,8 +74,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.removePro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickItemCart.removePro(position,cart);
+               clickItemCart.removePro(position,cart);
 
+            }
+        });
+        holder.increasePro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickItemCart.increasePro(position,cart);
             }
         });
     }
@@ -108,6 +115,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         int colorInt = Color.parseColor("#" + pro.getColor());
         gradientDrawable.setColors(new int[]{0xFFFFFFFF, colorInt});
         layout.setBackground(gradientDrawable);
+    }
+    public void removeAt(int position) {
+        productArrayList.remove(position);
+        notifyItemRemoved(position);
+
     }
 
 
