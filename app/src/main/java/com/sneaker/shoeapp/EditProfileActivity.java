@@ -1,12 +1,16 @@
 package com.sneaker.shoeapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -14,11 +18,31 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.net.PasswordAuthentication;
 
 
 public class EditProfileActivity extends AppCompatActivity {
 
     Button btnRename,btnConfirm,btnChangeAvt,btnChangeEmail,btnChangePassword;
+    EditText edtPassOld, edtPassNew, edtConfirm;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
+
+    AuthCredential credential = EmailAuthProvider
+            .getCredential("user@example.com", "password1234");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,19 +212,49 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSavePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 dialog.dismiss();
+                onClickChangePassWord();
             }
+
+
         });
         dialog.show();
     }
+    private void onClickChangePassWord() {
+        String strConFirmPass= edtConfirm.getText().toString().trim();
+        String strNewPass=edtPassNew.getText().toString().trim();
+        user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()&&strConFirmPass.equals(strNewPass)){
 
+                    user.updatePassword(strNewPass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(EditProfileActivity.this, "User Password update.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+
+
+
+
+    }
     private void addControls() {
         btnRename= findViewById(R.id.btnRename);
         btnConfirm=findViewById(R.id.btnConfirm);
         btnChangeAvt=findViewById(R.id.btnChangeAvt);
         btnChangeEmail=findViewById(R.id.btnChangeEmail);
         btnChangePassword=findViewById(R.id.btnChangePassword);
-
+        edtPassOld=findViewById(R.id.edtPassOld);
+        edtPassNew=findViewById(R.id.edtPassNew);
+        edtConfirm=findViewById(R.id.edtConfirm);
     }
 
 

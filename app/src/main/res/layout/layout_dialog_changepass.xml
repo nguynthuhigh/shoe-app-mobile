@@ -34,6 +34,7 @@
         android:textColorHint="@color/darkGrey"
         android:paddingStart="20dp"
         android:hint="Old Password"
+        android:id="@+id/edtPassOld"
         />
     <EditText
         android:layout_width="300dp"
@@ -47,6 +48,7 @@
         android:textColorHint="@color/darkGrey"
         android:paddingStart="20dp"
         android:hint="New Password"
+        android:id="@+id/edtPassNew"
         />
     <EditText
         android:layout_width="300dp"
@@ -60,6 +62,7 @@
         android:textColorHint="@color/darkGrey"
         android:paddingStart="20dp"
         android:hint="Confirm Password"
+        android:id="@+id/edtConfirm"
         />
 
     <LinearLayout
