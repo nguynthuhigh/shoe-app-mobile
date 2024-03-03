@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -82,22 +83,60 @@ public class MyCartActivity extends AppCompatActivity {
         cartAdapter = new CartAdapter(this, productArrayList, new ClickItemCart() {
             @Override
             public void increasePro(int position_item, Cart cart) {
-                db.collection("User")
-                    .document(user.getUid())
-                    .collection("AddToCart")
-                    .document(cart.getId_cart())
-                    .update("quantity",cart.getQuantity() + 1)
+                DocumentReference documentReference =  db.collection("User")
+                        .document(user.getUid())
+                        .collection("AddToCart")
+                        .document(cart.getId_cart());
+
+                documentReference.update("quantity",cart.getQuantity() + 1)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            cart.setTotal_cart((cart.getQuantity()+1) * cart.getPrice());
                             cart.setQuantity(cart.getQuantity() + 1);
                             cartAdapter.notifyItemChanged(position_item);
+                            documentReference.update("total_price",(cart.getQuantity()) * cart.getPrice());
                         }
                     });
+              /*  documentReference.update("total_price",cart.getTotal_cart() * cart.getQuantity())
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                cart.setTotal_cart(cart.getTotal_cart() * cart.getQuantity());
+                                cartAdapter.notifyItemChanged(position_item);
+                            }
+                        });*/
             }
             @Override
             public void decreasePro(int position_item, Cart cart) {
+                if(cart.getQuantity() > 1){
+                    DocumentReference documentReference =
+                    db.collection("User")
+                    .document(user.getUid())
+                    .collection("AddToCart")
+                    .document(cart.getId_cart());
+                    documentReference.update("quantity",cart.getQuantity() - 1)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            cart.setQuantity(cart.getQuantity() - 1);
+                            cart.setTotal_cart(cart.getQuantity() * cart.getPrice());
+                            cartAdapter.notifyItemChanged(position_item);
+                            documentReference.update("total_price",(cart.getQuantity()) * cart.getPrice());
+                        }
+                    });
+                }
+                else{
+                    db.collection("User")
+                            .document(user.getUid())
+                            .collection("AddToCart")
+                            .document(cart.getId_cart())
+                            .delete();
 
+                    productArrayList.remove(position_item);
+
+                    cartAdapter.notifyItemRemoved(position_item);
+                }
             }
 
             @Override
@@ -134,10 +173,12 @@ public class MyCartActivity extends AppCompatActivity {
                     db.collection("Product").document(proID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            String namePro = task.getResult().getString("name");
+                            String namePro = task.getResult().getString("proName");
                             String imgPro = task.getResult().getString("image");
                             String color = task.getResult().getString("color");
-                            productArrayList.add(new Cart(namePro, 1.1, "FT", imgPro, color, 2, "2", quantity, total_price, dc.getId()));
+                            Double price = Double.valueOf(task.getResult().getString("price")) ;
+
+                            productArrayList.add(new Cart(namePro,price , dc.getString("category"), imgPro, color, 2, "2", quantity, total_price, dc.getId()));
                             cartAdapter.notifyDataSetChanged();
                         }
                     });

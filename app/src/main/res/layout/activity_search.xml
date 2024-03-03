@@ -82,23 +82,10 @@
 
                 </ImageView>
             </RelativeLayout>
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2">
-                <include layout="@layout/item_card">
-
-                </include>
-                <include layout="@layout/item_card">
-
-                </include>
-                <include layout="@layout/item_card">
-
-                </include>
-                <include layout="@layout/item_card">
-
-                </include>
-            </GridLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
 

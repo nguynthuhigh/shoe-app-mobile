@@ -171,6 +171,7 @@
                             android:layout_marginLeft="5dp"/>
 
                         <ImageView
+                            android:id="@+id/bs_img"
                             android:layout_width="match_parent"
                             android:layout_height="210dp"
                             android:layout_marginRight="10dp"
@@ -195,6 +196,7 @@
                             android:textSize="17sp" />
 
                         <TextView
+                            android:id="@+id/bs_name"
                             android:textColor="@color/black"
                             android:layout_width="175dp"
                             android:layout_height="wrap_content"
@@ -205,6 +207,7 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/bs_price"
                             android:textColor="@color/black"
                             android:layout_width="180dp"
                             android:layout_height="wrap_content"
