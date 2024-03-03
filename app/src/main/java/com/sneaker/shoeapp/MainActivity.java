@@ -55,7 +55,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton btnAddFav, btnSearch;
-    Button btnSeller,categoryAll,categoryFootball,categoryRunning,btnFav,btnPayment,btnCheckout,btnOrderDetails,inputCate;
+    Button btnSeller,categoryAll,categoryFootball,categoryRunning,btnFav,btnPayment,btnCheckout,btnOrderDetails,inputCate,btnLogin;
     EditText searchProduct,searchProduct_2;
     FrameLayout productCard;
     ImageButton finishLayout;
@@ -155,6 +155,12 @@ public class MainActivity extends AppCompatActivity {
                 changeLayout(CategoryAdminActivity.class);
             }
         });
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLayout(LoginActivity.class);
+            }
+        });
 
     }
     private void changeStateButton(Button btn,int drawable,int color){
@@ -182,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         btnCheckout = findViewById(R.id.btnCheckout);
         btnOrderDetails = findViewById(R.id.btnOrderDetails);
         inputCate = findViewById(R.id.inputCate);
-
+        btnLogin = findViewById(R.id.btnLogin);
         btnSeller = findViewById(R.id.btnSeller);
         btnAddFav = findViewById(R.id.btnAddFav);
         searchProduct = findViewById(R.id.searchProduct);

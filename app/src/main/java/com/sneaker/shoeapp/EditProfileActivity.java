@@ -14,12 +14,23 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class EditProfileActivity extends AppCompatActivity {
-
+    TextView name_userEdit;
     Button btnRename,btnConfirm,btnChangeAvt,btnChangeEmail,btnChangePassword;
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,7 +211,14 @@ public class EditProfileActivity extends AppCompatActivity {
         btnChangeAvt=findViewById(R.id.btnChangeAvt);
         btnChangeEmail=findViewById(R.id.btnChangeEmail);
         btnChangePassword=findViewById(R.id.btnChangePassword);
-
+        name_userEdit = findViewById(R.id.name_userEdit);
+        DocumentReference documentReference =db.collection("User").document(user.getUid());
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                name_userEdit.setText(documentSnapshot.getString("username"));
+            }
+        });
     }
 
 

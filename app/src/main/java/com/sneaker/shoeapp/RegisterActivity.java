@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,48 @@ EditText inputEmail,confirmPass,inputPass,inputName;
         setContentView(R.layout.activity_register);
         addControls();
         addEvents();
+        addCheckError();
+    }
+
+    private void addCheckError() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable icERR = getResources().getDrawable(R.drawable.ic_errorlogin);
+                icERR.setBounds(0,0,icERR.getIntrinsicWidth(),icERR.getIntrinsicHeight());
+                String email_user = inputEmail.getText().toString().trim();
+                String password_user = inputPass.getText().toString().trim();
+                String confirmPassword_user = confirmPass.getText().toString().trim();
+                String name_user = inputName.getText().toString().trim();
+                if (email_user.isEmpty())
+                {
+                    inputEmail.setCompoundDrawables(null,null,icERR,null);
+                    inputEmail.setError("Nhập mẹ mày acc vào",icERR);
+                }
+                if (password_user.isEmpty()){
+                    inputPass.setCompoundDrawables(null,null,icERR,null);
+                    inputPass.setError("Nhập mật khẩu vào",icERR);
+                }
+                if (confirmPassword_user.isEmpty())
+                {
+                    confirmPass.setCompoundDrawables(null,null,icERR,null);
+                    confirmPass.setError("Nhập lại mật khẩu đê",icERR);
+                }
+                if (email_user.isEmpty())
+                {
+                    inputName.setCompoundDrawables(null,null,icERR,null);
+                    inputName.setError("Thằng bố mày tên gì",icERR);
+                }
+                if (!email_user.isEmpty() && !password_user.isEmpty()){
+                    inputEmail.setCompoundDrawables(null,null,null,null);
+                    inputPass.setCompoundDrawables(null,null,null,null);
+                    confirmPass.setCompoundDrawables(null,null,null,null);
+                    inputName.setCompoundDrawables(null,null,null,null);
+                    Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void addEvents() {

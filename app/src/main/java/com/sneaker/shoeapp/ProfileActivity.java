@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Source;
 
 public class ProfileActivity extends AppCompatActivity {
-    Button btnEdit_profile,btnView_order,btnLog_out,btnView_favourite;
+    Button btnEdit_profile,btnView_order,btnView_favourite,btnLog_out;
     TextView name_user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -35,9 +35,26 @@ public class ProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(ProfileActivity.this,LoginActivity.class);
             startActivity(intent);
         }
+        /*else {
+            Intent intent = new Intent(this,ProfileActivity.class);
+            startActivity(intent);
+        }*/
         addControls();
         addEvents();
+       // addLogout();
     }
+
+    /*private void addLogout() {
+        btnLog_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(ProfileActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }*/
 
     private void addEvents() {
 
@@ -63,6 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void addControls() {
@@ -71,11 +89,11 @@ public class ProfileActivity extends AppCompatActivity {
         btnLog_out = findViewById(R.id.btnLog_out);
         btnView_favourite = findViewById(R.id.btnView_favourite);
         name_user = findViewById(R.id.name_user);
-        DocumentReference documentReference =db.collection("User").document(user.getUid());
+        DocumentReference documentReference =db.collection("Userr").document(user.getUid());
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                name_user.setText(documentSnapshot.getString("username"));
+                name_user.setText(documentSnapshot.getString("usernamee"));
             }
         });
     }

@@ -27,16 +27,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         addControls();
         addEvents();
+        addLogin();
     }
 
-    private void addControls() {
-        btnLogin = findViewById(R.id.btnLogin);
-        btnRegister=findViewById(R.id.btnRegister);
-        emailLogin = findViewById(R.id.emailLogin);
-        pwLogin = findViewById(R.id.pwLogin);
-    }
-
-    private void addEvents() {
+    private void addLogin() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +55,17 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void addControls() {
+        btnLogin = findViewById(R.id.btnLogin);
+        btnRegister=findViewById(R.id.btnRegister);
+        emailLogin = findViewById(R.id.emailLogin);
+        pwLogin = findViewById(R.id.pwLogin);
+    }
+
+    private void addEvents() {
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
