@@ -99,7 +99,7 @@
                 android:background="@drawable/btn_login"
                 android:fontFamily="@font/alata_regular"
                 android:gravity="center"
-                android:text="Sign Up"
+                android:text="Register"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:textSize="20sp" />
