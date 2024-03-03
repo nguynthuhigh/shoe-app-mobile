@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.transition.Hold;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sneaker.shoeapp.Interface.ClickItemCart;
+import com.sneaker.shoeapp.MyCartActivity;
 import com.sneaker.shoeapp.R;
 import com.sneaker.shoeapp.model.Cart;
 import com.sneaker.shoeapp.model.Product;
@@ -67,16 +70,34 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         Glide.with(context).load(cart.getImage()).into(holder.proImg_cart);
         holder.proName_cart.setText(cart.getProName());
-        holder.proPrice_cart.setText(cart.getPrice() + "");
+        int total_cart = (int) ((int) cart.getTotal_cart() * cart.getQuantity());
+        holder.proPrice_cart.setText(cart.getTotal_cart() + "");
         Integer quantity = (int) cart.getQuantity();
         holder.viewQuantity.setText(quantity + " ");
+        holder.discount.setText("-10%");
         holder.removePro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickItemCart.removePro(position,cart);
+               clickItemCart.removePro(position,cart);
 
             }
         });
+        holder.increasePro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickItemCart.increasePro(position,cart);
+            }
+        });
+        holder.decreasePro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickItemCart.decreasePro(position,cart);
+            }
+        });
+        GradientDrawable gradientDrawable = new GradientDrawable(
+                GradientDrawable.Orientation.TL_BR,
+                new int[]{ Color.parseColor("#" + cart.getColor()),Color.WHITE});
+        holder.item_cart.setBackground(gradientDrawable);
     }
 
     @Override
@@ -85,10 +106,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView proName_cart, proPrice_cart, viewQuantity;
+        TextView proName_cart, proPrice_cart, viewQuantity,discount;
         ImageView proImg_cart;
         ImageButton decreasePro, increasePro,removePro;
-        FrameLayout bg_item_card_custom;
+        LinearLayout item_cart;
         Product product;
 
         public ViewHolder(@NonNull View itemView) {
@@ -100,7 +121,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             proImg_cart = itemView.findViewById(R.id.proImg_cart);
             decreasePro = itemView.findViewById(R.id.decreasePro);
             increasePro = itemView.findViewById(R.id.increasePro);
-            bg_item_card_custom = itemView.findViewById(R.id.bg_item_card_custom);
+            item_cart = itemView.findViewById(R.id.item_cart);
+            discount = itemView.findViewById(R.id.discount);
         }
     }
 
@@ -108,6 +130,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         int colorInt = Color.parseColor("#" + pro.getColor());
         gradientDrawable.setColors(new int[]{0xFFFFFFFF, colorInt});
         layout.setBackground(gradientDrawable);
+    }
+    public void removeAt(int position) {
+        productArrayList.remove(position);
+        notifyItemRemoved(position);
+
     }
 
 

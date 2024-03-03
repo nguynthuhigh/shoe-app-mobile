@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sneaker.shoeapp.Adapter.CartAdapter;
 import com.sneaker.shoeapp.Adapter.ProductAdapter;
@@ -44,6 +45,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
+    Integer quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,17 +175,30 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 DocumentReference documentReference = db.collection("User").document(user.getUid());
                 CollectionReference newCollection = documentReference.collection("AddToCart");
 
-                newCollection.add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Intent intent = new Intent(ProductDetailsActivity.this, MyCartActivity.class);
-                        startActivity(intent);
-                    }
-                });
+               newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                   @Override
+                   public void onSuccess(DocumentSnapshot documentSnapshot) {
+                       if(documentSnapshot.exists()){
+                           Object quantityObject = documentSnapshot.get("quantity");
 
-
-
-
+                           int currentQuantity = ((Long) quantityObject).intValue();
+                           double total_cart = (double) (pro.getPrice() * (currentQuantity+1));
+                           newCollection.document(pro.getId()).update("total_price",total_cart);
+                           newCollection.document(pro.getId()).update("quantity",currentQuantity+1);
+                           Intent intent = new Intent(ProductDetailsActivity.this, MyCartActivity.class);
+                           startActivity(intent);
+                       }
+                       else{
+                           newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                               @Override
+                               public void onSuccess(Void unused) {
+                                   Intent intent = new Intent(ProductDetailsActivity.this, MyCartActivity.class);
+                                   startActivity(intent);
+                               }
+                           });
+                       }
+                   }
+               });
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {

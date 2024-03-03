@@ -7,23 +7,26 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <FrameLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/bg_item_card_custom"
         android:layout_width="355dp"
         android:layout_height="150dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/bg_item_card_custom"
+
         app:cardCornerRadius="15dp"
-        app:cardElevation="7dp">
+        app:cardElevation="0dp">
 
         <LinearLayout
+            android:id="@+id/item_cart"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_height="match_parent"
+
+            android:background="@drawable/bg_item_card_custom"
             android:orientation="horizontal">
 
             <LinearLayout
+                android:layout_marginTop="2dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -68,6 +71,7 @@
                             </TextView>
 
                             <TextView
+                                android:id="@+id/discount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
@@ -142,5 +146,5 @@
             </LinearLayout>
 
         </LinearLayout>
-    </FrameLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
