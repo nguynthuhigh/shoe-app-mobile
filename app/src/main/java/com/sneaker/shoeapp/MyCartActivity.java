@@ -43,9 +43,9 @@ public class MyCartActivity extends AppCompatActivity {
     ImageButton decreasePro, increasePro;
     ListProduct productList;
     ImageButton btnBack;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    FirebaseUser user = mAuth.getCurrentUser();
+    FirebaseFirestore db;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
 
     //    ListView listItem_cart;
     @Override
@@ -54,7 +54,11 @@ public class MyCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_cart);
         Toolbar main_header = findViewById(R.id.menu_header_back);
         setSupportActionBar(main_header);
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         if (user == null){
+            finish();
             Intent intent = new Intent(MyCartActivity.this, LoginActivity.class);
             startActivity(intent);
         }
@@ -162,30 +166,31 @@ public class MyCartActivity extends AppCompatActivity {
     }
 
     private void reloadCart() {
-        db.collection("User").document(user.getUid()).collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot dc : task.getResult()) {
-                    Double quantity = dc.getDouble("quantity");
-                    Double total_price = dc.getDouble("total_price");
-                    String proID = dc.getString("proID");
+        if(user != null){
+            db.collection("User").document(user.getUid()).collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for (QueryDocumentSnapshot dc : task.getResult()) {
+                        Double quantity = dc.getDouble("quantity");
+                        Double total_price = dc.getDouble("total_price");
+                        String proID = dc.getString("proID");
 
-                    db.collection("Product").document(proID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            String namePro = task.getResult().getString("proName");
-                            String imgPro = task.getResult().getString("image");
-                            String color = task.getResult().getString("color");
-                            Double price = Double.valueOf(task.getResult().getString("price")) ;
+                        db.collection("Product").document(proID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                String namePro = task.getResult().getString("proName");
+                                String imgPro = task.getResult().getString("image");
+                                String color = task.getResult().getString("color");
+                                Double price = Double.valueOf(task.getResult().getString("price")) ;
 
-                            productArrayList.add(new Cart(namePro,price , dc.getString("category"), imgPro, color, 2, "2", quantity, total_price, dc.getId()));
-                            cartAdapter.notifyDataSetChanged();
-                        }
-                    });
+                                productArrayList.add(new Cart(namePro,price , dc.getString("category"), imgPro, color, 2, "2", quantity, total_price, dc.getId()));
+                                cartAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
                 }
-            }
-        });
-
+            });
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
