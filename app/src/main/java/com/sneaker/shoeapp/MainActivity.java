@@ -1,6 +1,7 @@
 package com.sneaker.shoeapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -36,8 +37,15 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -51,20 +59,23 @@ import com.sneaker.shoeapp.Interface.ClickItemProduct;
 import com.sneaker.shoeapp.model.Product;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton btnAddFav, btnSearch;
-    Button btnSeller,categoryAll,categoryFootball,categoryRunning,btnFav,btnPayment,btnCheckout,btnOrderDetails,inputCate;
+    Button btnSeller,categoryAll,categoryFootball,categoryRunning,btnPayment,btnCheckout,btnOrderDetails,inputCate;
     EditText searchProduct,searchProduct_2;
     FrameLayout productCard;
     ImageButton finishLayout;
     ImageView bs_img;
-    TextView bs_name,bs_price;
+    TextView bs_name,bs_price,bag_count;
     RecyclerView rcv_popular,rcv_banner;
     ProductAdapter productAdapter,productAdapter_banner;
     CardView bg_proImg;
     FirebaseFirestore db;
+    FirebaseAuth mauth;
+    FirebaseUser user;
     List<Product>listProBanner;
 
     @Override
@@ -74,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar main_header = findViewById(R.id.menu_header);
         setSupportActionBar(main_header);
         db = FirebaseFirestore.getInstance();
+        mauth = FirebaseAuth.getInstance();
+        user =mauth.getCurrentUser();
         addControls();
         addEvents();
 
@@ -125,16 +138,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        btnFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeLayout(FavouriteActivity.class);
-            }
-        });
+
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeLayout(PaymentActivity.class);
+                changeLayout(LoginActivity.class);
             }
         });
         btnCheckout.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("ResourceAsColor")
     private void addControls() {
 
-        btnFav = findViewById(R.id.btnFav);
+
         btnPayment = findViewById(R.id.btnPayment);
         btnCheckout = findViewById(R.id.btnCheckout);
         btnOrderDetails = findViewById(R.id.btnOrderDetails);
@@ -193,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         categoryAll = findViewById(R.id.categoryAll);
         categoryFootball = findViewById(R.id.categoryFootball);
         categoryRunning = findViewById(R.id.categoryRunning);
-
+        bag_count = findViewById(R.id.bag_count);
 
         Fragment fragment = new AllFragment();
         loadFragment(fragment);
@@ -232,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot dc : task.getResult()) {
 
-                        listProBanner.add(new Product(dc.getString("namePro"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),3,dc.getId()));
+                        listProBanner.add(new Product(dc.getString("proName"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),3,dc.getId()));
                         productAdapter_banner.notifyDataSetChanged();
                     }
                 }
@@ -252,12 +260,25 @@ public class MainActivity extends AppCompatActivity {
 
                 for (QueryDocumentSnapshot dc : task.getResult()) {
                     Glide.with(MainActivity.this).load(dc.getString("image")).into(bs_img);
-                    bs_name.setText(dc.getString("namePro"));
+                    bs_name.setText(dc.getString("proName"));
                     bs_price.setText("$"+dc.getString("price"));
                 }
             }
         });
-        //
+        //Bag count user
+      /*  CollectionReference collectionReference1 = db.collection("User").document(user.getUid()).collection("AddToCart");
+        collectionReference1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                double quantity =0;
+                for (DocumentSnapshot dc: task.getResult()
+                     ) {
+                     quantity = quantity +dc.getDouble("quantity");
+                    bag_count.setText(quantity+"");
+                }
+
+            }
+        });*/
     }
 
     private List<Product> getListPro_banners() {
@@ -285,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
               if (task.isSuccessful()) {
                   for (QueryDocumentSnapshot dc : task.getResult()) {
 
-                      listPro.add(new Product(dc.getString("namePro"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),1,dc.getId()));
+                      listPro.add(new Product(dc.getString("proName"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),1,dc.getId()));
                       productAdapter.notifyDataSetChanged();
                   }
               }

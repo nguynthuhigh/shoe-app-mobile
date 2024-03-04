@@ -98,6 +98,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/add_to_cart_popular"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@android:color/transparent"
