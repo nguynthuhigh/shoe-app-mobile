@@ -3,8 +3,10 @@ package com.sneaker.shoeapp.Adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sneaker.shoeapp.Interface.ClickItemCart;
 import com.sneaker.shoeapp.MyCartActivity;
+import com.sneaker.shoeapp.ProductDetailsActivity;
+import com.sneaker.shoeapp.ProfileActivity;
 import com.sneaker.shoeapp.R;
 import com.sneaker.shoeapp.model.Cart;
 import com.sneaker.shoeapp.model.Product;
@@ -98,6 +102,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 GradientDrawable.Orientation.TL_BR,
                 new int[]{ Color.parseColor("#" + cart.getColor()),Color.WHITE});
         holder.item_cart.setBackground(gradientDrawable);
+        holder.item_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Product product = new Product(cart.getProName(), cart.getPrice(), cart.getCategory(), cart.getImage(), cart.getColor(), 0, cart.getId());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("obj_product",product);
+                Intent intent = new Intent(context, ProductDetailsActivity.class);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
