@@ -3,12 +3,22 @@
   <component name="deploymentTargetDropDown">
     <value>
       <entry key="MainActivity">
-        <State />
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\TienHaoPhong\.android\avd\Pixel_7_Pro_API_33.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-03T16:34:52.001287500Z" />
+        </State>
       </entry>
-      <entry key="MyCartActivity">
-        <State />
-      </entry>
-      <entry key="app">
+      <entry key="ProductDetailsActivity">
         <State />
       </entry>
     </value>

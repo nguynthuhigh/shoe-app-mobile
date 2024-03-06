@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/color_checkout"
     tools:context=".CheckoutActivity">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:srcCompat="@drawable/rectangle_bottom_radius" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:srcCompat="@drawable/rectangle_bottom_radius" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,8 +70,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/alata_regular"
                                 android:layout_marginLeft="15dp"
+                                android:fontFamily="@font/alata_regular"
                                 android:text="Total"
                                 android:textSize="20dp" />
 
@@ -173,88 +176,119 @@
                                 app:srcCompat="@drawable/line_bill" />
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginEnd="15dp"
-                                android:background="@drawable/rectangle_payment_info">
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
-                                <ImageView
-                                    android:id="@+id/img1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_marginLeft="5dp"
-                                    android:src="@drawable/ic_cod" />
+                                <RelativeLayout
+                                    android:id="@+id/notMOMO"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginEnd="15dp"
+                                    android:background="@drawable/rectangle_payment_info">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_toRightOf="@+id/img1"
-                                    android:fontFamily="@font/alata_regular"
-                                    android:gravity="center"
-                                    android:text="Cash on delivery"
-                                    android:textColor="@color/black"
-                                    android:textSize="12sp" />
+                                    <ImageView
+                                        android:id="@+id/img1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/ic_cod" />
 
-                                <RadioButton
-                                    android:id="@+id/radio_cod"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentTop="true"
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_toRightOf="@+id/img1"
+                                        android:fontFamily="@font/alata_regular"
+                                        android:gravity="center"
+                                        android:text="Cash on delivery"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp" />
+
+
+                                    <!--                                <RadioButton-->
+                                    <!--                                    android:id="@+id/radio_cod1"-->
+                                    <!--                                    android:layout_width="wrap_content"-->
+                                    <!--                                    android:layout_height="wrap_content"-->
+                                    <!--                                    android:layout_alignParentTop="true"-->
+                                    <!--                                    android:layout_alignParentEnd="true"-->
+                                    <!--                                    android:layout_alignParentBottom="true"-->
+                                    <!--                                    android:checked="true"-->
+                                    <!--                                    app:buttonTint="@color/black" />-->
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/MOMO"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_below="@+id/notMOMO"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="15dp"
+                                    android:background="@drawable/rectangle_payment_info">
+
+                                    <ImageView
+                                        android:id="@+id/img2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/ic_momo" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_toRightOf="@+id/img2"
+                                        android:fontFamily="@font/alata_regular"
+                                        android:gravity="center_vertical"
+                                        android:text="Pay with Momo\nNew"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp" />
+
+                                    <!--                                    <RadioButton-->
+                                    <!--                                        android:layout_width="wrap_content"-->
+                                    <!--                                        android:layout_height="wrap_content"-->
+                                    <!--                                        android:layout_alignParentTop="true"-->
+                                    <!--                                        android:layout_alignParentEnd="true"-->
+                                    <!--                                        android:layout_alignParentBottom="true"-->
+                                    <!--                                        android:checked="false"-->
+                                    <!--                                        app:buttonTint="@color/black" />-->
+
+                                </RelativeLayout>
+
+                                <RadioGroup
+                                    android:layout_marginEnd="20dp"
                                     android:layout_alignParentEnd="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:checked="true"
-                                    app:buttonTint="@color/black" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginEnd="15dp"
-                                android:background="@drawable/rectangle_payment_info">
-
-                                <ImageView
-                                    android:id="@+id/img2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_marginLeft="5dp"
-                                    android:src="@drawable/ic_momo" />
+                                    android:layout_centerInParent="true">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_toRightOf="@+id/img2"
-                                    android:fontFamily="@font/alata_regular"
-                                    android:gravity="center_vertical"
-                                    android:text="Pay with Momo\nNew"
-                                    android:textColor="@color/black"
-                                    android:textSize="12sp" />
+                                    <RadioButton
+                                        android:id="@+id/radio_cod"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="true"
+                                        app:buttonTint="@color/black" />
 
-                                <RadioButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:checked="false"
-                                    app:buttonTint="@color/black" />
-
+                                    <RadioButton
+                                        android:id="@+id/radio_codd"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="39dp"
+                                        android:checked="false"
+                                        app:buttonTint="@color/black" />
+                                </RadioGroup>
                             </RelativeLayout>
 
                             <ImageView
@@ -274,8 +308,8 @@
                                 android:backgroundTint="@color/black"
                                 android:fontFamily="@font/alata_regular"
                                 android:text="Pay now"
-                                android:textColor="@color/white"
                                 android:textAllCaps="false"
+                                android:textColor="@color/white"
                                 android:textSize="18dp"
                                 android:textStyle="bold" />
                         </LinearLayout>

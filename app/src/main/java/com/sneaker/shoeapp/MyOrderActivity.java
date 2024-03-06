@@ -67,11 +67,11 @@ public class MyOrderActivity extends AppCompatActivity {
     private List<Order> getListOrder() {
         List<Order> orderList = new ArrayList<>();
 
-        orderList.add(new Order(1,2024,true,5,1200,"HCM"));
-        orderList.add(new Order(2,2024,false,4,5200,"HN"));
-        orderList.add(new Order(3,2024,true,100,520000,"DAKLAK"));
-        orderList.add(new Order(4,2024,false,20,1200,"GIALAI"));
-        orderList.add(new Order(5,2024,true,5,15000,"QUANGNAM"));
+        orderList.add(new Order("1",2024,true,5,1200,"HCM"));
+        orderList.add(new Order("2",2024,false,4,5200,"HN"));
+        orderList.add(new Order("3",2024,true,100,520000,"DAKLAK"));
+        orderList.add(new Order("4",2024,false,20,1200,"GIALAI"));
+        orderList.add(new Order("5",2024,true,5,15000,"QUANGNAM"));
         return orderList;
     }
 
