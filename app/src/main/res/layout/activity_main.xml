@@ -273,15 +273,8 @@
                 android:layout_height="wrap_content"
                 app:columnCount="4"
                 >
-                <Button
-                    android:id="@+id/btnLogin"
-                    android:text="Login"/>
-                <Button
-                    android:id="@+id/btnRegister"
-                    android:text="Register"/>
-                <Button
-                    android:id="@+id/btnFav"
-                    android:text="Favorite"/>
+
+
                 <Button
                     android:id="@+id/btnPayment"
                     android:text="Payment"/>

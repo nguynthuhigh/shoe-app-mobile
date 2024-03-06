@@ -31,15 +31,21 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user == null){
-            Intent intent = new Intent(ProfileActivity.this,LoginActivity.class);
-            startActivity(intent);
-        }
+
         addControls();
         addEvents();
     }
 
     private void addEvents() {
+        btnLog_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(ProfileActivity.this,LoginActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         btnEdit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +77,20 @@ public class ProfileActivity extends AppCompatActivity {
         btnLog_out = findViewById(R.id.btnLog_out);
         btnView_favourite = findViewById(R.id.btnView_favourite);
         name_user = findViewById(R.id.name_user);
-        DocumentReference documentReference =db.collection("User").document(user.getUid());
-        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                name_user.setText(documentSnapshot.getString("username"));
-            }
-        });
+        if(user !=null){
+            DocumentReference documentReference =db.collection("User").document(user.getUid());
+            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    name_user.setText(documentSnapshot.getString("username"));
+                }
+            });
+        }
+        else{
+            finish();
+            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+
     }
 }

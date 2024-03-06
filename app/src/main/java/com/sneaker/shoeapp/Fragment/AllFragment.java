@@ -19,12 +19,14 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -40,6 +42,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Collection;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
@@ -72,8 +75,9 @@ public class AllFragment extends Fragment {
             }
         },getContext());
 
-
-       db.collection("Product").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        CollectionReference collection = db.collection("Product");
+        Query query = collection.document().getParent().limit(4);
+        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
            @Override
            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                if(error !=null){
@@ -87,13 +91,8 @@ public class AllFragment extends Fragment {
                    String image = dc.getDocument().getString("image");
                    String cate = dc.getDocument().getString("category");
                    String id = dc.getDocument().getId();
-
-
-                   productList.add(new Product(namePro, 1000.0, cate, image, color, 2,id));
-
-
-
-
+                   Double price = Double.valueOf(dc.getDocument().getString("price"));
+                   productList.add(new Product(namePro, price, cate, image, color, 2,id));
                }
                productAdapter.notifyDataSetChanged();
            }

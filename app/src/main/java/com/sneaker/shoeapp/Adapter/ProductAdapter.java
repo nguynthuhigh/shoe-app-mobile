@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,13 +35,28 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.sneaker.shoeapp.Interface.ClickItemProduct;
+import com.sneaker.shoeapp.MyCartActivity;
 import com.sneaker.shoeapp.ProductDetailsActivity;
 import com.sneaker.shoeapp.R;
 import com.sneaker.shoeapp.model.Product;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
@@ -49,6 +65,9 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static int TYPE_USER_POPULAR =1;
     private static int TYPE_USER_CATE =2;
     private static int TYPE_PRO_BANNER = 3;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mauth = FirebaseAuth.getInstance();
+    private FirebaseUser user = mauth.getCurrentUser();
     Context context;
     public ProductAdapter(List<Product> ListProduct, ClickItemProduct clickItemProduct, Context context) {
         this.clickItemProduct = clickItemProduct;
@@ -139,6 +158,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             productPopularViewHolder.proName_popular.setText(pro.getProName());
             productPopularViewHolder.proCate_popular.setText(pro.getCategory());
+
             GradientDrawable gradientDrawable = new GradientDrawable(
                     GradientDrawable.Orientation.TL_BR,
                     new int[]{ Color.parseColor("#" + pro.getColor()),Color.WHITE});
@@ -150,6 +170,61 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     clickItemProduct.onClickItemProduct(pro);
                 }
             });
+            if(user !=null ) {
+                DocumentReference documentReference = db.collection("User").document(user.getUid());
+                CollectionReference newCollection = documentReference.collection("AddToCart");
+                newCollection.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+
+                            return;
+                        }
+                        for (DocumentSnapshot document : value.getDocuments()) {
+                            if (document.getId().equals(pro.getId())) {
+                                productPopularViewHolder.add_to_cart_popular.setImageResource(R.drawable.check_circle);
+                                break;
+                            }
+                            productPopularViewHolder.add_to_cart_popular.setImageResource(R.drawable.add);
+                        }
+                    }
+                });
+
+
+                productPopularViewHolder.add_to_cart_popular.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Map<String,Object> data = new HashMap<>();
+                        data.put("quantity",1);
+                        data.put("total_price",pro.getPrice());
+                        data.put("proID",pro.getId());
+                        DocumentReference documentReference = db.collection("User").document(user.getUid());
+                        CollectionReference newCollection = documentReference.collection("AddToCart");
+                        newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists()){
+                                    Object quantityObject = documentSnapshot.get("quantity");
+
+                                    Toast.makeText(context, "Product is available", Toast.LENGTH_SHORT).show();
+
+
+                                }
+                                else{
+                                    newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(context, "Product Added", Toast.LENGTH_SHORT).show();
+                                            productPopularViewHolder.add_to_cart_popular.setImageResource(R.drawable.check_circle);
+                                        }
+                                    });
+                                }
+
+                            }
+                        });
+                    }
+                });
+            }
         }
         else if(TYPE_PRO_BANNER == holder.getItemViewType()){
             ProBannerViewHolder proBannerViewHolder = (ProBannerViewHolder) holder;
@@ -161,6 +236,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     GradientDrawable.Orientation.TL_BR,
                     new int[]{ Color.parseColor("#" + pro.getColor()),Color.WHITE});
             proBannerViewHolder.item_banner.setBackground(gradientDrawable);
+            proBannerViewHolder.item_banner_price.setText("$"+pro.getPrice());
             proBannerViewHolder.item_banner.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -197,14 +273,14 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
     public class ProBannerViewHolder extends  RecyclerView.ViewHolder{
         RelativeLayout item_banner;
-        TextView item_banner_name;
+        TextView item_banner_name,item_banner_price;
         ImageView item_banner_img;
 
         public ProBannerViewHolder(@NonNull View itemView) {
             super(itemView);
             item_banner_img = itemView.findViewById(R.id.item_banner_img);
             item_banner_name = itemView.findViewById(R.id.item_banner_name);
-
+            item_banner_price = itemView.findViewById(R.id.item_banner_price);
             item_banner = itemView.findViewById(R.id.item_banner);
         }
     }
@@ -237,6 +313,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ImageView proImg_popular;
         FrameLayout proBg_popular;
         FrameLayout item_popular;
+        ImageButton add_to_cart_popular;
 
         public ProductPopularViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -246,6 +323,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             proImg_popular = itemView.findViewById(R.id.proImg_popular);
             proBg_popular = itemView.findViewById(R.id.probg_popular);
             item_popular = itemView.findViewById(R.id.item_popular);
+            add_to_cart_popular = itemView.findViewById(R.id.add_to_cart_popular);
         }
 
     }

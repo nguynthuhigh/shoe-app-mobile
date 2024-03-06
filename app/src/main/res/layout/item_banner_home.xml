@@ -28,16 +28,31 @@
 
                         <TextView
                             android:id="@+id/item_banner_name"
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
+                            android:layout_width="300dp"
+                            android:layout_height="30dp"
                             android:layout_marginStart="15dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="5dp"
                             android:layout_marginEnd="15dp"
                             android:layout_marginBottom="15dp"
                             android:fontFamily="@font/alata_regular"
                             android:text="Nike Dunk Low GS Year of The Dragon"
                             android:textColor="@color/white"
                             android:textSize="20sp">
+
+                        </TextView>
+                        <TextView
+                            android:id="@+id/item_banner_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+
+                            android:layout_marginTop="40dp"
+
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/alata_regular"
+                            android:text="$300"
+                            android:textColor="@color/white"
+                            android:textSize="25sp">
 
                         </TextView>
                         <ImageButton

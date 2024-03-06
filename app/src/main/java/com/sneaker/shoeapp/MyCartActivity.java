@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +28,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sneaker.shoeapp.Adapter.CartAdapter;
@@ -43,9 +46,11 @@ public class MyCartActivity extends AppCompatActivity {
     ImageButton decreasePro, increasePro;
     ListProduct productList;
     ImageButton btnBack;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    FirebaseUser user = mAuth.getCurrentUser();
+    FirebaseFirestore db;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+    TextView total_cart,quantity_cart;
+    Button btnCheckout;
 
     //    ListView listItem_cart;
     @Override
@@ -54,7 +59,11 @@ public class MyCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_cart);
         Toolbar main_header = findViewById(R.id.menu_header_back);
         setSupportActionBar(main_header);
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         if (user == null){
+            finish();
             Intent intent = new Intent(MyCartActivity.this, LoginActivity.class);
             startActivity(intent);
         }
@@ -62,8 +71,29 @@ public class MyCartActivity extends AppCompatActivity {
         addEvents();
         reloadCart();
        // loadData();
+        Total_Cart();
     }
-
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Total_Cart();
+    }
+    private void Total_Cart(){
+        Query query = db.collection("User").document(user.getUid()).collection("AddToCart").document().getParent();
+        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                int quantity_val= 0;
+                int total_cart_val = 0;
+                for(DocumentChange dc: value.getDocumentChanges()){
+                    quantity_val += dc.getDocument().getDouble("quantity") ;
+                    total_cart_val += dc.getDocument().getDouble("total_price");
+                }
+                total_cart.setText("$"+total_cart_val+"");
+                quantity_cart.setText(quantity_val+"");
+            }
+        });
+    }
 
 
 
@@ -74,10 +104,18 @@ public class MyCartActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
     }
 
     private void addControls() {
+        btnCheckout = findViewById(R.id.btnCheckout);
+        total_cart = findViewById(R.id.total_cart);
+        quantity_cart = findViewById(R.id.quantity_cart);
         recyclerMyCart = findViewById(R.id.recyclerMyCart);
         productArrayList = new ArrayList<>();
         cartAdapter = new CartAdapter(this, productArrayList, new ClickItemCart() {
@@ -162,30 +200,31 @@ public class MyCartActivity extends AppCompatActivity {
     }
 
     private void reloadCart() {
-        db.collection("User").document(user.getUid()).collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot dc : task.getResult()) {
-                    Double quantity = dc.getDouble("quantity");
-                    Double total_price = dc.getDouble("total_price");
-                    String proID = dc.getString("proID");
+        if(user != null){
+            db.collection("User").document(user.getUid()).collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for (QueryDocumentSnapshot dc : task.getResult()) {
+                        Double quantity = dc.getDouble("quantity");
+                        Double total_price = dc.getDouble("total_price");
+                        String proID = dc.getString("proID");
 
-                    db.collection("Product").document(proID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            String namePro = task.getResult().getString("proName");
-                            String imgPro = task.getResult().getString("image");
-                            String color = task.getResult().getString("color");
-                            Double price = Double.valueOf(task.getResult().getString("price")) ;
+                        db.collection("Product").document(proID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                String namePro = task.getResult().getString("proName");
+                                String imgPro = task.getResult().getString("image");
+                                String color = task.getResult().getString("color");
+                                Double price = Double.valueOf(task.getResult().getString("price")) ;
 
-                            productArrayList.add(new Cart(namePro,price , dc.getString("category"), imgPro, color, 2, "2", quantity, total_price, dc.getId()));
-                            cartAdapter.notifyDataSetChanged();
-                        }
-                    });
+                                productArrayList.add(new Cart(namePro,price , dc.getString("category"), imgPro, color, 2, "2", quantity, total_price, dc.getId()));
+                                cartAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
                 }
-            }
-        });
-
+            });
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

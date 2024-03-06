@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
-Button btnSignUp;
+Button btnSignUp,btnSignIn;
 EditText inputEmail,confirmPass,inputPass,inputName;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     CollectionReference userCollection = firestore.collection("User");
@@ -39,6 +39,13 @@ EditText inputEmail,confirmPass,inputPass,inputName;
     }
 
     private void addEvents() {
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,5 +91,6 @@ EditText inputEmail,confirmPass,inputPass,inputName;
         confirmPass = findViewById(R.id.confirmPass);
         inputPass = findViewById(R.id.inputPass);
         inputName = findViewById(R.id.inputName);
+        btnSignIn=findViewById(R.id.btnSignIn);
     }
 }
