@@ -8,15 +8,15 @@ import java.io.Serializable;
 
 public class Product implements Serializable {
     private String ProName, color,id;
-
     private Double Price;
     private String Category;
     private String Image;
     private int type;
+    boolean favourite;
     public Product() {
     }
 
-    public Product(String proName, Double price, String category, String image, String color, int type, String id) {
+    public Product(String proName, Double price, String category, String image, String color, int type, String id, boolean favourite) {
         ProName = proName;
         Price = price;
         Category = category;
@@ -24,6 +24,7 @@ public class Product implements Serializable {
         this.color = color;
         this.type = type;
         this.id = id;
+        this.favourite=favourite;
     }
 
     public String getId() {
@@ -83,6 +84,11 @@ public class Product implements Serializable {
         Image = image;
     }
 
+    public boolean isFavourite() {
+        return favourite;
+    }
 
-    
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
 }

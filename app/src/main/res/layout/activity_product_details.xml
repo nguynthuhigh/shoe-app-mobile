@@ -117,10 +117,11 @@
                         android:layout_alignParentEnd="true"
                         >
                         <ImageView
+                            android:id="@+id/favouriteBtn"
                             android:padding="2dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/heart">
+                            app:srcCompat="@drawable/favorite">
 
                         </ImageView>
 

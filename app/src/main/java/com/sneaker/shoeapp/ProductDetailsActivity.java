@@ -1,40 +1,55 @@
 package com.sneaker.shoeapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sneaker.shoeapp.Adapter.CartAdapter;
+import com.sneaker.shoeapp.Adapter.FavoriteAdapter;
 import com.sneaker.shoeapp.Adapter.ProductAdapter;
+import com.sneaker.shoeapp.databinding.ActivityProductDetailsBinding;
 import com.sneaker.shoeapp.model.Product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ProductDetailsActivity extends AppCompatActivity {
+    //view binding
+    private ActivityProductDetailsBinding binding;
     TextView dt_proName;
-    ImageView dt_proImage;
+    ImageView dt_proImage,favouriteBtn;
     TextView dt_proPrice;
     TextView dt_proCate,txtTextSize;
     FrameLayout bg_pro_details,bg_pro_details_2,bg_pro_details_main;
@@ -46,6 +61,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
     Integer quantity;
+    String id, ProName, Category, Image;
+    Double Price;
+    boolean isInMyFavourite = false;
+    private FirebaseAuth firebaseAuth;
+    //ArrayList to hold the products
+    ArrayList<Product> arr_favorite;
+    //adapter to set in recyclerview
+    FavoriteAdapter favoriteAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +87,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_item_2), pro,bg_pro_details_2);
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_new), pro,bg_pro_details_main);
         proColor.setCardBackgroundColor(Color.parseColor("#" + pro.getColor()));
+
+
+        //binding = ActivityProductDetailsBinding.inflate(getLayoutInflater());
+        //setContentView(binding.getRoot());
+        //get data from intent e.g. ProName
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser()!=null){
+            checkIsFavourite();
+        }
+
         addEvents();
         xuLyPopupSize();
         xulyPopupColor();
@@ -102,6 +138,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -167,53 +209,100 @@ public class ProductDetailsActivity extends AppCompatActivity {
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String,Object> data = new HashMap<>();
-                data.put("quantity",1);
-                data.put("total_price",pro.getPrice());
-                data.put("proID",pro.getId());
+                Map<String, Object> data = new HashMap<>();
+                data.put("quantity", 1);
+                data.put("total_price", pro.getPrice());
+                data.put("proID", pro.getId());
 
                 DocumentReference documentReference = db.collection("User").document(user.getUid());
                 CollectionReference newCollection = documentReference.collection("AddToCart");
 
-               newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                   @Override
-                   public void onSuccess(DocumentSnapshot documentSnapshot) {
-                       if(documentSnapshot.exists()){
-                           Object quantityObject = documentSnapshot.get("quantity");
+                newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            Object quantityObject = documentSnapshot.get("quantity");
 
-                           int currentQuantity = ((Long) quantityObject).intValue();
-                           double total_cart = (double) (pro.getPrice() * (currentQuantity+1));
-                           newCollection.document(pro.getId()).update("total_price",total_cart);
-                           newCollection.document(pro.getId()).update("quantity",currentQuantity+1);
-                           Intent intent = new Intent(ProductDetailsActivity.this, MyCartActivity.class);
-                           startActivity(intent);
-                       }
-                       else{
-                           newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
-                               @Override
-                               public void onSuccess(Void unused) {
-                                   Intent intent = new Intent(ProductDetailsActivity.this, MyCartActivity.class);
-                                   startActivity(intent);
-                               }
-                           });
-                       }
-                   }
-               });
+                            int currentQuantity = ((Long) quantityObject).intValue();
+                            double total_cart = (double) (pro.getPrice() * (currentQuantity + 1));
+                            newCollection.document(pro.getId()).update("total_price", total_cart);
+                            newCollection.document(pro.getId()).update("quantity", currentQuantity + 1);
+                            Intent intent = new Intent(ProductDetailsActivity.this, MyCartActivity.class);
+                            startActivity(intent);
+                        } else {
+                            newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Intent intent = new Intent(ProductDetailsActivity.this, MyCartActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
-        btnBack.setOnClickListener(new View.OnClickListener() {
+
+        binding.favouriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (firebaseAuth.getCurrentUser()==null){
+                    Toast.makeText(ProductDetailsActivity.this, "You're not logged in", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if (isInMyFavourite){
+                        //in favourite, remove from favourite
+                        MyApplication.removeFavourite(ProductDetailsActivity.this,id,ProName,Image,Category,Price);
+                    }
+                    else {
+                        // not in favourite, af to favourite
+                        MyApplication.addToFavourite(ProductDetailsActivity.this, id,ProName,Image,Category,Price);
+                    }
+                }
             }
         });
     }
 
 
+
+    private void checkIsFavourite(){
+            //logged in check if its in favourite list or not
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+        reference.child(firebaseAuth.getUid());
+        reference.child("Favourites");
+        reference.child(id);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                isInMyFavourite = snapshot.exists(); //true: if exists, false: if not exists
+
+                if (isInMyFavourite) {
+
+                    //exists in favourite
+                    binding.favouriteBtn.setImageDrawable(getDrawable(R.drawable.heart));
+
+                }
+                else {
+                    //not exists in favourite
+                    binding.favouriteBtn.setImageDrawable(getDrawable(R.drawable.favorite));
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     private void addControls() {
         dt_proName = findViewById(R.id.dt_proName);
         dt_proCate = findViewById(R.id.dt_proCate);
         dt_proImage = findViewById(R.id.dt_proImage);
+        favouriteBtn = findViewById(R.id.favouriteBtn);
         dt_proPrice = findViewById(R.id.dt_proPrice);
         bg_pro_details = findViewById(R.id.bg_pro_details);
         bg_pro_details_2 = findViewById(R.id.bg_pro_details_2);
@@ -224,5 +313,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnPopupSize=findViewById(R.id.btnPopupSize);
         txtTextSize=findViewById(R.id.txtTextSize);
         btnPopupColor=findViewById(R.id.btnPopupColor);
+
     }
 }
