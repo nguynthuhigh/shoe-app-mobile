@@ -18,10 +18,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -31,6 +34,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.sneaker.shoeapp.model.Order;
 import com.sneaker.shoeapp.model.Product;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -220,24 +225,26 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Product yeuemkhonganh = new Product();
-                Order okemyeu = new Order("id1", 2024, false, 1000, 1000000, "VN");
+
 
                 CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
                         .collection("Order");
-                DocumentReference documentReference = db.collection("User").document(user.getUid())
-                        .collection("Order").document(okemyeu.getId());
 
                 Map<String,Object> orderInfo = new HashMap<>();
-                orderInfo.put("Date", okemyeu.getDate());
-                orderInfo.put("Quantity", okemyeu.getQuantity());
-                orderInfo.put("Price", okemyeu.getTotal_value());
-                orderInfo.put("status", okemyeu.getStatus());
+                orderInfo.put("Date", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()));
+                orderInfo.put("Quantity", 1);
+                orderInfo.put("Price", pro.getPrice());
+                orderInfo.put("status", false);
+                orderInfo.put("Address",123);
                 Map<String,Object> productInfo = new HashMap<>();
-                collectionOrderReference.add(orderInfo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                productInfo.put("ID", pro.getId());
+                productInfo.put("Quantity", 1);
+                collectionOrderReference.add(orderInfo).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference1) {
-                        collectionOrderReference.document(documentReference1.getId())
-                                .collection("listPro").document(yeuemkhonganh.getId()).set(productInfo);
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        collectionOrderReference.document(task.getResult().getId())
+                                .collection("listPro").document(pro.getId()).set(productInfo);
+                        Toast.makeText(ProductDetailsActivity.this, "Success", Toast.LENGTH_SHORT).show();
                     }
                 });
                 //                collectionReference.add(data)
