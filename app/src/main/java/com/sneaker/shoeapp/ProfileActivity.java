@@ -81,6 +81,21 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    public void showUserInformation(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user== null)
+        {
+            return;
+        }
+        String name = user.getDisplayName();
+        if(name==null){
+            name_user.setVisibility(View.GONE);
+        }
+        else {
+            name_user.setVisibility(View.VISIBLE);
+            name_user.setText(name);
+        }
+    }
     private void addControls() {
         btnEdit_profile = findViewById(R.id.btnEdit_profile);
         btnView_order = findViewById(R.id.btnView_order);

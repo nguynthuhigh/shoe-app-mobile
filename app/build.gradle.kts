@@ -43,7 +43,7 @@ android {
 
 dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
-    implementation("androidx.activity:activity:1.8.0")
+    implementation("androidx.activity:activity:1.8.2")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
     implementation("com.google.firebase:firebase-storage")

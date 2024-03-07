@@ -29,9 +29,11 @@ import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sneaker.shoeapp.model.User;
 
 import java.net.PasswordAuthentication;
 
@@ -40,12 +42,12 @@ public class EditProfileActivity extends AppCompatActivity {
     TextView name_userEdit;
 
     Button btnRename,btnConfirm,btnChangeAvt,btnChangeEmail,btnChangePassword;
-    EditText edtPassOld, edtPassNew, edtConfirm;
+    EditText edtPassOld, edtPassNew, edtConfirm,edtUserName,edtSurName;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
 
-
+    ProfileActivity profileActivity;
 
     AuthCredential credential = EmailAuthProvider
             .getCredential("user@example.com", "password1234");
@@ -228,6 +230,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
     private void onClickChangePassWord() {
         String strConFirmPass= edtConfirm.getText().toString().trim();
         String strNewPass=edtPassNew.getText().toString().trim();
@@ -253,6 +256,26 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
     }
+
+    private  void ChangeName(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null){
+            return;
+        }
+      String name=edtUserName.getText().toString().trim();
+        UserProfileChangeRequest profileChangeRequest=new UserProfileChangeRequest.Builder()
+                .setDisplayName(name).build();
+        user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(EditProfileActivity.this, "Update Profile Success", Toast.LENGTH_SHORT).show();
+                    profileActivity.showUserInformation();
+                }
+            }
+        });
+
+    }
     private void addControls() {
         btnRename= findViewById(R.id.btnRename);
         btnConfirm=findViewById(R.id.btnConfirm);
@@ -263,6 +286,8 @@ public class EditProfileActivity extends AppCompatActivity {
         edtPassNew=findViewById(R.id.edtPassNew);
         edtConfirm=findViewById(R.id.edtConfirm);
         name_userEdit=findViewById(R.id.name_userEdit);
+        edtUserName=findViewById(R.id.editUsername);
+        edtSurName=findViewById(R.id.editSurname);
         if(user !=null){
             DocumentReference documentReference =db.collection("User").document(user.getUid());
             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
