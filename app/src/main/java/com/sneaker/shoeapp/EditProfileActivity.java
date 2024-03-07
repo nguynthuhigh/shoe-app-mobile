@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ import java.net.PasswordAuthentication;
 
 public class EditProfileActivity extends AppCompatActivity {
     TextView name_userEdit;
-
+    ImageButton btnSaveNameUS;
     Button btnRename,btnConfirm,btnChangeAvt,btnChangeEmail,btnChangePassword;
     EditText edtPassOld, edtPassNew, edtConfirm,edtUserName,edtSurName;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -48,6 +49,7 @@ public class EditProfileActivity extends AppCompatActivity {
     FirebaseUser user = mAuth.getCurrentUser();
 
     ProfileActivity profileActivity;
+    ProgressDialog progressDialog;
 
     AuthCredential credential = EmailAuthProvider
             .getCredential("user@example.com", "password1234");
@@ -57,11 +59,14 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
         addControls();
+
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 finish();
             }
         });
@@ -70,6 +75,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openDialogRename(Gravity.CENTER);
+
             }
         });
         btnChangeAvt.setOnClickListener(new View.OnClickListener() {
@@ -117,10 +123,22 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         LinearLayout btnSaveName = dialog.findViewById(R.id.btnSaveName);
-
+        edtUserName= dialog.findViewById(R.id.editUsername);
+        edtSurName=dialog.findViewById(R.id.editSurname);
         btnSaveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = edtUserName.getText().toString();
+                String userSur=edtSurName.getText().toString();
+                if (userSur.equals(username)) {
+                    db.collection("User").document(user.getUid()).update("username", edtUserName.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(profileActivity, "Update Success", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
                 dialog.dismiss();
             }
         });
@@ -257,23 +275,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
-    private  void ChangeName(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user==null){
-            return;
-        }
-      String name=edtUserName.getText().toString().trim();
-        UserProfileChangeRequest profileChangeRequest=new UserProfileChangeRequest.Builder()
-                .setDisplayName(name).build();
-        user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(EditProfileActivity.this, "Update Profile Success", Toast.LENGTH_SHORT).show();
-                    profileActivity.showUserInformation();
-                }
-            }
-        });
+    private  void changeName(){
 
     }
     private void addControls() {
@@ -286,8 +288,9 @@ public class EditProfileActivity extends AppCompatActivity {
         edtPassNew=findViewById(R.id.edtPassNew);
         edtConfirm=findViewById(R.id.edtConfirm);
         name_userEdit=findViewById(R.id.name_userEdit);
-        edtUserName=findViewById(R.id.editUsername);
-        edtSurName=findViewById(R.id.editSurname);
+
+
+        btnSaveNameUS=findViewById(R.id.btnSaveNameUser);
         if(user !=null){
             DocumentReference documentReference =db.collection("User").document(user.getUid());
             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
