@@ -243,24 +243,24 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
-        binding.favouriteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (firebaseAuth.getCurrentUser()==null){
-                    Toast.makeText(ProductDetailsActivity.this, "You're not logged in", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    if (isInMyFavourite){
-                        //in favourite, remove from favourite
-                        MyApplication.removeFavourite(ProductDetailsActivity.this,id,ProName,Image,Category,Price);
-                    }
-                    else {
-                        // not in favourite, af to favourite
-                        MyApplication.addToFavourite(ProductDetailsActivity.this, id,ProName,Image,Category,Price);
-                    }
-                }
-            }
-        });
+//        binding.favouriteBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (firebaseAuth.getCurrentUser()==null){
+//                    Toast.makeText(ProductDetailsActivity.this, "You're not logged in", Toast.LENGTH_SHORT).show();
+//                }
+//                else {
+//                    if (isInMyFavourite){
+//                        //in favourite, remove from favourite
+//                        MyApplication.removeFavourite(ProductDetailsActivity.this,id,ProName,Image,Category,Price);
+//                    }
+//                    else {
+//                        // not in favourite, af to favourite
+//                        MyApplication.addToFavourite(ProductDetailsActivity.this, id,ProName,Image,Category,Price);
+//                    }
+//                }
+//            }
+//        });
     }
 
 

@@ -105,7 +105,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.item_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Product product = new Product(cart.getProName(), cart.getPrice(), cart.getCategory(), cart.getImage(), cart.getColor(), 0, cart.getId());
+                Product product = new Product(cart.getProName(), cart.getPrice(), cart.getCategory(), cart.getImage(), cart.getColor(), cart.getType(), cart.getId());
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("obj_product",product);
                 Intent intent = new Intent(context, ProductDetailsActivity.class);

@@ -40,72 +40,24 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //LayoutInflater layoutInflater=LayoutInflater.from(context);
-        //View viewFavo=layoutInflater.inflate(R.layout.item_card,parent,false);
-        //ViewHolder viewHolderFV=new ViewHolder(viewFavo);
-        binding = ItemCardBinding.inflate(LayoutInflater.from(context),parent, false);
-        return new ViewHolder(binding.getRoot());
+        LayoutInflater layoutInflater=LayoutInflater.from(context);
+        View viewFavo=layoutInflater.inflate(R.layout.item_card,parent,false);
+        ViewHolder viewHolderFV=new ViewHolder(viewFavo);
+        //binding = ItemCardBinding.inflate(LayoutInflater.from(context),parent, false);
+       // return new ViewHolder(binding.getRoot());
+        return viewHolderFV;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product pd=arr_favorite.get(position);
-        //holder.proImg.setImageResource(pd.getImage());
-        //holder.proName.setText(pd.getProName());
-        //holder.proCategory.setText(pd.getCategory());
-        //holder.proPrice.setText(pd.getPrice()+"");
-        //holder.proHint.setText(pd.getProName());
+       // holder.proImg.setImageResource(pd.getImage());
+        holder.proName.setText(pd.getProName());
+        holder.proCategory.setText(pd.getCategory());
+        holder.proPrice.setText(pd.getPrice()+"");
+        holder.proHint.setText(pd.getProName());
 
-        loadProDetails(pd,holder);
-        //handle click, open prodetail
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(context, ProductDetailsActivity.class);
-                intent.putExtra("id", pd.getId());
-                context.startActivity(intent);
-            }
-        });
-        //handle click, remove from favourite
-        holder.removeFavBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyApplication.removeFavourite(context, pd.getId(), pd.getProName(), pd.getCategory(), pd.getImage(), pd.getPrice());
-            }
-        });
 
-    }
-
-    private void loadProDetails(Product pd, ViewHolder holder) {
-        String id = pd.getId();
-        Log.d(TAG, "loadProDetails: Product Detail of Product Name"+id);
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("ko chạy đc ko bk cái j ở đây," +
-                "tạm đoán là id or Id");
-        ref.child(id)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //get pro info
-                        String ProName = ""+snapshot.child("ProName").getValue();
-                        String Category = ""+snapshot.child("Category").getValue();
-                        String Image = ""+snapshot.child("Image").getValue();
-                        String Price = ""+snapshot.child("Price").getValue();
-
-                        //set to pd
-                        pd.setFavourite(true);
-                        pd.setProName(ProName);
-                        pd.setCategory(Category);
-                        pd.setImage(Image);
-
-                        //
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
     }
 
     @Override

@@ -71,7 +71,7 @@ FirebaseFirestore db;
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot dc: task.getResult()
                      ) {
-                    productList.add(new Product(dc.getString("namePro"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),3,dc.getId()));
+                  //  productList.add(new Product(dc.getString("namePro"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),3,dc.getId()));
                     productAdapter.notifyDataSetChanged();
                 }
             }

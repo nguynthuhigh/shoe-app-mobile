@@ -13,7 +13,7 @@
         >
     </include>
     <include
-        android:id="@+id/include_search_old"
+        android:id="@+id/include_search_old1"
         layout="@layout/item_search"
         >
     </include>
