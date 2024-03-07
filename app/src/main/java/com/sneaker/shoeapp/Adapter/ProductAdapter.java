@@ -144,8 +144,30 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             productViewHolder.btnAddFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    productViewHolder.btnAddFav.setImageResource(R.drawable.heart);
+
+                    DocumentReference documentReference = db.collection("User").document(user.getUid());
+                    CollectionReference newCollection = documentReference.collection("Favorite");
+                    Map<String,Object> data = new HashMap<>();
+                    data.put("id",pro.getId());
+                    newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(documentSnapshot.exists()){
+
+                            }
+                            else{
+                                newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show();
+                                        productViewHolder.btnAddFav.setImageResource(R.drawable.heart);
+                                    }
+                                });
+                            }
+                        }
+                    });
                 }
+
             });
         }
         else if(TYPE_USER_POPULAR == holder.getItemViewType()){
