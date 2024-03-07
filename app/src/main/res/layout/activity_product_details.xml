@@ -4,176 +4,183 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductDetailsActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ProductDetailsActivity">
+
     <include layout="@layout/item_menuback">
 
     </include>
+
     <ScrollView
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <RelativeLayout
 
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
                 <LinearLayout
-                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/dt_proName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="30sp"
+                        android:fontFamily="@font/alata_regular"
                         android:text="Product's Name"
-                        android:fontFamily="@font/alata_regular">
-                    </TextView>
+                        android:textColor="@color/black"
+                        android:textSize="30sp"></TextView>
+
                     <TextView
                         android:id="@+id/dt_proCate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#928A8A"
-                        android:textSize="20sp"
+                        android:fontFamily="@font/alata_regular"
                         android:text="Product's Catgory"
-                        android:fontFamily="@font/alata_regular">
-                    </TextView>
+                        android:textColor="#928A8A"
+                        android:textSize="20sp"></TextView>
                 </LinearLayout>
+
                 <FrameLayout
-                    android:layout_marginTop="20dp"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
-                    android:text="4,5"
-                    android:padding="0dp"
-                    android:textSize="10sp"
+                    android:layout_marginTop="20dp"
                     android:background="@color/black"
-                    >
+                    android:padding="0dp"
+                    android:text="4,5"
+                    android:textSize="10sp">
 
                 </FrameLayout>
             </RelativeLayout>
+
             <RelativeLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="390dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
 
                 <FrameLayout
                     android:id="@+id/bg_pro_details_main"
                     android:layout_width="310dp"
                     android:layout_height="170dp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="60dp"
                     android:layout_marginLeft="30dp"
+                    android:layout_marginTop="60dp"
                     android:background="@drawable/bg_details_new"
-                    android:rotation="-20">
-                </FrameLayout>
+                    android:rotation="-20"></FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/bg_pro_details_2"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="70dp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/bg_details_item_2">
-                </FrameLayout>
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="70dp"
+                    android:background="@drawable/bg_details_item_2"></FrameLayout>
+
                 <FrameLayout
                     android:id="@+id/bg_pro_details"
-                    android:layout_marginLeft="310dp"
-                    android:layout_marginTop="15dp"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:background="@drawable/bg_details_item_2">
-                </FrameLayout>
+                    android:layout_marginLeft="310dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_details_item_2"></FrameLayout>
 
                 <ImageView
                     android:id="@+id/dt_proImage"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginTop="43dp"
                     android:layout_width="325dp"
                     android:layout_height="185dp"
-                    app:srcCompat="@drawable/shoe8"
-                    android:rotation="-25"/>
+                    android:layout_marginTop="43dp"
+                    android:layout_marginRight="2dp"
+                    android:rotation="-25"
+                    app:srcCompat="@drawable/shoe8" />
+
                 <RelativeLayout
 
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="220dp"
-                    android:layout_marginLeft="165dp">
+                    android:layout_marginLeft="165dp"
+                    android:layout_marginTop="220dp">
+
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border_radius_10dp"
                         android:layout_alignParentEnd="true"
-                        >
+                        android:background="@drawable/border_radius_10dp">
+
                         <ImageView
-                            android:padding="2dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:padding="2dp"
                             app:srcCompat="@drawable/heart">
 
                         </ImageView>
 
                     </FrameLayout>
+
                     <LinearLayout
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="35dp"
                         android:layout_width="88dp"
                         android:layout_height="35dp"
-                        android:background="@drawable/custom_button1"
-                        android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.95"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="6dp"
-                            android:fontFamily="@font/alata_regular"
-                            android:textStyle="bold"
-                            android:text="Size: 40"
-                            android:id="@+id/txtTextSize"
-                            android:textSize="13sp">
-
-                        </TextView>
-
-                        <ImageButton
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="1dp"
-
-                            android:background="@android:color/transparent"
-                            android:id="@+id/btnPopupSize"
-                            app:srcCompat="@drawable/sort_down">
-
-                        </ImageButton>
-
-                    </LinearLayout>
-                    <LinearLayout
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="75dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_marginTop="35dp"
                         android:background="@drawable/custom_button1"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.95"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/txtTextSize"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/alata_regular"
+                            android:text="Size: 40"
+                            android:textSize="13sp"
+                            android:textStyle="bold">
+
+                        </TextView>
+
+                        <ImageButton
+                            android:id="@+id/btnPopupSize"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+
+                            android:layout_marginLeft="1dp"
+                            android:background="@android:color/transparent"
+                            app:srcCompat="@drawable/sort_down">
+
+                        </ImageButton>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="75dp"
+                        android:background="@drawable/custom_button1"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.95"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
                         <androidx.cardview.widget.CardView
                             android:id="@+id/proColor"
                             android:layout_width="22dp"
@@ -181,26 +188,26 @@
                             android:layout_marginLeft="6dp"
                             android:layout_marginTop="6dp"
                             app:cardBackgroundColor="@color/green"
-                            app:cardCornerRadius="7dp"
-                            />
+                            app:cardCornerRadius="7dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/alata_regular"
-                            android:textStyle="bold"
                             android:text="Color"
-                            android:textSize="13sp">
+                            android:textSize="13sp"
+                            android:textStyle="bold">
 
                         </TextView>
 
                         <ImageButton
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-
-                            android:background="@android:color/transparent"
                             android:id="@+id/btnPopupColor"
+                            android:layout_width="30dp"
+
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
                             app:srcCompat="@drawable/sort_down">
 
                         </ImageButton>
@@ -209,74 +216,79 @@
 
                 </RelativeLayout>
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/dt_proPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/alata_regular"
                         android:text="$1000"
                         android:textColor="@color/black"
-                        android:textSize="36sp"
-                        android:fontFamily="@font/alata_regular">
-                    </TextView>
+                        android:textSize="36sp"></TextView>
+
                     <TextView
-                        android:layout_marginLeft="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/alata_regular"
                         android:text="$1000"
                         android:textColor="@color/black"
-                        android:textSize="25sp"
-                        android:fontFamily="@font/alata_regular">
-                    </TextView>
+                        android:textSize="25sp"></TextView>
                 </LinearLayout>
+
                 <TextView
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/alata_regular"
                     android:text="Descend deep into the desert that turns modest gains into house calls."
                     android:textColor="@color/black"
-                    android:textSize="21sp"
-                    android:fontFamily="@font/alata_regular">
+                    android:textSize="21sp">
 
                 </TextView>
             </LinearLayout>
+
             <RelativeLayout
-                android:layout_gravity="center"
                 android:layout_width="340dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/add_to_cart"
                     android:layout_width="163dp"
                     android:layout_height="50dp"
-                    android:text="Add to Cart"
-                    android:textAllCaps="false"
-                    android:background="@drawable/btn_default"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
                     android:layout_alignParentStart="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp">
-                </Button>
-                <Button
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_default"
+                    android:text="Add to Cart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"></Button>
+
+                <Button
+                    android:id="@+id/btnBuyNow"
                     android:layout_width="163dp"
                     android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_default"
                     android:text="Buy Now"
                     android:textAllCaps="false"
-                    android:background="@drawable/btn_default"
                     android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:layout_alignParentEnd="true">
+                    android:textSize="20dp">
 
                 </Button>
             </RelativeLayout>
