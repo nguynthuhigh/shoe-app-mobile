@@ -27,11 +27,12 @@
         >
 
         <TextView
+            android:id="@+id/name_userEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"
             android:textSize="22sp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="60dp"
             android:fontFamily="@font/alata_regular"
             android:textStyle="bold"
             android:layout_gravity="center"
