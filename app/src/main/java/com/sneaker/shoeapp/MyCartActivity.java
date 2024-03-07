@@ -35,9 +35,12 @@ import com.sneaker.shoeapp.Adapter.CartAdapter;
 import com.sneaker.shoeapp.Interface.ClickItemCart;
 import com.sneaker.shoeapp.model.Cart;
 import com.sneaker.shoeapp.model.ListProduct;
+import com.sneaker.shoeapp.model.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyCartActivity extends AppCompatActivity {
     RecyclerView recyclerMyCart;
@@ -95,7 +98,20 @@ public class MyCartActivity extends AppCompatActivity {
         });
     }
 
-
+    public void Order(){
+        Product product = new Product();
+        Map<String,Object> infoOrder = new HashMap<>();
+        Map<String,Object> infoProduct = new HashMap<>();
+        db.collection("User").document(user.getUid())
+                .collection("Order").add(infoOrder).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        db.collection("User").document(user.getUid())
+                                .collection("Order").document(documentReference.getId())
+                                .collection("listPro").document(product.getId()).set(infoProduct);
+                    }
+                });
+    }
 
     private void addEvents() {
         btnBack.setOnClickListener(new View.OnClickListener() {

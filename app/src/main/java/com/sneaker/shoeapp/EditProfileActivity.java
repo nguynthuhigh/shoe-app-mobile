@@ -40,6 +40,7 @@ public class EditProfileActivity extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
 
+
     AuthCredential credential = EmailAuthProvider
             .getCredential("user@example.com", "password1234");
 
@@ -112,7 +113,7 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSaveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+
             }
         });
         dialog.show();
