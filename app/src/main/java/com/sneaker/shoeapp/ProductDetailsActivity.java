@@ -87,7 +87,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
         Glide.with(ProductDetailsActivity.this).load(pro.getImage()).into(dt_proImage);
         context = this;
         ListProduct listProduct = (ListProduct) bundle.getSerializable("listProduct");
-
+        db.collection("User").document(user.getUid()).collection("Favorite").document(pro.getId())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()){
+                            addToFvbtn.setImageResource(R.drawable.heart);
+                        }
+                    }
+                });
         dt_proName.setText(pro.getProName());
 
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_item_2), pro, bg_pro_details);
@@ -95,42 +103,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_new), pro, bg_pro_details_main);
         proColor.setCardBackgroundColor(Color.parseColor("#" + pro.getColor()));
 
-        // Firebase
-        favoriteRef = FirebaseDatabase.getInstance().getReference("favorites");
-
-        // Check initial favorite status
-       // checkInitialFavoriteStatus(pro);
-
-
         addEvents();
         xuLyPopupSize();
         xulyPopupColor();
     }
-//    private void checkInitialFavoriteStatus(Product pro) {
-//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        if (currentUser != null && pro != null) {
-//            String userId = currentUser.getUid();
-//            favoriteRef.child(userId).child(pro.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    updateFavoriteButton(snapshot.exists());
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//                    // Xử lý lỗi nếu cần
-//                }
-//            });
-//        }
-//    }
-//    private void updateFavoriteButton(boolean isFavorite) {
-//        ImageButton addToFvButton = findViewById(R.id.addToFvbtn);
-//        if (isFavorite) {
-//            addToFvButton.setImageResource(R.drawable.heart);
-//        } else {
-//            addToFvButton.setImageResource(R.drawable.favorite);
-//        }
-//    }
+
     private void xulyPopupColor() {
         btnPopupColor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -276,6 +253,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
         btnBuyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -331,115 +316,58 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 toggleFavourite();
             }
         });
-
-        // Khởi tạo ds sản phẩm
-        arr_Favorite = new ArrayList<>();
-        // Load dl sản phẩm từ firebase
-        loadProductList();
     }
 
-    private void loadProductList() {
-//        Realtime DB
-//        favoriteRef.child("Product").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Log.d("ProductDetailsActivity", "DataSnapshot: " + dataSnapshot.toString());
-//                arr_Favorite.clear();
-//
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    Product product = snapshot.getValue(Product.class);
-//                    arr_Favorite.add(product);
-//                }
-//
-//                // Gọi notifyDataSetChanged để cập nhật RecyclerView
-//                favoriteAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                // Xử lý lỗi khi đọc dữ liệu
-//                Log.e("ProductDetailsActivity", "Failed to read product list!", databaseError.toException());
-//            }
-//        });
-       // Firestore DB
-        FirebaseFirestore.getInstance().collection("Product")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        arr_Favorite.clear();
 
-                        for (DocumentSnapshot document : task.getResult()) {
-                            // Convert dữ liệu từ Firestore thành đối tượng Product
-                            Product product = document.toObject(Product.class);
-                            arr_Favorite.add(product);
-                        }
-
-                        // Gọi notifyDataSetChanged để cập nhật RecyclerView
-                        favoriteAdapter.notifyDataSetChanged();
-                    } else {
-                        // Xử lý lỗi khi đọc dữ liệu
-                        Log.e("ProductDetailsActivity", "Failed to read product list!", task.getException());
-                    }
-                });
-    }
     private void toggleFavourite() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            // Lấy UID của người dùng hiện tại
-            String uid = currentUser.getUid();
-
-            if (arr_Favorite.size() > 0) {
-                Product selectedProduct = arr_Favorite.get(0);
-
-                if (isFavorite) {
-                    // Nếu sp đã ở trong ds yêu thích,xóa nó
-                    favoriteRef.child("favourites").child(uid).child(selectedProduct.getId()).removeValue();
-                    isFavorite = false;
-                    // Đổi hình trái tim thành hình trái tim không màu
-                    addToFvbtn.setImageResource(R.drawable.favorite);
-                    Toast.makeText(ProductDetailsActivity.this, "Đã xóa khỏi yêu thích", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Nếu sp chưa có trong ds yêu thích, thêm vào
-                    // Tạo một đối tượng Map để lưu chi tiết sản phẩm
-                    Map<String, Object> productDetails = new HashMap<>();
-                    productDetails.put("name", selectedProduct.getProName());
-                    productDetails.put("id", selectedProduct.getId());
-                    productDetails.put("color", selectedProduct.getColor());
-                    productDetails.put("category", selectedProduct.getCategory());
-                    productDetails.put("price", selectedProduct.getPrice());
-                    productDetails.put("imageUrl", selectedProduct.getImage());
-
-                    // Lưu chi tiết sản phẩm vào Firebase
-                    favoriteRef.child("favourites").child(uid).child(selectedProduct.getId()).setValue(productDetails);
-
-                    isFavorite = true;
-                    // Đổi hình trái tim không màu thành hình trái tim có màu
-                    addToFvbtn.setImageResource(R.drawable.heart);
-                    Toast.makeText(ProductDetailsActivity.this, "Đã lưu vào yêu thích", Toast.LENGTH_SHORT).show();
+        DocumentReference documentReference = db.collection("User").document(user.getUid());
+        CollectionReference newCollection = documentReference.collection("Favorite");
+        Map<String,Object> data = new HashMap<>();
+        data.put("id",pro.getId());
+        newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    newCollection.document(pro.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context,"Removed from Favorites",Toast.LENGTH_SHORT).show();
+                            addToFvbtn.setImageResource(R.drawable.favorite);
+                        }
+                    });
                 }
-            } else {
-                Toast.makeText(ProductDetailsActivity.this, "Không có sản phẩm để thêm vào yêu thích", Toast.LENGTH_SHORT).show();
+                else{
+                    newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context,"Added to Favorites",Toast.LENGTH_SHORT).show();
+                            addToFvbtn.setImageResource(R.drawable.heart);
+                        }
+                    });
+                }
             }
-        }
+        });
     }
 
 
-            private void addControls() {
-                dt_proName = findViewById(R.id.dt_proName);
-                dt_proCate = findViewById(R.id.dt_proCate);
-                dt_proImage = findViewById(R.id.dt_proImage);
-                dt_proPrice = findViewById(R.id.dt_proPrice);
-                bg_pro_details = findViewById(R.id.bg_pro_details);
-                bg_pro_details_2 = findViewById(R.id.bg_pro_details_2);
-                bg_pro_details_main = findViewById(R.id.bg_pro_details_main);
-                add_to_cart = findViewById(R.id.add_to_cart);
-                proColor = findViewById(R.id.proColor);
-                btnBack = findViewById(R.id.btnBack);
-                btnPopupSize = findViewById(R.id.btnPopupSize);
-                txtTextSize = findViewById(R.id.txtTextSize);
-                btnPopupColor = findViewById(R.id.btnPopupColor);
-                btnBuyNow = findViewById(R.id.btnBuyNow);
-                addToFvbtn = findViewById(R.id.addToFvbtn);
 
-            }
+        private void addControls() {
+            dt_proName = findViewById(R.id.dt_proName);
+            dt_proCate = findViewById(R.id.dt_proCate);
+            dt_proImage = findViewById(R.id.dt_proImage);
+            dt_proPrice = findViewById(R.id.dt_proPrice);
+            bg_pro_details = findViewById(R.id.bg_pro_details);
+            bg_pro_details_2 = findViewById(R.id.bg_pro_details_2);
+            bg_pro_details_main = findViewById(R.id.bg_pro_details_main);
+            add_to_cart = findViewById(R.id.add_to_cart);
+            proColor = findViewById(R.id.proColor);
+            btnBack = findViewById(R.id.btnBack);
+            btnPopupSize = findViewById(R.id.btnPopupSize);
+            txtTextSize = findViewById(R.id.txtTextSize);
+            btnPopupColor = findViewById(R.id.btnPopupColor);
+            btnBuyNow = findViewById(R.id.btnBuyNow);
+            addToFvbtn = findViewById(R.id.addToFvbtn);
+
         }
+    }
+

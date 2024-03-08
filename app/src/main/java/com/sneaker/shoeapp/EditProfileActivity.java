@@ -119,7 +119,7 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSaveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+
             }
         });
         dialog.show();

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.sneaker.shoeapp.FirebaseManager;
+import com.bumptech.glide.Glide;
 import com.sneaker.shoeapp.R;
 import com.sneaker.shoeapp.model.Product;
 
@@ -21,13 +22,12 @@ import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
     Activity context;
-    Context mcontext;
+
     ArrayList<Product>arr_favourite = new ArrayList<>();
     List<String> myFavouriteProductIds = new ArrayList<>();
-    public FavoriteAdapter(Activity context,ArrayList<Product>arr_favorite, Context mcontext){
+    public FavoriteAdapter(Activity context,ArrayList<Product>arr_favorite){
         this.context=context;
         this.arr_favourite=arr_favorite;
-        this.mcontext=context;
     }
 
 
@@ -45,7 +45,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product =arr_favourite.get(position);
-        //holder.proImg.setImageResource(pd.getImage());
+        Glide.with(context).load(product.getImage()).into(holder.proImg);
         holder.proName.setText(product.getProName());
         holder.proCategory.setText(product.getCategory());
         holder.proPrice.setText(product.getPrice()+"");
