@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +22,8 @@ import com.google.firebase.firestore.Source;
 
 public class ProfileActivity extends AppCompatActivity {
     Button btnEdit_profile,btnView_order,btnLog_out,btnView_favourite;
+
+    ImageButton btnBack;
     TextView name_user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -68,6 +71,13 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
     }
 
@@ -76,6 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
         btnView_order = findViewById(R.id.btnView_order);
         btnLog_out = findViewById(R.id.btnLog_out);
         btnView_favourite = findViewById(R.id.btnView_favourite);
+        btnBack=findViewById(R.id.btnBack);
         name_user = findViewById(R.id.name_user);
         if(user !=null){
             DocumentReference documentReference =db.collection("User").document(user.getUid());

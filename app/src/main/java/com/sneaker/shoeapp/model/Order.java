@@ -1,10 +1,9 @@
 package com.sneaker.shoeapp.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Order implements Serializable {
-    private Integer id;
+    private String id;
     private Integer date;
     private Boolean status;
     private Integer quantity;
@@ -14,8 +13,10 @@ public class Order implements Serializable {
 
     private String address;
 
+    public Order() {
+    }
 
-    public Order(Integer id, Integer date, Boolean status, Integer quantity, Integer total_value,String address) {
+    public Order(String id, Integer date, Boolean status, Integer quantity, Integer total_value, String address) {
         this.id = id;
         this.date = date;
         this.status = status;
@@ -30,11 +31,11 @@ public class Order implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

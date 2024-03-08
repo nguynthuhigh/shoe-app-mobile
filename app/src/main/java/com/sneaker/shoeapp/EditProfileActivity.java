@@ -18,27 +18,33 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.net.PasswordAuthentication;
 
 
 public class EditProfileActivity extends AppCompatActivity {
+    TextView name_userEdit;
 
     Button btnRename,btnConfirm,btnChangeAvt,btnChangeEmail,btnChangePassword;
     EditText edtPassOld, edtPassNew, edtConfirm;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
+
 
 
     AuthCredential credential = EmailAuthProvider
@@ -256,6 +262,16 @@ public class EditProfileActivity extends AppCompatActivity {
         edtPassOld=findViewById(R.id.edtPassOld);
         edtPassNew=findViewById(R.id.edtPassNew);
         edtConfirm=findViewById(R.id.edtConfirm);
+        name_userEdit=findViewById(R.id.name_userEdit);
+        if(user !=null){
+            DocumentReference documentReference =db.collection("User").document(user.getUid());
+            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    name_userEdit.setText(documentSnapshot.getString("username"));
+                }
+            });
+        }
     }
 
 

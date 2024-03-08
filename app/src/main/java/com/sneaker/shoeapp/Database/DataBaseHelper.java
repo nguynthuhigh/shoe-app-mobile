@@ -232,11 +232,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         long insert = db.insert(TABLE_CATE, null, contentValues);
 
-        if (insert == -1){
-            return false;
-        } else {
-            return true;
-        }
+        return insert != -1;
     }
 
     public List<Category> getCategory(){

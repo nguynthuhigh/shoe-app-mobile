@@ -141,11 +141,57 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     clickItemProduct.onClickItemProduct(pro);
                 }
             });
+            DocumentReference documentReference = db.collection("User").document(user.getUid());
+            CollectionReference newCollection = documentReference.collection("Favorite");
+            newCollection.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    if (error != null) {
+
+                        return;
+                    }
+                    for (DocumentSnapshot document : value.getDocuments()) {
+                        if (document.getId().equals(pro.getId())) {
+                            productViewHolder.btnAddFav.setImageResource(R.drawable.heart);
+                            break;
+                        }
+                        productViewHolder.btnAddFav.setImageResource(R.drawable.favorite_white);
+                    }
+                }
+            });
             productViewHolder.btnAddFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    productViewHolder.btnAddFav.setImageResource(R.drawable.heart);
+
+                    DocumentReference documentReference = db.collection("User").document(user.getUid());
+                    CollectionReference newCollection = documentReference.collection("Favorite");
+                    Map<String,Object> data = new HashMap<>();
+                    data.put("id",pro.getId());
+                    newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(documentSnapshot.exists()){
+                                newCollection.document(pro.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(context,"Remove Favorite",Toast.LENGTH_SHORT).show();
+                                        productViewHolder.btnAddFav.setImageResource(R.drawable.favorite);
+                                    }
+                                });
+                            }
+                            else{
+                                newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show();
+                                        productViewHolder.btnAddFav.setImageResource(R.drawable.heart);
+                                    }
+                                });
+                            }
+                        }
+                    });
                 }
+
             });
         }
         else if(TYPE_USER_POPULAR == holder.getItemViewType()){
@@ -220,6 +266,57 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                                     });
                                 }
 
+                            }
+                        });
+                    }
+                });
+                //load Img Added Fav
+                DocumentReference documentFav = db.collection("User").document(user.getUid());
+                CollectionReference collectionFav = documentFav.collection("Favorite");
+                collectionFav.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+
+                            return;
+                        }
+                        for (DocumentSnapshot document : value.getDocuments()) {
+                            if (document.getId().equals(pro.getId())) {
+                                productPopularViewHolder.addFav.setImageResource(R.drawable.heart);
+                                break;
+                            }
+                            productPopularViewHolder.addFav.setImageResource(R.drawable.favorite);
+                        }
+                    }
+                });
+                productPopularViewHolder.addFav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DocumentReference documentReference = db.collection("User").document(user.getUid());
+                        CollectionReference newCollection = documentReference.collection("Favorite");
+                        Map<String,Object> data = new HashMap<>();
+                        data.put("id",pro.getId());
+                        newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists()){
+                                    newCollection.document(pro.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(context,"Remove Favorite",Toast.LENGTH_SHORT).show();
+                                            productPopularViewHolder.addFav.setImageResource(R.drawable.favorite);
+                                        }
+                                    });
+                                }
+                                else{
+                                    newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show();
+                                            productPopularViewHolder.addFav.setImageResource(R.drawable.heart);
+                                        }
+                                    });
+                                }
                             }
                         });
                     }
@@ -314,9 +411,11 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         FrameLayout proBg_popular;
         FrameLayout item_popular;
         ImageButton add_to_cart_popular;
+        ImageButton addFav;
 
         public ProductPopularViewHolder(@NonNull View itemView) {
             super(itemView);
+            addFav = itemView.findViewById(R.id.addFav);
             proPrice_popular = itemView.findViewById(R.id.proPrice_popular);
             proCate_popular = itemView.findViewById(R.id.proCate_popular);
             proName_popular =itemView.findViewById(R.id.proName_popular);
