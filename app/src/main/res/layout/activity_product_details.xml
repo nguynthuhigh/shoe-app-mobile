@@ -119,15 +119,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="0dp"
                         android:background="@drawable/border_radius_10dp">
 
-                        <ImageView
+                        <ImageButton
+                            android:id="@+id/addToFvbtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="2dp"
-                            app:srcCompat="@drawable/heart">
+                            app:srcCompat="@drawable/favorite">
 
-                        </ImageView>
+                        </ImageButton>
 
                     </FrameLayout>
 

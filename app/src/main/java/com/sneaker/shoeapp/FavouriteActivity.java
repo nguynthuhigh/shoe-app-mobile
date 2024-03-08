@@ -1,63 +1,123 @@
 package com.sneaker.shoeapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sneaker.shoeapp.Adapter.FavoriteAdapter;
 import com.sneaker.shoeapp.model.Product;
+
 
 import java.util.ArrayList;
 
 public class FavouriteActivity extends AppCompatActivity {
- RecyclerView recyclerFavo;
- FavoriteAdapter favoriteAdapter;
- ArrayList<Product> arr_Favorite;
- ImageButton btnBack,btnFv,btnCart,btnPro;
+    RecyclerView recyclerFavorite ;
+    FavoriteAdapter favoriteAdapter;
+    ArrayList<Product> arr_Favourite;
+    DatabaseReference favouriteRef;
+    FirebaseAuth firebaseAuth;
+    FirebaseAuth.AuthStateListener mAuthListener;
+    ImageButton btnBack, removeToFVbtn;
+    Product product=new Product();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
+        // Firebase
+        favouriteRef = FirebaseDatabase.getInstance().getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
+        // RecyclerView
+        RecyclerView recyclerFavorite = findViewById(R.id.recyclerFavorite);
+        recyclerFavorite.setLayoutManager(new LinearLayoutManager(this));
+
+        arr_Favourite = new ArrayList<>();
+        favoriteAdapter = new FavoriteAdapter(arr_Favourite);
+        recyclerFavorite.setAdapter(favoriteAdapter);
         addControls();
-        loadData();
         addEvents();
+        // Hiển thị danh sách yêu thích
+        displayFavourites(product);
     }
+
+    private void displayFavourites(Product pro) {
+        // Đọc danh sách yêu thích từ Firebase
+        favouriteRef.child("favourites").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arr_Favourite.clear();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Product product = snapshot.getValue(Product.class);
+                    arr_Favourite.add(product);
+                }
+
+                // Kiểm tra và thêm product mới vào danh sách nếu không tồn tại
+                if (pro != null && !arr_Favourite.contains(pro)) {
+                    arr_Favourite.add(pro);
+                }
+
+                // Thông báo adapter về sự thay đổi trong dữ liệu
+                favoriteAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Xử lý lỗi khi đọc dữ liệu
+            }
+        });
+    }
+
+    // Attach a ValueEventListener to fetch favorite products from Firebase
 
     private void addEvents() {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(FavouriteActivity.this,MainActivity.class);
+                Intent intent = new Intent(FavouriteActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-    }
-
-    private void loadData() {
-
-        arr_Favorite.add(new Product("Dunk nike year of dragon",200.0,"men's shoe","1","CACBCF",0,"1"));
-        arr_Favorite.add(new Product("Hello",300.0,"hello's shoe","1","FF422B",0,"1"));
-        arr_Favorite.add(new Product("Hehe boi",300.0,"nguyn's shoe","1","5D90DD",0,"1"));
-        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2 NRG",220.0,"Men's Football Cleats","1","A59D2D",0,"1"));
-        arr_Favorite.add(new Product("Nike Vapor Edge Elite 360 2",2200.0,"Hello's Football Cleats","1","585858",0,"1"));
-
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                if (currentUser != null) {
+                    // Người dùng đã đăng nhập
+                    String uid = currentUser.getUid();
+                    // Tiếp tục xử lý...
+                } else {
+                    // Người dùng chưa đăng nhập
+                    // ...
+                }
+            }
+        };
     }
 
     private void addControls() {
-        recyclerFavo=findViewById(R.id.recyclerFavorite);
-        btnBack=findViewById(R.id.btnBack);
+        recyclerFavorite = findViewById(R.id.recyclerFavorite);
+        recyclerFavorite.setLayoutManager(new LinearLayoutManager(this));
+        btnBack = findViewById(R.id.btnBack);
 
-        arr_Favorite=new ArrayList<>();
-        favoriteAdapter=new FavoriteAdapter(this,arr_Favorite);
-        recyclerFavo.setAdapter(favoriteAdapter);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(this,2);
-        recyclerFavo.setLayoutManager(gridLayoutManager);
+        arr_Favourite = new ArrayList<>();
+        favoriteAdapter = new FavoriteAdapter(arr_Favourite);
+        //favouriteAdapter = new FavoriteAdapter(this, arr_Favourite);
+        recyclerFavorite.setAdapter(favoriteAdapter);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        recyclerFavorite.setLayoutManager(gridLayoutManager);
     }
 }

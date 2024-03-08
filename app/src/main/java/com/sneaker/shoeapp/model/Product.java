@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 public class Product implements Serializable {
     private String ProName, color,id;
-
     private Double Price;
     private String Category;
     private String Image;
