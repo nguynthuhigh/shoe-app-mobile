@@ -56,6 +56,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@android:color/transparent"
+
             android:src="@drawable/icon_save" />
         <TextView
             android:layout_width="wrap_content"
