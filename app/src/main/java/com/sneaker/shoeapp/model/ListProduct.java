@@ -1,5 +1,7 @@
 package com.sneaker.shoeapp.model;
 
+import android.view.View;
+
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
