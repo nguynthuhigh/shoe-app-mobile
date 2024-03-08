@@ -3,7 +3,9 @@ package com.sneaker.shoeapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -27,14 +29,22 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sneaker.shoeapp.Adapter.FavoriteAdapter;
+import com.sneaker.shoeapp.model.ListProduct;
 import com.sneaker.shoeapp.model.Order;
 import com.sneaker.shoeapp.model.Product;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,6 +53,7 @@ import java.util.Map;
 public class ProductDetailsActivity extends AppCompatActivity {
     TextView dt_proName;
     ImageView dt_proImage;
+    ImageButton addToFvbtn;
     TextView dt_proPrice;
     TextView dt_proCate, txtTextSize;
     FrameLayout bg_pro_details, bg_pro_details_2, bg_pro_details_main;
@@ -51,11 +62,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
     ImageButton btnBack, btnPopupSize, btnPopupColor;
     Product pro;
     Order order;
+    ArrayList<Product> arr_Favorite;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
+    private DatabaseReference favoriteRef;
+    private boolean isFavorite = false;
+    FavoriteAdapter favoriteAdapter= new FavoriteAdapter(arr_Favorite);;
+    Context context;
+
     Integer quantity;
     private static final String TAG = "ProductDetailsActivity";
+    private ListProduct productViewHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +85,24 @@ public class ProductDetailsActivity extends AppCompatActivity {
         dt_proPrice.setText(pro.getPrice() + "");
         dt_proCate.setText(pro.getCategory());
         Glide.with(ProductDetailsActivity.this).load(pro.getImage()).into(dt_proImage);
-
+        context = this;
+        ListProduct listProduct = (ListProduct) bundle.getSerializable("listProduct");
+        db.collection("User").document(user.getUid()).collection("Favorite").document(pro.getId())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()){
+                            addToFvbtn.setImageResource(R.drawable.heart);
+                        }
+                    }
+                });
         dt_proName.setText(pro.getProName());
 
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_item_2), pro, bg_pro_details);
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_item_2), pro, bg_pro_details_2);
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_new), pro, bg_pro_details_main);
         proColor.setCardBackgroundColor(Color.parseColor("#" + pro.getColor()));
+
         addEvents();
         xuLyPopupSize();
         xulyPopupColor();
@@ -177,7 +206,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
         layout.setBackground(gradientDrawable);
     }
 
+
+
     private void addEvents() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,12 +252,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 });
             }
         });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
 
         btnBuyNow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,22 +304,70 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
 
         });
+
+//            private void updateFavoriteButton() {
+//                // Change the ImageButton state based on 'isFavorite'
+//                ImageButton addToFvButton = findViewById(R.id.addToFvbtn);
+//                addToFvButton.setImageResource(isFavorite ? R.drawable.heart : R.drawable.favorite);
+//            }
+        addToFvbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleFavourite();
+            }
+        });
     }
 
-    private void addControls() {
-        dt_proName = findViewById(R.id.dt_proName);
-        dt_proCate = findViewById(R.id.dt_proCate);
-        dt_proImage = findViewById(R.id.dt_proImage);
-        dt_proPrice = findViewById(R.id.dt_proPrice);
-        bg_pro_details = findViewById(R.id.bg_pro_details);
-        bg_pro_details_2 = findViewById(R.id.bg_pro_details_2);
-        bg_pro_details_main = findViewById(R.id.bg_pro_details_main);
-        add_to_cart = findViewById(R.id.add_to_cart);
-        proColor = findViewById(R.id.proColor);
-        btnBack = findViewById(R.id.btnBack);
-        btnPopupSize = findViewById(R.id.btnPopupSize);
-        txtTextSize = findViewById(R.id.txtTextSize);
-        btnPopupColor = findViewById(R.id.btnPopupColor);
-        btnBuyNow = findViewById(R.id.btnBuyNow);
+
+    private void toggleFavourite() {
+        DocumentReference documentReference = db.collection("User").document(user.getUid());
+        CollectionReference newCollection = documentReference.collection("Favorite");
+        Map<String,Object> data = new HashMap<>();
+        data.put("id",pro.getId());
+        newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    newCollection.document(pro.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context,"Removed from Favorites",Toast.LENGTH_SHORT).show();
+                            addToFvbtn.setImageResource(R.drawable.favorite);
+                        }
+                    });
+                }
+                else{
+                    newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context,"Added to Favorites",Toast.LENGTH_SHORT).show();
+                            addToFvbtn.setImageResource(R.drawable.heart);
+                        }
+                    });
+                }
+            }
+        });
     }
-}
+
+
+
+        private void addControls() {
+            dt_proName = findViewById(R.id.dt_proName);
+            dt_proCate = findViewById(R.id.dt_proCate);
+            dt_proImage = findViewById(R.id.dt_proImage);
+            dt_proPrice = findViewById(R.id.dt_proPrice);
+            bg_pro_details = findViewById(R.id.bg_pro_details);
+            bg_pro_details_2 = findViewById(R.id.bg_pro_details_2);
+            bg_pro_details_main = findViewById(R.id.bg_pro_details_main);
+            add_to_cart = findViewById(R.id.add_to_cart);
+            proColor = findViewById(R.id.proColor);
+            btnBack = findViewById(R.id.btnBack);
+            btnPopupSize = findViewById(R.id.btnPopupSize);
+            txtTextSize = findViewById(R.id.txtTextSize);
+            btnPopupColor = findViewById(R.id.btnPopupColor);
+            btnBuyNow = findViewById(R.id.btnBuyNow);
+            addToFvbtn = findViewById(R.id.addToFvbtn);
+
+        }
+    }
+

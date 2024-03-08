@@ -81,7 +81,9 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="60dp"
                     android:background="@drawable/bg_details_new"
-                    android:rotation="-20"></FrameLayout>
+                    android:rotation="-20">
+
+                </FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/bg_pro_details_2"
@@ -89,7 +91,9 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="60dp"
                     android:layout_marginTop="70dp"
-                    android:background="@drawable/bg_details_item_2"></FrameLayout>
+                    android:background="@drawable/bg_details_item_2">
+
+                </FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/bg_pro_details"
@@ -97,7 +101,9 @@
                     android:layout_height="15dp"
                     android:layout_marginLeft="310dp"
                     android:layout_marginTop="15dp"
-                    android:background="@drawable/bg_details_item_2"></FrameLayout>
+                    android:background="@drawable/bg_details_item_2">
+
+                </FrameLayout>
 
                 <ImageView
                     android:id="@+id/dt_proImage"
@@ -119,15 +125,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="0dp"
                         android:background="@drawable/border_radius_10dp">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
+                        <ImageButton
+                            android:id="@+id/addToFvbtn"
+                            android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:padding="2dp"
-                            app:srcCompat="@drawable/heart">
+                            android:background="@android:color/transparent"
+                            app:srcCompat="@drawable/favorite">
 
-                        </ImageView>
+                        </ImageButton>
 
                     </FrameLayout>
 

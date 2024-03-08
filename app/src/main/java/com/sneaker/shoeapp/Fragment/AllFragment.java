@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 import java.util.zip.GZIPInputStream;
 
 
@@ -74,9 +75,10 @@ public class AllFragment extends Fragment {
                 startActivity(intent);
             }
         },getContext());
-
+        Random random = new Random();
+        long randomValue = random.nextLong();
         CollectionReference collection = db.collection("Product");
-        Query query = collection.document().getParent().limit(4);
+        Query query = collection.document().getParent().orderBy("proName").startAt(randomValue).limit(4);
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
            @Override
            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
