@@ -64,7 +64,7 @@ EditText inputEmail,confirmPass,inputPass,inputName;
                                         userinfo.put("id",mAuth.getCurrentUser().getUid());
                                         userinfo.put("username", inputName.getText().toString());
 
-                                        firestore.collection("User").document(email_user).set(userinfo);
+                                        firestore.collection("User").document(mAuth.getCurrentUser().getUid()).set(userinfo);
                                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                         Toast.makeText(RegisterActivity.this,"Success",Toast.LENGTH_SHORT).show();
                                         startActivity(intent);
