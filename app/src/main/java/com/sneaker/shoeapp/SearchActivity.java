@@ -2,13 +2,17 @@ package com.sneaker.shoeapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +36,14 @@ RecyclerView rcv_search;
 ProductAdapter productAdapter;
 List<Product> productList;
 FirebaseFirestore db;
+String query_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        Toolbar main_header = findViewById(R.id.menu_header);
+        setSupportActionBar(main_header);
         addControls();
         addEvents();
         loadData();
@@ -47,41 +54,84 @@ FirebaseFirestore db;
     }
 
     private void addControls() {
+        Intent intent = getIntent();
+        query_search = intent.getStringExtra("dataSearch").toLowerCase();
         productList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
         contentSearch = findViewById(R.id.contentSearch);
-        Intent searchData = getIntent();
-        String data = searchData.getStringExtra("dataSearch");
-        contentSearch.setText("Search: " +data);
+
         rcv_search = findViewById(R.id.rcv_search);
         productAdapter = new ProductAdapter(productList, new ClickItemProduct() {
             @Override
             public void onClickItemProduct(Product product) {
-
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("obj_product",product);
+                Intent intent = new Intent(SearchActivity.this, ProductDetailsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         },this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(SearchActivity.this,2);
         rcv_search.setLayoutManager(gridLayoutManager);
         rcv_search.setAdapter(productAdapter);
+
     }
     private void loadData(){
-        Intent intent = getIntent();
-        String query = intent.getStringExtra("dataSearch");
-        Toast.makeText(this,query,Toast.LENGTH_SHORT).show();
+
+        contentSearch.setText("Search: " +query_search);
+        Toast.makeText(this,query_search,Toast.LENGTH_SHORT).show();
         CollectionReference collectionReference = db.collection("Product");
-        Query query_db = collectionReference.whereEqualTo("proName",query);
-        query_db.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot dc: task.getResult()
                      ) {
-                    productList.add(new Product(dc.getString("proName"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),3,dc.getId()));
-                    productAdapter.notifyDataSetChanged();
+                    if((dc.getString("proName").toLowerCase()).contains(query_search) || (dc.getString("category").toLowerCase()).contains(query_search)){
+                        productList.add(new Product(dc.getString("proName"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),2,dc.getId()));
+                        productAdapter.notifyDataSetChanged();
+                    }
                 }
             }
         });
-        productList.add(new Product("123",1.0,"123","https://firebasestorage.googleapis.com/v0/b/shoe-app-mobile-3b284.appspot.com/o/img%2Fok1.png?alt=media&token=b271df61-5837-45d4-8f48-e8914b88a18f","e64043",3,"1"));
-        productAdapter.notifyDataSetChanged();
+
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.header_menu,menu);
+        MenuItem mn_search = menu.findItem(R.id.ic_search);
+        SearchView searchView = (SearchView) mn_search.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                query_search = query;
+                productList.clear();
+                loadData();
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.bag_header){
+            Intent intent = new Intent(SearchActivity.this,MyCartActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.account_header){
+            Intent intent = new Intent(SearchActivity.this,ProfileActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

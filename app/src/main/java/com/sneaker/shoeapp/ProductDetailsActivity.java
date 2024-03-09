@@ -80,7 +80,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         dt_proCate.setText(pro.getCategory());
         Glide.with(ProductDetailsActivity.this).load(pro.getImage()).into(dt_proImage);
         ListProduct listProduct = (ListProduct) bundle.getSerializable("listProduct");
-        db.collection("User").document(user.getUid()).collection("Favorite").document(pro.getId())
+        if(user != null){
+            db.collection("User").document(user.getUid()).collection("Favorite").document(pro.getId())
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -89,6 +90,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         }
                     }
                 });
+        }
         dt_proName.setText(pro.getProName());
 
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_item_2), pro, bg_pro_details);
