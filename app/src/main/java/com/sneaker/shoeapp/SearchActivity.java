@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,6 +39,7 @@ FirebaseFirestore db;
         setContentView(R.layout.activity_search);
         addControls();
         addEvents();
+        loadData();
     }
 
     private void addEvents() {
@@ -45,6 +47,7 @@ FirebaseFirestore db;
     }
 
     private void addControls() {
+        productList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
         contentSearch = findViewById(R.id.contentSearch);
         Intent searchData = getIntent();
@@ -64,18 +67,21 @@ FirebaseFirestore db;
     private void loadData(){
         Intent intent = getIntent();
         String query = intent.getStringExtra("dataSearch");
+        Toast.makeText(this,query,Toast.LENGTH_SHORT).show();
         CollectionReference collectionReference = db.collection("Product");
-        Query query_db = collectionReference.document().getParent().whereArrayContains("namePro",query);
+        Query query_db = collectionReference.whereEqualTo("proName",query);
         query_db.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot dc: task.getResult()
                      ) {
-                    productList.add(new Product(dc.getString("namePro"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),3,dc.getId()));
+                    productList.add(new Product(dc.getString("proName"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),3,dc.getId()));
                     productAdapter.notifyDataSetChanged();
                 }
             }
         });
+        productList.add(new Product("123",1.0,"123","https://firebasestorage.googleapis.com/v0/b/shoe-app-mobile-3b284.appspot.com/o/img%2Fok1.png?alt=media&token=b271df61-5837-45d4-8f48-e8914b88a18f","e64043",3,"1"));
+        productAdapter.notifyDataSetChanged();
 
     }
 }

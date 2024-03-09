@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnAddFav, btnSearch;
     Button btnSeller,categoryAll,categoryFootball,categoryRunning,btnPayment,btnCheckout,btnOrderDetails,inputCate;
     EditText searchProduct,searchProduct_2;
-    FrameLayout productCard;
+    FrameLayout productCard,bs_item;
     ImageButton finishLayout;
     ImageView bs_img;
     TextView bs_name,bs_price,bag_count;
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mauth;
     FirebaseUser user;
     List<Product>listProBanner;
+    Product pro_bs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +104,16 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Chưa add được nha e",Toast.LENGTH_SHORT).show();
             }
         });
-
-
+        bs_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("obj_product",pro_bs);
+                Intent intent = new Intent(MainActivity.this, ProductDetailsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
 
         categoryFootball.setOnClickListener(new View.OnClickListener() {
@@ -256,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
         bs_img = findViewById(R.id.bs_img);
         bs_name = findViewById(R.id.bs_name);
         bs_price = findViewById(R.id.bs_price);
+        bs_item = findViewById(R.id.bs_item);
 
         Query bs_query = collectionReference.document().getParent().limit(3);
         bs_query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -266,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
                     Glide.with(MainActivity.this).load(dc.getString("image")).into(bs_img);
                     bs_name.setText(dc.getString("proName"));
                     bs_price.setText("$"+dc.getString("price"));
+                    pro_bs =new Product(dc.getString("proName"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),0,dc.getId());
                 }
             }
         });
