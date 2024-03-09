@@ -15,6 +15,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.ktx.Firebase;
 import com.sneaker.shoeapp.Adapter.OrderAdapter;
 import com.sneaker.shoeapp.Interface.ClickItemOrder;
 import com.sneaker.shoeapp.model.Order;
@@ -30,6 +38,10 @@ public class MyOrderActivity extends AppCompatActivity {
     RecyclerView rcv_order;
     List<Product> ListProduct;
     OrderAdapter orderAdapter;
+    List<Order> orderList;
+    FirebaseFirestore db;
+    FirebaseAuth mauth;
+    FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +56,36 @@ public class MyOrderActivity extends AppCompatActivity {
             }
         });
         addControl();
+        loadData();
+    }
+
+    private void loadData() {
+        db.collection("User").document(user.getUid()).collection("Order")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot dc: task.getResult()
+                     ) {
+                    Integer quantity = dc.getDouble("Quantity").intValue();
+                    Integer price = Integer.valueOf(dc.getString("Price")) ;
+                    orderList.add(new Order(dc.getId(),dc.getString("Date"),dc.getBoolean("status"),quantity,price,dc.getString("Address")));
+                    orderAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     private void addControl() {
-        orderAdapter = new OrderAdapter(getListOrder());
+        orderList = new ArrayList<>();
+        db = FirebaseFirestore.getInstance();
+        mauth = FirebaseAuth.getInstance();
+        user = mauth.getCurrentUser();
+        orderAdapter = new OrderAdapter(orderList);
         rcv_order = findViewById(R.id.rcv_order);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         rcv_order.setLayoutManager(linearLayoutManager);
-        orderAdapter.setData(getListOrder(), new ClickItemOrder() {
+        orderAdapter.setData(orderList, new ClickItemOrder() {
             @Override
             public void onClickedItem(Order order) {
                 Bundle bundle = new Bundle();
@@ -64,16 +98,7 @@ public class MyOrderActivity extends AppCompatActivity {
         rcv_order.setAdapter(orderAdapter);
     }
 
-    private List<Order> getListOrder() {
-        List<Order> orderList = new ArrayList<>();
 
-        orderList.add(new Order("1",2024,true,5,1200,"HCM"));
-        orderList.add(new Order("2",2024,false,4,5200,"HN"));
-        orderList.add(new Order("3",2024,true,100,520000,"DAKLAK"));
-        orderList.add(new Order("4",2024,false,20,1200,"GIALAI"));
-        orderList.add(new Order("5",2024,true,5,15000,"QUANGNAM"));
-        return orderList;
-    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
 

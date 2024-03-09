@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Order implements Serializable {
     private String id;
-    private Integer date;
+    private String date;
     private Boolean status;
     private Integer quantity;
     private Integer total_value;
@@ -16,7 +16,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(String id, Integer date, Boolean status, Integer quantity, Integer total_value, String address) {
+    public Order(String id, String date, Boolean status, Integer quantity, Integer total_value, String address) {
         this.id = id;
         this.date = date;
         this.status = status;
@@ -39,11 +39,11 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public Integer getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Integer date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -125,7 +125,7 @@ public class MyCartActivity extends AppCompatActivity {
         });
     }
 
-    private void addControls() {///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void addControls() {
         btnCheckout = findViewById(R.id.btnCheckout);
         total_cart = findViewById(R.id.total_cart);
         quantity_cart = findViewById(R.id.quantity_cart);
