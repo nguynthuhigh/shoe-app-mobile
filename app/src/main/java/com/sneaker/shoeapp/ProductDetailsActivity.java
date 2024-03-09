@@ -1,6 +1,7 @@
 package com.sneaker.shoeapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -39,6 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ProductDetailsActivity extends AppCompatActivity {
     TextView dt_proName;
@@ -55,6 +57,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
     Integer quantity;
+    private static final int REQUEST_ADDRESS = 123;
     private static final String TAG = "ProductDetailsActivity";
 
     @Override
@@ -77,6 +80,23 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addEvents();
         xuLyPopupSize();
         xulyPopupColor();
+    }
+
+    private void addControls() {
+        dt_proName = findViewById(R.id.dt_proName);
+        dt_proCate = findViewById(R.id.dt_proCate);
+        dt_proImage = findViewById(R.id.dt_proImage);
+        dt_proPrice = findViewById(R.id.dt_proPrice);
+        bg_pro_details = findViewById(R.id.bg_pro_details);
+        bg_pro_details_2 = findViewById(R.id.bg_pro_details_2);
+        bg_pro_details_main = findViewById(R.id.bg_pro_details_main);
+        add_to_cart = findViewById(R.id.add_to_cart);
+        proColor = findViewById(R.id.proColor);
+        btnBack = findViewById(R.id.btnBack);
+        btnPopupSize = findViewById(R.id.btnPopupSize);
+        txtTextSize = findViewById(R.id.txtTextSize);
+        btnPopupColor = findViewById(R.id.btnPopupColor);
+        btnBuyNow = findViewById(R.id.btnBuyNow);
     }
 
     private void xulyPopupColor() {
@@ -177,6 +197,27 @@ public class ProductDetailsActivity extends AppCompatActivity {
         layout.setBackground(gradientDrawable);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ADDRESS) {
+            if (resultCode == RESULT_OK) {
+                // Address data is obtained from the GetAddressActivity
+                String address = data.getStringExtra("address");
+
+                // Proceed to add the order to Firestore with the obtained address
+                addOrderToFirestore(address);
+            }
+        }
+    }
+
+    private void addOrderToFirestore(String address) {
+        Product buyNowProduct = new Product();
+
+        CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
+                .collection("Order");
+    }
+
     private void addEvents() {
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,63 +264,58 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnBuyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(ProductDetailsActivity.this, CheckoutActivity.class);
+                intent.putExtra("Customer", "Phong");////////////////////////////////////////////////////////////////////////////
+                intent.putExtra("Total Price", "123546");
+                startActivity(intent);
 
-                Product yeuemkhonganh = new Product();
-
-
-                CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
-                        .collection("Order");
-
-                Map<String,Object> orderInfo = new HashMap<>();
-                orderInfo.put("Date", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()));
-                orderInfo.put("Quantity", 1);
-                orderInfo.put("Price", pro.getPrice());
-                orderInfo.put("status", false);
-                orderInfo.put("Address",123);
-                Map<String,Object> productInfo = new HashMap<>();
-                productInfo.put("ID", pro.getId());
-                productInfo.put("Quantity", 1);
-                collectionOrderReference.add(orderInfo).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        collectionOrderReference.document(task.getResult().getId())
-                                .collection("listPro").document(pro.getId()).set(productInfo);
-                        Toast.makeText(ProductDetailsActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                //                collectionReference.add(data)
-//                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                            @Override
-//                            public void onSuccess(DocumentReference documentReference) {
-//                                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Log.w(TAG, "Error adding document", e);
-//                            }
-//                        });
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                Product buyNowProduct = new Product();
+//
+//                CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
+//                        .collection("Order");
+//
+//                Map<String, Object> orderInfo = new HashMap<>();
+//                orderInfo.put("Date", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()));
+//                orderInfo.put("Quantity", 1);
+//                orderInfo.put("Price", pro.getPrice());
+//                orderInfo.put("status", false);
+//                orderInfo.put("Address", 123);
+//                Map<String, Object> productInfo = new HashMap<>();
+//                productInfo.put("ID", pro.getId());
+//                productInfo.put("Quantity", 1);
+//                collectionOrderReference.add(orderInfo).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentReference> task) {
+//                        collectionOrderReference.document(task.getResult().getId())
+//                                .collection("listPro").document(pro.getId()).set(productInfo);
+//                        Toast.makeText(ProductDetailsActivity.this, "Success", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
-
         });
-    }
 
-
-    private void addControls() {
-        dt_proName = findViewById(R.id.dt_proName);
-        dt_proCate = findViewById(R.id.dt_proCate);
-        dt_proImage = findViewById(R.id.dt_proImage);
-        dt_proPrice = findViewById(R.id.dt_proPrice);
-        bg_pro_details = findViewById(R.id.bg_pro_details);
-        bg_pro_details_2 = findViewById(R.id.bg_pro_details_2);
-        bg_pro_details_main = findViewById(R.id.bg_pro_details_main);
-        add_to_cart = findViewById(R.id.add_to_cart);
-        proColor = findViewById(R.id.proColor);
-        btnBack = findViewById(R.id.btnBack);
-        btnPopupSize = findViewById(R.id.btnPopupSize);
-        txtTextSize = findViewById(R.id.txtTextSize);
-        btnPopupColor = findViewById(R.id.btnPopupColor);
-        btnBuyNow = findViewById(R.id.btnBuyNow);
+//        Product buyNowProduct = new Product();
+//
+//        CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
+//                .collection("Order");
+//
+//        Map<String, Object> orderInfo = new HashMap<>();
+//        orderInfo.put("Date", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()));
+//        orderInfo.put("Quantity", 1);
+//        orderInfo.put("Price", pro.getPrice());
+//        orderInfo.put("status", false);
+//        orderInfo.put("Address", 123);
+//        Map<String, Object> productInfo = new HashMap<>();
+//        productInfo.put("ID", pro.getId());
+//        productInfo.put("Quantity", 1);
+//        collectionOrderReference.add(orderInfo).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentReference> task) {
+//                collectionOrderReference.document(task.getResult().getId())
+//                        .collection("listPro").document(pro.getId()).set(productInfo);
+//                Toast.makeText(ProductDetailsActivity.this, "Success", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 }
