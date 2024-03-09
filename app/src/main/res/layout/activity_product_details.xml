@@ -42,7 +42,9 @@
                         android:fontFamily="@font/alata_regular"
                         android:text="Product's Name"
                         android:textColor="@color/black"
-                        android:textSize="30sp"></TextView>
+                        android:textSize="30sp">
+
+                    </TextView>
 
                     <TextView
                         android:id="@+id/dt_proCate"
@@ -51,20 +53,38 @@
                         android:fontFamily="@font/alata_regular"
                         android:text="Product's Catgory"
                         android:textColor="#928A8A"
-                        android:textSize="20sp"></TextView>
+                        android:textSize="20sp">
+
+                    </TextView>
                 </LinearLayout>
 
-                <FrameLayout
+                <RelativeLayout
                     android:layout_width="40dp"
-                    android:layout_height="20dp"
+                    android:layout_height="22dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="20dp"
-                    android:background="@color/black"
-                    android:padding="0dp"
-                    android:text="4,5"
-                    android:textSize="10sp">
+                    android:background="@drawable/border_radius_30dp"
 
-                </FrameLayout>
+
+                    android:textSize="10sp">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/star"
+                       android:layout_marginTop="1dp"
+                        android:layout_marginLeft="3dp">
+
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="8dp">
+
+                    </TextView>
+                </RelativeLayout>
             </RelativeLayout>
 
             <RelativeLayout
@@ -81,7 +101,9 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="60dp"
                     android:background="@drawable/bg_details_new"
-                    android:rotation="-20"></FrameLayout>
+                    android:rotation="-20">
+
+                </FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/bg_pro_details_2"
@@ -89,7 +111,9 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="60dp"
                     android:layout_marginTop="70dp"
-                    android:background="@drawable/bg_details_item_2"></FrameLayout>
+                    android:background="@drawable/bg_details_item_2">
+
+                </FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/bg_pro_details"
@@ -97,7 +121,9 @@
                     android:layout_height="15dp"
                     android:layout_marginLeft="310dp"
                     android:layout_marginTop="15dp"
-                    android:background="@drawable/bg_details_item_2"></FrameLayout>
+                    android:background="@drawable/bg_details_item_2">
+
+                </FrameLayout>
 
                 <ImageView
                     android:id="@+id/dt_proImage"
@@ -119,15 +145,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="0dp"
                         android:background="@drawable/border_radius_10dp">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
+                        <ImageButton
+                            android:id="@+id/addToFvbtn"
+                            android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:padding="2dp"
-                            app:srcCompat="@drawable/heart">
+                            android:background="@android:color/transparent"
+                            app:srcCompat="@drawable/favorite">
 
-                        </ImageView>
+                        </ImageButton>
 
                     </FrameLayout>
 

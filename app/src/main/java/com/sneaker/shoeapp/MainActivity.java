@@ -61,12 +61,13 @@ import com.sneaker.shoeapp.model.Product;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton btnAddFav, btnSearch;
     Button btnSeller,categoryAll,categoryFootball,categoryRunning,btnPayment,btnCheckout,btnOrderDetails,inputCate;
     EditText searchProduct,searchProduct_2;
-    FrameLayout productCard;
+    FrameLayout productCard,bs_item;
     ImageButton finishLayout;
     ImageView bs_img;
     TextView bs_name,bs_price,bag_count;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mauth;
     FirebaseUser user;
     List<Product>listProBanner;
+    Product pro_bs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +104,16 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Chưa add được nha e",Toast.LENGTH_SHORT).show();
             }
         });
-
-
+        bs_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("obj_product",pro_bs);
+                Intent intent = new Intent(MainActivity.this, ProductDetailsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
 
         categoryFootball.setOnClickListener(new View.OnClickListener() {
@@ -232,8 +242,10 @@ public class MainActivity extends AppCompatActivity {
         rcv_banner.setLayoutManager(linearLayoutManager_2);
         rcv_banner.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rcv_banner.setAdapter(productAdapter_banner);
+        Random random = new Random();
+        long randomValue = random.nextLong();
         CollectionReference collectionReference = db.collection("Product");
-        Query query = collectionReference.document().getParent().whereEqualTo("category", "football").limit(4);
+        Query query = collectionReference.document().getParent().orderBy("price").startAt(randomValue).limit(3);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -253,7 +265,9 @@ public class MainActivity extends AppCompatActivity {
         bs_img = findViewById(R.id.bs_img);
         bs_name = findViewById(R.id.bs_name);
         bs_price = findViewById(R.id.bs_price);
-        Query bs_query = collectionReference.document().getParent().limit(4);
+        bs_item = findViewById(R.id.bs_item);
+
+        Query bs_query = collectionReference.document().getParent().limit(3);
         bs_query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -262,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
                     Glide.with(MainActivity.this).load(dc.getString("image")).into(bs_img);
                     bs_name.setText(dc.getString("proName"));
                     bs_price.setText("$"+dc.getString("price"));
+                    pro_bs =new Product(dc.getString("proName"),Double.valueOf(dc.getString("price")),dc.getString("category"),dc.getString("image"),dc.getString("color"),0,dc.getId());
                 }
             }
         });
@@ -298,9 +313,12 @@ public class MainActivity extends AppCompatActivity {
     }
   private List<Product> getListPro() {
         List<Product> listPro= new ArrayList<Product>();
+      Random random = new Random();
+      int randomValue = random.nextInt(100);
+      randomValue +=1;
       CollectionReference collectionReference = db.collection("Product");
-    //  Query query = collectionReference.document();
-      collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+      Query query = collectionReference.document().getParent().orderBy("color").startAt(randomValue).limit(5);
+      query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
           @Override
           public void onComplete(@NonNull Task<QuerySnapshot> task) {
               if (task.isSuccessful()) {
