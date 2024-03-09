@@ -61,31 +61,24 @@ public class ProductDetailsActivity extends AppCompatActivity {
     Button add_to_cart, btnBuyNow;
     ImageButton btnBack, btnPopupSize, btnPopupColor;
     Product pro;
-    Order order;
-    ArrayList<Product> arr_Favorite;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
-    private DatabaseReference favoriteRef;
-    private boolean isFavorite = false;
-    FavoriteAdapter favoriteAdapter= new FavoriteAdapter(arr_Favorite);;
-    Context context;
 
-    Integer quantity;
-    private static final String TAG = "ProductDetailsActivity";
-    private ListProduct productViewHolder;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
         addControls();
+        //get bundle
         Bundle bundle = getIntent().getExtras();
         pro = (Product) bundle.get("obj_product");
         dt_proPrice.setText(pro.getPrice() + "");
         dt_proCate.setText(pro.getCategory());
         Glide.with(ProductDetailsActivity.this).load(pro.getImage()).into(dt_proImage);
-        context = this;
         ListProduct listProduct = (ListProduct) bundle.getSerializable("listProduct");
         db.collection("User").document(user.getUid()).collection("Favorite").document(pro.getId())
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -264,10 +257,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnBuyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Product yeuemkhonganh = new Product();
-
-
                 CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
                         .collection("Order");
 
@@ -288,28 +277,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         Toast.makeText(ProductDetailsActivity.this, "Success", Toast.LENGTH_SHORT).show();
                     }
                 });
-                //                collectionReference.add(data)
-//                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                            @Override
-//                            public void onSuccess(DocumentReference documentReference) {
-//                                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Log.w(TAG, "Error adding document", e);
-//                            }
-//                        });
             }
 
         });
 
-//            private void updateFavoriteButton() {
-//                // Change the ImageButton state based on 'isFavorite'
-//                ImageButton addToFvButton = findViewById(R.id.addToFvbtn);
-//                addToFvButton.setImageResource(isFavorite ? R.drawable.heart : R.drawable.favorite);
-//            }
+//
         addToFvbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -331,7 +303,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     newCollection.document(pro.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(context,"Removed from Favorites",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductDetailsActivity.this,"Removed from Favorites",Toast.LENGTH_SHORT).show();
                             addToFvbtn.setImageResource(R.drawable.favorite);
                         }
                     });
@@ -340,7 +312,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(context,"Added to Favorites",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductDetailsActivity.this,"Added to Favorites",Toast.LENGTH_SHORT).show();
                             addToFvbtn.setImageResource(R.drawable.heart);
                         }
                     });
