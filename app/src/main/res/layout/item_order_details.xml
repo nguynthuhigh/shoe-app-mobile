@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
+        android:id="@+id/pro_order"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="15dp"
@@ -19,19 +20,22 @@
             android:layout_marginLeft="5dp">
 
             <ImageView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 app:srcCompat="@drawable/bgshoe" />
 
             <ImageView
+                android:id="@+id/proImg_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                app:srcCompat="@drawable/shoe" />
+                />
         </RelativeLayout>
 
         <TextView
+
             android:id="@+id/txtShoename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,6 +49,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/proPrice_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtShoename"
@@ -57,7 +62,7 @@
             android:textSize="11sp" />
 
         <TextView
-            android:id="@+id/radio_cod"
+            android:id="@+id/proQuan_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

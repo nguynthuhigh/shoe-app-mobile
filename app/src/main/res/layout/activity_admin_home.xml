@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminHomeActivity"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi, Admin"
+        android:fontFamily="@font/alata_regular"
+        android:textColor="@color/black"
+        android:textSize="20sp">
+    </TextView>
+    <GridLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/addPro"
+            android:text="Add Product"
+            >
+
+        </Button>
+        <Button
+            android:id="@+id/viewOrder"
+            android:text="View Order"
+            >
+
+        </Button>
+    </GridLayout>
+</LinearLayout>

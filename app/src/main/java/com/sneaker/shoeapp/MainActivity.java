@@ -1,35 +1,26 @@
 package com.sneaker.shoeapp;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,18 +31,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sneaker.shoeapp.Adapter.ProductAdapter;
 import com.sneaker.shoeapp.Admin.AdminCustomerActivity;
-import com.sneaker.shoeapp.Admin.CategoryAdminActivity;
+import com.sneaker.shoeapp.Admin.AdminOrderActivity;
 import com.sneaker.shoeapp.Fragment.AllFragment;
 import com.sneaker.shoeapp.Fragment.FootballFragment;
 import com.sneaker.shoeapp.Fragment.RunningFragment;
@@ -59,7 +45,6 @@ import com.sneaker.shoeapp.Interface.ClickItemProduct;
 import com.sneaker.shoeapp.model.Product;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -152,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeLayout(LoginActivity.class);
+                changeLayout(AdminOrderActivity.class);
             }
         });
         btnCheckout.setOnClickListener(new View.OnClickListener() {
@@ -167,12 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 changeLayout(AdminCustomerActivity.class);
             }
         });
-        inputCate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeLayout(CategoryAdminActivity.class);
-            }
-        });
+
 
     }
     private void changeStateButton(Button btn,int drawable,int color){

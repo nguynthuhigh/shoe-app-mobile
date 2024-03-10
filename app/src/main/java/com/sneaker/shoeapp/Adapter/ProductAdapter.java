@@ -65,6 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static int TYPE_USER_POPULAR =1;
     private static int TYPE_USER_CATE =2;
     private static int TYPE_PRO_BANNER = 3;
+    private static int TYPE_PRO_ORDER = 4;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mauth = FirebaseAuth.getInstance();
     private FirebaseUser user = mauth.getCurrentUser();
@@ -90,6 +91,10 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }else if(TYPE_PRO_BANNER == viewType){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_banner_home,parent,false);
             return new ProBannerViewHolder(view);
+        }
+        else if(TYPE_PRO_ORDER == viewType){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_details,parent,false);
+            return new ProductOrderViewHolder(view);
         }
         return null;
     }
@@ -325,7 +330,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 });
             }
         }
-        else if(TYPE_PRO_BANNER == holder.getItemViewType()){
+        if(TYPE_PRO_BANNER == holder.getItemViewType()){
             ProBannerViewHolder proBannerViewHolder = (ProBannerViewHolder) holder;
             Glide.with(context)
                     .load(pro.getImage())
@@ -344,6 +349,8 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
 
         }
+
+
     }
 
 
@@ -425,6 +432,24 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             proBg_popular = itemView.findViewById(R.id.probg_popular);
             item_popular = itemView.findViewById(R.id.item_popular);
             add_to_cart_popular = itemView.findViewById(R.id.add_to_cart_popular);
+        }
+
+    }
+    public class ProductOrderViewHolder extends RecyclerView.ViewHolder{
+
+        RelativeLayout pro_order;
+        ImageView proImg_order;
+        TextView txtShoename,proPrice_order,proQuan_order;
+
+
+        public ProductOrderViewHolder(@NonNull View itemView) {
+            super(itemView);
+            proQuan_order = itemView.findViewById(R.id.proQuan_order);
+            pro_order = itemView.findViewById(R.id.pro_order);
+            proImg_order = itemView.findViewById(R.id.proImg_order);
+            txtShoename = itemView.findViewById(R.id.txtShoename);
+            proPrice_order = itemView.findViewById(R.id.proPrice_order);
+
         }
 
     }

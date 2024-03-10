@@ -37,6 +37,7 @@ import com.sneaker.shoeapp.model.Cart;
 import com.sneaker.shoeapp.model.ListProduct;
 import com.sneaker.shoeapp.model.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -120,7 +121,13 @@ public class MyCartActivity extends AppCompatActivity {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Intent intent = new Intent(MyCartActivity.this, CheckoutActivity.class);
+                Bundle bundle = new Bundle();
+                intent.putExtra("pro",(Serializable) productArrayList);
+                bundle.putInt("quantity",quantity_val);
+                bundle.putDouble("total",(double) total_cart_val);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
@@ -241,7 +248,7 @@ public class MyCartActivity extends AppCompatActivity {
                                 String color = task.getResult().getString("color");
                                 Double price = Double.valueOf(task.getResult().getString("price")) ;
 
-                                productArrayList.add(new Cart(namePro,price , dc.getString("category"), imgPro, color, 2, "2", quantity, total_price, dc.getId()));
+                                productArrayList.add(new Cart(namePro,price , dc.getString("category"), imgPro, color, 2, proID, quantity, total_price, dc.getId()));
                                 cartAdapter.notifyDataSetChanged();
                             }
                         });

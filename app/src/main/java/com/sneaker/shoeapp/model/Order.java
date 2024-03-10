@@ -2,28 +2,47 @@ package com.sneaker.shoeapp.model;
 
 import java.io.Serializable;
 
-public class Order implements Serializable {
+public class Order implements Serializable{
     private String id;
     private String date;
     private Boolean status;
     private Integer quantity;
     private Integer total_value;
 
-
+    private String cusName,cusID;
 
     private String address;
 
     public Order() {
     }
 
-    public Order(String id, String date, Boolean status, Integer quantity, Integer total_value, String address) {
+    public Order(String id, String date, Boolean status, Integer quantity, Integer total_value, String address, String cusName, String cusID) {
         this.id = id;
         this.date = date;
         this.status = status;
         this.quantity = quantity;
         this.total_value = total_value;
+        this.cusName = cusName;
+        this.cusID = cusID;
         this.address = address;
     }
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
+
+    public String getCusID() {
+        return cusID;
+    }
+
+    public void setCusID(String cusID) {
+        this.cusID = cusID;
+    }
+
     public String getAddress() {
         return address;
     }

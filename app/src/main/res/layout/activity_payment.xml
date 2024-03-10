@@ -60,7 +60,7 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="100dp"
+                                android:layout_width="70dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
                                 android:paddingStart="15dp"
@@ -76,6 +76,7 @@
                                 android:textSize="20dp" />
 
                             <TextView
+                                android:id="@+id/total_Order"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="15dp"
@@ -102,6 +103,7 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/id_Order"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
@@ -121,6 +123,7 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/date_Order"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/orderID"
@@ -141,6 +144,7 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/cus_Order"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/date"
@@ -161,6 +165,7 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/address_Order"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/customer"
@@ -268,6 +273,7 @@
                                 </RelativeLayout>
 
                                 <RadioGroup
+                                    android:id="@+id/radioGroup"
                                     android:layout_marginEnd="20dp"
                                     android:layout_alignParentEnd="true"
                                     android:layout_width="wrap_content"
@@ -275,18 +281,27 @@
                                     android:layout_centerInParent="true">
 
                                     <RadioButton
+
                                         android:id="@+id/radio_cod"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="true"
-                                        app:buttonTint="@color/black" />
+                                        app:buttonTint="@color/black"
+                                        android:text="COD"
+                                        android:rotation="180"
+                                        android:textColor="@android:color/transparent"
+                                        android:paddingLeft="12dp"
+                                        />
 
                                     <RadioButton
-                                        android:id="@+id/radio_codd"
+                                        android:id="@+id/radio_momo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="39dp"
                                         android:checked="false"
+                                        android:text="MomO"
+                                        android:rotation="180"
+                                        android:textColor="@android:color/transparent"
                                         app:buttonTint="@color/black" />
                                 </RadioGroup>
                             </RelativeLayout>
@@ -305,7 +320,7 @@
                                 android:layout_marginStart="15dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginEnd="15dp"
-                                android:backgroundTint="@color/black"
+                                android:background="@drawable/btn_default"
                                 android:fontFamily="@font/alata_regular"
                                 android:text="Pay now"
                                 android:textAllCaps="false"
