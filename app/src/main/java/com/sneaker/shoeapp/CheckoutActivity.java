@@ -29,6 +29,7 @@ import com.sneaker.shoeapp.model.Order;
 
 import com.sneaker.shoeapp.model.Product;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,7 +47,8 @@ public class CheckoutActivity extends AppCompatActivity {
     FirebaseUser user = mAuth.getCurrentUser();
     CheckoutAdapter checkoutAdapter;
     Bundle bundle;
-    String orderID = "";
+    String orderID = "",username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,8 @@ public class CheckoutActivity extends AppCompatActivity {
                 orderInfo.put("Price", bundle.getDouble("total"));
                 orderInfo.put("status", false);
                 orderInfo.put("Address", address);
+                orderInfo.put("username",username);
+                orderInfo.put("userID",user.getUid());
 
                 CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
                         .collection("Order");
@@ -94,6 +98,7 @@ public class CheckoutActivity extends AppCompatActivity {
                         Intent intent = new Intent(CheckoutActivity.this,PaymentActivity.class);
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("orderID",orderID);
+                        intent.putExtra("pro",(Serializable) pro);
                         intent.putExtras(bundle1);
                         startActivity(intent);
                         finish();
@@ -119,9 +124,11 @@ public class CheckoutActivity extends AppCompatActivity {
         db.collection("User").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                 username = task.getResult().getString("username");
                 txtCustomer.setText(task.getResult().getString("username"));
             }
         });
+
         txtQuantity = findViewById(R.id.txtQuantity);
 
         txtDiscount = findViewById(R.id.txtDiscount);

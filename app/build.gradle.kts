@@ -39,9 +39,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    packagingOptions{
+        exclude("META-INF/NOTICE.md")
+        exclude("META-INF/LICENSE.md")
+    }
 }
 
 dependencies {
+    implementation("com.sun.mail:android-activation:1.6.7")
+    implementation("com.sun.mail:android-mail:1.6.6")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.activity:activity:1.8.2")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")

@@ -16,9 +16,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -42,6 +44,7 @@ public class MyOrderActivity extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseAuth mauth;
     FirebaseUser user;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +72,7 @@ public class MyOrderActivity extends AppCompatActivity {
                      ) {
                     Integer quantity = dc.getDouble("Quantity").intValue();
                     Integer price = dc.getDouble("Price").intValue();
-                    orderList.add(new Order(dc.getId(),dc.getString("Date"),dc.getBoolean("status"),quantity,price,dc.getString("Address")));
+                    orderList.add(new Order(dc.getId(),dc.getString("Date"),dc.getBoolean("status"),quantity,price,dc.getString("Address"),username,user.getUid()));
                     orderAdapter.notifyDataSetChanged();
                 }
             }
@@ -85,6 +88,12 @@ public class MyOrderActivity extends AppCompatActivity {
         rcv_order = findViewById(R.id.rcv_order);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         rcv_order.setLayoutManager(linearLayoutManager);
+        db.collection("User").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                username = documentSnapshot.getString("username");
+            }
+        });
         orderAdapter.setData(orderList, new ClickItemOrder() {
             @Override
             public void onClickedItem(Order order) {
