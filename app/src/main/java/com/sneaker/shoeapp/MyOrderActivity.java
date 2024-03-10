@@ -68,7 +68,7 @@ public class MyOrderActivity extends AppCompatActivity {
                 for (QueryDocumentSnapshot dc: task.getResult()
                      ) {
                     Integer quantity = dc.getDouble("Quantity").intValue();
-                    Integer price = Integer.valueOf(dc.getString("Price")) ;
+                    Integer price = dc.getDouble("Price").intValue();
                     orderList.add(new Order(dc.getId(),dc.getString("Date"),dc.getBoolean("status"),quantity,price,dc.getString("Address")));
                     orderAdapter.notifyDataSetChanged();
                 }

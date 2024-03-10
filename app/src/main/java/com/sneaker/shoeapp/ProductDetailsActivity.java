@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,15 +41,18 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sneaker.shoeapp.Adapter.FavoriteAdapter;
+import com.sneaker.shoeapp.model.Cart;
 import com.sneaker.shoeapp.model.ListProduct;
 import com.sneaker.shoeapp.model.Order;
 import com.sneaker.shoeapp.model.Product;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -282,7 +286,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(ProductDetailsActivity.this, CheckoutActivity.class);
 
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("pro",pro);
+                ArrayList<Cart> productList =new ArrayList<>();
+                productList.add(new Cart(pro.getProName(),pro.getPrice(),pro.getCategory(),pro.getImage(),pro.getColor(),0,pro.getId(),1,pro.getPrice(),"0"));
+               // bundle.putParcelableArrayList("pro", (ArrayList<? extends Parcelable>) productList);
+                intent.putExtra("pro",(Serializable) productList);
+                bundle.putInt("quantity",1);
+                bundle.putDouble("total",pro.getPrice());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

@@ -2,7 +2,7 @@ package com.sneaker.shoeapp.model;
 
 import java.io.Serializable;
 
-public class Order implements Serializable {
+public class Order implements Serializable{
     private String id;
     private String date;
     private Boolean status;
