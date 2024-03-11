@@ -2,6 +2,7 @@ package com.sneaker.shoeapp.Adapter;
 
 
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,10 @@ public class OrderAdapter extends  RecyclerView.Adapter<OrderAdapter.OrderViewHo
         holder.Order_Quantity.setText(order.getQuantity()+" Products");
         if(order.getStatus() == true){
             holder.Order_Status.setText("Delivered");
+        }
+        else{
+            holder.Order_Status.setText("Delivering");
+            holder.Order_Status.setTextColor(Color.parseColor("#FFC107"));
         }
         holder.Order_Value.setText("$"+order.getTotal_value());
         holder.item_order.setOnClickListener(new View.OnClickListener() {

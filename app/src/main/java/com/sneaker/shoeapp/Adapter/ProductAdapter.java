@@ -65,6 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static int TYPE_USER_POPULAR =1;
     private static int TYPE_USER_CATE =2;
     private static int TYPE_PRO_BANNER = 3;
+    private static int TYPE_PRO_ORDER = 4;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mauth = FirebaseAuth.getInstance();
     private FirebaseUser user = mauth.getCurrentUser();
@@ -90,6 +91,10 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }else if(TYPE_PRO_BANNER == viewType){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_banner_home,parent,false);
             return new ProBannerViewHolder(view);
+        }
+        else if(TYPE_PRO_ORDER == viewType){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_details,parent,false);
+            return new ProductOrderViewHolder(view);
         }
         return null;
     }
@@ -141,34 +146,60 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     clickItemProduct.onClickItemProduct(pro);
                 }
             });
-            productViewHolder.btnAddFav.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            if(user !=null){
+                DocumentReference documentReference = db.collection("User").document(user.getUid());
+                CollectionReference newCollection = documentReference.collection("Favorite");
+                newCollection.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
 
-                    DocumentReference documentReference = db.collection("User").document(user.getUid());
-                    CollectionReference newCollection = documentReference.collection("Favorite");
-                    Map<String,Object> data = new HashMap<>();
-                    data.put("id",pro.getId());
-                    newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if(documentSnapshot.exists()){
-
-                            }
-                            else{
-                                newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show();
-                                        productViewHolder.btnAddFav.setImageResource(R.drawable.heart);
-                                    }
-                                });
-                            }
+                            return;
                         }
-                    });
-                }
+                        for (DocumentSnapshot document : value.getDocuments()) {
+                            if (document.getId().equals(pro.getId())) {
+                                productViewHolder.btnAddFav.setImageResource(R.drawable.heart);
+                                break;
+                            }
+                            productViewHolder.btnAddFav.setImageResource(R.drawable.favorite_white);
+                        }
+                    }
+                });
+                productViewHolder.btnAddFav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-            });
+                        DocumentReference documentReference = db.collection("User").document(user.getUid());
+                        CollectionReference newCollection = documentReference.collection("Favorite");
+                        Map<String,Object> data = new HashMap<>();
+                        data.put("id",pro.getId());
+                        newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists()){
+                                    newCollection.document(pro.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(context,"Remove Favorite",Toast.LENGTH_SHORT).show();
+                                            productViewHolder.btnAddFav.setImageResource(R.drawable.favorite);
+                                        }
+                                    });
+                                }
+                                else{
+                                    newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show();
+                                            productViewHolder.btnAddFav.setImageResource(R.drawable.heart);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+
+                });
+            }
         }
         else if(TYPE_USER_POPULAR == holder.getItemViewType()){
 
@@ -246,9 +277,60 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         });
                     }
                 });
+                //load Img Added Fav
+                DocumentReference documentFav = db.collection("User").document(user.getUid());
+                CollectionReference collectionFav = documentFav.collection("Favorite");
+                collectionFav.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+
+                            return;
+                        }
+                        for (DocumentSnapshot document : value.getDocuments()) {
+                            if (document.getId().equals(pro.getId())) {
+                                productPopularViewHolder.addFav.setImageResource(R.drawable.heart);
+                                break;
+                            }
+                            productPopularViewHolder.addFav.setImageResource(R.drawable.favorite);
+                        }
+                    }
+                });
+                productPopularViewHolder.addFav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DocumentReference documentReference = db.collection("User").document(user.getUid());
+                        CollectionReference newCollection = documentReference.collection("Favorite");
+                        Map<String,Object> data = new HashMap<>();
+                        data.put("id",pro.getId());
+                        newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists()){
+                                    newCollection.document(pro.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(context,"Remove Favorite",Toast.LENGTH_SHORT).show();
+                                            productPopularViewHolder.addFav.setImageResource(R.drawable.favorite);
+                                        }
+                                    });
+                                }
+                                else{
+                                    newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show();
+                                            productPopularViewHolder.addFav.setImageResource(R.drawable.heart);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
             }
         }
-        else if(TYPE_PRO_BANNER == holder.getItemViewType()){
+        if(TYPE_PRO_BANNER == holder.getItemViewType()){
             ProBannerViewHolder proBannerViewHolder = (ProBannerViewHolder) holder;
             Glide.with(context)
                     .load(pro.getImage())
@@ -267,6 +349,8 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
 
         }
+
+
     }
 
 
@@ -336,9 +420,11 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         FrameLayout proBg_popular;
         FrameLayout item_popular;
         ImageButton add_to_cart_popular;
+        ImageButton addFav;
 
         public ProductPopularViewHolder(@NonNull View itemView) {
             super(itemView);
+            addFav = itemView.findViewById(R.id.addFav);
             proPrice_popular = itemView.findViewById(R.id.proPrice_popular);
             proCate_popular = itemView.findViewById(R.id.proCate_popular);
             proName_popular =itemView.findViewById(R.id.proName_popular);
@@ -346,6 +432,24 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             proBg_popular = itemView.findViewById(R.id.probg_popular);
             item_popular = itemView.findViewById(R.id.item_popular);
             add_to_cart_popular = itemView.findViewById(R.id.add_to_cart_popular);
+        }
+
+    }
+    public class ProductOrderViewHolder extends RecyclerView.ViewHolder{
+
+        RelativeLayout pro_order;
+        ImageView proImg_order;
+        TextView txtShoename,proPrice_order,proQuan_order;
+
+
+        public ProductOrderViewHolder(@NonNull View itemView) {
+            super(itemView);
+            proQuan_order = itemView.findViewById(R.id.proQuan_order);
+            pro_order = itemView.findViewById(R.id.pro_order);
+            proImg_order = itemView.findViewById(R.id.proImg_order);
+            txtShoename = itemView.findViewById(R.id.txtShoename);
+            proPrice_order = itemView.findViewById(R.id.proPrice_order);
+
         }
 
     }

@@ -132,6 +132,7 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSaveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String username = edtUserName.getText().toString();
                 String userSur=edtSurName.getText().toString();
                 if (userSur.equals(username)) {
@@ -145,6 +146,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             });
                 }
                 dialog.dismiss();
+
             }
         });
         dialog.show();

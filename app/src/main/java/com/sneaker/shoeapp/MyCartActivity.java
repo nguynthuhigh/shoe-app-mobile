@@ -35,9 +35,13 @@ import com.sneaker.shoeapp.Adapter.CartAdapter;
 import com.sneaker.shoeapp.Interface.ClickItemCart;
 import com.sneaker.shoeapp.model.Cart;
 import com.sneaker.shoeapp.model.ListProduct;
+import com.sneaker.shoeapp.model.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyCartActivity extends AppCompatActivity {
     RecyclerView recyclerMyCart;
@@ -51,6 +55,8 @@ public class MyCartActivity extends AppCompatActivity {
     FirebaseUser user;
     TextView total_cart,quantity_cart;
     Button btnCheckout;
+    int quantity_val= 0;
+    int total_cart_val = 0;
 
     //    ListView listItem_cart;
     @Override
@@ -73,21 +79,16 @@ public class MyCartActivity extends AppCompatActivity {
        // loadData();
         Total_Cart();
     }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Total_Cart();
-    }
+
+
     private void Total_Cart(){
         Query query = db.collection("User").document(user.getUid()).collection("AddToCart").document().getParent();
-        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                int quantity_val= 0;
-                int total_cart_val = 0;
-                for(DocumentChange dc: value.getDocumentChanges()){
-                    quantity_val += dc.getDocument().getDouble("quantity") ;
-                    total_cart_val += dc.getDocument().getDouble("total_price");
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for(QueryDocumentSnapshot dc: task.getResult()){
+                    quantity_val += dc.getDouble("quantity") ;
+                    total_cart_val += dc.getDouble("total_price");
                 }
                 total_cart.setText("$"+total_cart_val+"");
                 quantity_cart.setText(quantity_val+"");
@@ -95,7 +96,20 @@ public class MyCartActivity extends AppCompatActivity {
         });
     }
 
-
+    public void Order(){
+        Product product = new Product();
+        Map<String,Object> infoOrder = new HashMap<>();
+        Map<String,Object> infoProduct = new HashMap<>();
+        db.collection("User").document(user.getUid())
+                .collection("Order").add(infoOrder).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        db.collection("User").document(user.getUid())
+                                .collection("Order").document(documentReference.getId())
+                                .collection("listPro").document(product.getId()).set(infoProduct);
+                    }
+                });
+    }
 
     private void addEvents() {
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -107,12 +121,18 @@ public class MyCartActivity extends AppCompatActivity {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Intent intent = new Intent(MyCartActivity.this, CheckoutActivity.class);
+                Bundle bundle = new Bundle();
+                intent.putExtra("pro",(Serializable) productArrayList);
+                bundle.putInt("quantity",quantity_val);
+                bundle.putDouble("total",(double) total_cart_val);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
 
-    private void addControls() {///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void addControls() {
         btnCheckout = findViewById(R.id.btnCheckout);
         total_cart = findViewById(R.id.total_cart);
         quantity_cart = findViewById(R.id.quantity_cart);
@@ -134,6 +154,10 @@ public class MyCartActivity extends AppCompatActivity {
                             cart.setQuantity(cart.getQuantity() + 1);
                             cartAdapter.notifyItemChanged(position_item);
                             documentReference.update("total_price",(cart.getQuantity()) * cart.getPrice());
+                            total_cart_val += cart.getPrice();
+                            total_cart.setText("$"+total_cart_val);
+                            quantity_val += 1;
+                            quantity_cart.setText(quantity_val+"");
                         }
                     });
               /*  documentReference.update("total_price",cart.getTotal_cart() * cart.getQuantity())
@@ -161,6 +185,10 @@ public class MyCartActivity extends AppCompatActivity {
                             cart.setTotal_cart(cart.getQuantity() * cart.getPrice());
                             cartAdapter.notifyItemChanged(position_item);
                             documentReference.update("total_price",(cart.getQuantity()) * cart.getPrice());
+                            total_cart_val -= cart.getPrice();
+                            total_cart.setText("$"+total_cart_val);
+                            quantity_val -= 1;
+                            quantity_cart.setText(quantity_val+"");
                         }
                     });
                 }
@@ -186,9 +214,12 @@ public class MyCartActivity extends AppCompatActivity {
                         .delete();
 
                 productArrayList.remove(position_item);
-
                 cartAdapter.notifyItemRemoved(position_item);
-
+                //remove
+                total_cart_val -= cart.getTotal_cart();
+                total_cart.setText("$"+total_cart_val);
+                quantity_val -= cart.getQuantity();
+                quantity_cart.setText(quantity_val+"");
             }
         });
 
@@ -217,7 +248,7 @@ public class MyCartActivity extends AppCompatActivity {
                                 String color = task.getResult().getString("color");
                                 Double price = Double.valueOf(task.getResult().getString("price")) ;
 
-                                productArrayList.add(new Cart(namePro,price , dc.getString("category"), imgPro, color, 2, "2", quantity, total_price, dc.getId()));
+                                productArrayList.add(new Cart(namePro,price , dc.getString("category"), imgPro, color, 2, proID, quantity, total_price, dc.getId()));
                                 cartAdapter.notifyDataSetChanged();
                             }
                         });

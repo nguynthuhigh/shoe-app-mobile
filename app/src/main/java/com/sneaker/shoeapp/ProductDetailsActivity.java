@@ -1,13 +1,17 @@
 package com.sneaker.shoeapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,22 +31,35 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sneaker.shoeapp.Adapter.FavoriteAdapter;
+import com.sneaker.shoeapp.model.Cart;
+import com.sneaker.shoeapp.model.ListProduct;
 import com.sneaker.shoeapp.model.Order;
 import com.sneaker.shoeapp.model.Product;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class ProductDetailsActivity extends AppCompatActivity {
     TextView dt_proName;
     ImageView dt_proImage;
+    ImageButton addToFvbtn;
     TextView dt_proPrice;
     TextView dt_proCate, txtTextSize;
     FrameLayout bg_pro_details, bg_pro_details_2, bg_pro_details_main;
@@ -50,34 +67,65 @@ public class ProductDetailsActivity extends AppCompatActivity {
     Button add_to_cart, btnBuyNow;
     ImageButton btnBack, btnPopupSize, btnPopupColor;
     Product pro;
-    Order order;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
-    Integer quantity;
-    private static final String TAG = "ProductDetailsActivity";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
         addControls();
+        //get bundle
         Bundle bundle = getIntent().getExtras();
         pro = (Product) bundle.get("obj_product");
         dt_proPrice.setText(pro.getPrice() + "");
         dt_proCate.setText(pro.getCategory());
         Glide.with(ProductDetailsActivity.this).load(pro.getImage()).into(dt_proImage);
-
+        ListProduct listProduct = (ListProduct) bundle.getSerializable("listProduct");
+        if(user != null){
+            db.collection("User").document(user.getUid()).collection("Favorite").document(pro.getId())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            addToFvbtn.setImageResource(R.drawable.heart);
+                        }
+                    }
+                });
+        }
         dt_proName.setText(pro.getProName());
 
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_item_2), pro, bg_pro_details);
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_item_2), pro, bg_pro_details_2);
         setColorBg((GradientDrawable) getResources().getDrawable(R.drawable.bg_details_new), pro, bg_pro_details_main);
         proColor.setCardBackgroundColor(Color.parseColor("#" + pro.getColor()));
+
         addEvents();
         xuLyPopupSize();
         xulyPopupColor();
     }
+
+    private void addControls() {
+        dt_proName = findViewById(R.id.dt_proName);
+        dt_proCate = findViewById(R.id.dt_proCate);
+        dt_proImage = findViewById(R.id.dt_proImage);
+        dt_proPrice = findViewById(R.id.dt_proPrice);
+        bg_pro_details = findViewById(R.id.bg_pro_details);
+        bg_pro_details_2 = findViewById(R.id.bg_pro_details_2);
+        bg_pro_details_main = findViewById(R.id.bg_pro_details_main);
+        add_to_cart = findViewById(R.id.add_to_cart);
+        proColor = findViewById(R.id.proColor);
+        btnBack = findViewById(R.id.btnBack);
+        btnPopupSize = findViewById(R.id.btnPopupSize);
+        txtTextSize = findViewById(R.id.txtTextSize);
+        btnPopupColor = findViewById(R.id.btnPopupColor);
+        btnBuyNow = findViewById(R.id.btnBuyNow);
+        addToFvbtn = findViewById(R.id.addToFvbtn);
+    }
+
 
     private void xulyPopupColor() {
         btnPopupColor.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +225,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
         layout.setBackground(gradientDrawable);
     }
 
+
+
     private void addEvents() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,72 +271,70 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 });
             }
         });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+
         btnBuyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(ProductDetailsActivity.this, CheckoutActivity.class);
 
-                Product yeuemkhonganh = new Product();
+                Bundle bundle = new Bundle();
+                ArrayList<Cart> productList =new ArrayList<>();
+                productList.add(new Cart(pro.getProName(),pro.getPrice(),pro.getCategory(),pro.getImage(),pro.getColor(),0,pro.getId(),1,pro.getPrice(),"0"));
+               // bundle.putParcelableArrayList("pro", (ArrayList<? extends Parcelable>) productList);
+                intent.putExtra("pro",(Serializable) productList);
+                bundle.putInt("quantity",1);
+                bundle.putDouble("total",pro.getPrice());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        addToFvbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleFavourite();
+            }
+        });
 
 
-                CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
-                        .collection("Order");
+    }
 
-                Map<String,Object> orderInfo = new HashMap<>();
-                orderInfo.put("Date", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()));
-                orderInfo.put("Quantity", 1);
-                orderInfo.put("Price", pro.getPrice());
-                orderInfo.put("status", false);
-                orderInfo.put("Address",123);
-                Map<String,Object> productInfo = new HashMap<>();
-                productInfo.put("ID", pro.getId());
-                productInfo.put("Quantity", 1);
-                collectionOrderReference.add(orderInfo).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        collectionOrderReference.document(task.getResult().getId())
-                                .collection("listPro").document(pro.getId()).set(productInfo);
-                        Toast.makeText(ProductDetailsActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                //                collectionReference.add(data)
-//                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                            @Override
-//                            public void onSuccess(DocumentReference documentReference) {
-//                                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Log.w(TAG, "Error adding document", e);
-//                            }
-//                        });
+
+    private void toggleFavourite() {
+        DocumentReference documentReference = db.collection("User").document(user.getUid());
+        CollectionReference newCollection = documentReference.collection("Favorite");
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", pro.getId());
+        newCollection.document(pro.getId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    newCollection.document(pro.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(ProductDetailsActivity.this, "Removed from Favorites", Toast.LENGTH_SHORT).show();
+                            addToFvbtn.setImageResource(R.drawable.favorite);
+                        }
+                    });
+                } else {
+                    newCollection.document(pro.getId()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(ProductDetailsActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
+                            addToFvbtn.setImageResource(R.drawable.heart);
+                        }
+                    });
+                }
             }
 
         });
     }
-
-
-    private void addControls() {
-        dt_proName = findViewById(R.id.dt_proName);
-        dt_proCate = findViewById(R.id.dt_proCate);
-        dt_proImage = findViewById(R.id.dt_proImage);
-        dt_proPrice = findViewById(R.id.dt_proPrice);
-        bg_pro_details = findViewById(R.id.bg_pro_details);
-        bg_pro_details_2 = findViewById(R.id.bg_pro_details_2);
-        bg_pro_details_main = findViewById(R.id.bg_pro_details_main);
-        add_to_cart = findViewById(R.id.add_to_cart);
-        proColor = findViewById(R.id.proColor);
-        btnBack = findViewById(R.id.btnBack);
-        btnPopupSize = findViewById(R.id.btnPopupSize);
-        txtTextSize = findViewById(R.id.txtTextSize);
-        btnPopupColor = findViewById(R.id.btnPopupColor);
-        btnBuyNow = findViewById(R.id.btnBuyNow);
-    }
 }
+
