@@ -57,8 +57,6 @@ public class EditProfileActivity extends AppCompatActivity {
     ProfileActivity profileActivity;
     ProgressDialog progressDialog;
 
-    AuthCredential credential = EmailAuthProvider
-            .getCredential("user@example.com", "password1234");
 
 
     @Override
