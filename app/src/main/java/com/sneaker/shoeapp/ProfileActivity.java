@@ -81,6 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+
     private void addControls() {
         btnEdit_profile = findViewById(R.id.btnEdit_profile);
         btnView_order = findViewById(R.id.btnView_order);
