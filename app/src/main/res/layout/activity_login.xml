@@ -45,7 +45,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:background="@drawable/custom_login_field"
-        android:drawableLeft="@drawable/ic_email"
+        android:drawableLeft="@drawable/ic_pass"
         android:drawablePadding="20dp"
         android:fontFamily="@font/alata_regular"
         android:gravity="center_vertical"

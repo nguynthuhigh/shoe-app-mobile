@@ -90,6 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+
     private void addControls() {
         manageAdmin = findViewById(R.id.manageAdmin);
         btnEdit_profile = findViewById(R.id.btnEdit_profile);

@@ -39,10 +39,14 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    buildToolsVersion = "34.0.0"
+
     packagingOptions{
         exclude("META-INF/NOTICE.md")
         exclude("META-INF/LICENSE.md")
     }
+
 }
 
 dependencies {
