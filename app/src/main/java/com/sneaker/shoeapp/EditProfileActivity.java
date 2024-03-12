@@ -135,6 +135,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 String username = edtUserName.getText().toString();
                 String userSur=edtSurName.getText().toString();
+
                 if (userSur.equals(username)) {
                     db.collection("User").document(user.getUid()).update("username" , edtUserName.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -144,6 +145,11 @@ public class EditProfileActivity extends AppCompatActivity {
                                     finish();
                                 }
                             });
+
+                }
+                else {
+                    Toast.makeText(profileActivity, "failed", Toast.LENGTH_SHORT).show();
+
                 }
                 dialog.dismiss();
 

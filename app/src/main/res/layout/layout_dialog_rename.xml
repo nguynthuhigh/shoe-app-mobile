@@ -45,7 +45,21 @@
                 android:paddingStart="20dp"
                 android:hint="username"
                 />
-
+            <EditText
+                android:id="@+id/editSurname"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="text"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/bg_corner_20"
+                android:textSize="25sp"
+                android:textColorHint="@color/darkGrey"
+                android:paddingStart="20dp"
+                android:hint="SureName"
+                />
 
 
             <LinearLayout
