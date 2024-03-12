@@ -9,8 +9,25 @@
     <include layout="@layout/item_back">
 
     </include>
+    <Button
+        android:id="@+id/manageAdmin"
+        android:layout_width="70dp"
+        android:layout_height="55dp"
+        android:background="@drawable/border_radius_30dp"
+        android:drawableStart="@drawable/person"
+
+        android:fontFamily="@font/alata_regular"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginLeft="300dp"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        >
+    </Button>
     <ImageView
-        android:layout_marginTop="50dp"
+
         android:id="@+id/imgEditName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,6 +52,7 @@
         </TextView>
 
 
+
     <Button
         android:id="@+id/btnEdit_profile"
         android:layout_width="350dp"
@@ -53,7 +71,6 @@
         android:textStyle="bold">
 
     </Button>
-
     <Button
         android:id="@+id/btnView_order"
         android:layout_marginTop="20dp"
@@ -112,4 +129,5 @@
         >
 
     </Button>
+
 </LinearLayout>

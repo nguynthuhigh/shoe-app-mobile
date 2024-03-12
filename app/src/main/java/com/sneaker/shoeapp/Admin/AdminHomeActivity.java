@@ -16,10 +16,18 @@ Button viewOrder,addPro;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
         viewOrder = findViewById(R.id.viewOrder);
+        addPro = findViewById(R.id.addPro);
         viewOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminHomeActivity.this,AdminOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+        addPro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminHomeActivity.this,AdminCustomerActivity.class);
                 startActivity(intent);
             }
         });

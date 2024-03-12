@@ -37,15 +37,14 @@ FirebaseFirestore firestore;
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Map<String,Object> obj = new HashMap<>();
-               // obj.put("category",);
-               // obj.put("proName",);
-               // obj.put("image",);
-               // obj.put("color",);
-               // obj.put("price",);
-              //  obj.put("discount",inputName_Discount.getText());
-                Product product = new Product(inputName_Pro.getText().toString(),Double.parseDouble(inputPrice_Pro.getText().toString()),inputName_Cate.getText().toString(),inputName_Img.getText().toString(),inputColor_Pro.getText().toString(),2,"0");
-                firestore.collection("Product").add(product).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                Map<String,Object> obj = new HashMap<>();
+                obj.put("category",inputName_Cate.getText().toString());
+                obj.put("proName",inputName_Pro.getText().toString());
+                obj.put("image",inputName_Img.getText().toString());
+                obj.put("color",inputColor_Pro.getText().toString());
+                obj.put("price",inputPrice_Pro.getText().toString());
+                obj.put("discount",inputName_Discount.getText().toString());
+                firestore.collection("Product").add(obj).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(AdminCustomerActivity.this, "Thanh cong",
