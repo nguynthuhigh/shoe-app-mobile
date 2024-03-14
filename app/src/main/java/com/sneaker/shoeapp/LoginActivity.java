@@ -45,58 +45,52 @@ public class LoginActivity extends AppCompatActivity {
                 icERR.setBounds(0,0,icERR.getIntrinsicWidth(),icERR.getIntrinsicHeight());
                 String email_user = emailLogin.getText().toString().trim();
                 String password_user = pwLogin.getText().toString().trim();
-                if (email_user.isEmpty())
+                if (email_user.isEmpty() )
                 {
                     emailLogin.setCompoundDrawables(null,null,icERR,null);
-                    emailLogin.setError("Nhập mẹ mày acc vào",icERR);
+                    emailLogin.setError("Please, input your email",icERR);
                 }
-                if (password_user.isEmpty()){
+                if ( password_user.isEmpty())
+                {
                     pwLogin.setCompoundDrawables(null,null,icERR,null);
-                    pwLogin.setError("Nhập mật khẩu vào",icERR);
+                    pwLogin.setError("Please, input your password",icERR);
                 }
-                if (!email_user.isEmpty() && !password_user.isEmpty()){
-                    emailLogin.setCompoundDrawables(null,null,null,null);
-                    pwLogin.setCompoundDrawables(null,null,null,null);
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email_user = emailLogin.getText().toString().trim();
-                String password_user = pwLogin.getText().toString().trim();
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signInWithEmailAndPassword(email_user, password_user)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
 
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    String admin =user.getEmail();
-                                    if(!"admin@gmail.com".equals(admin)){
-                                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                        finish();
-                                        startActivity(intent);
+                else if (!email_user.isEmpty() && !password_user.isEmpty()){
+                    email_user = emailLogin.getText().toString().trim();
+                    password_user = pwLogin.getText().toString().trim();
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    mAuth.signInWithEmailAndPassword(email_user, password_user)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        String admin =user.getEmail();
+                                        if(!"admin@gmail.com".equals(admin)){
+                                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                            finish();
+                                            startActivity(intent);
+                                        }
+                                        else{
+                                            Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+                                            finish();
+                                            startActivity(intent);
+                                        }
+
+
+                                    } else {
+
+                                        Toast.makeText(LoginActivity.this, "Account is wrong",
+                                                Toast.LENGTH_SHORT).show();
                                     }
-                                    else{
-                                        Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
-                                        finish();
-                                        startActivity(intent);
-                                    }
-
-
-                                } else {
-
-                                    Toast.makeText(LoginActivity.this, "fail.",
-                                            Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
