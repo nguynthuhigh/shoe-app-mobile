@@ -29,7 +29,7 @@ import com.sneaker.shoeapp.model.Order;
 import java.util.ArrayList;
 
 public class OrderDetailsActivity extends AppCompatActivity {
-    TextView orderID_Details,orderDate_Details,orderQuantity_Details,orderValue_Details,orderAddress_Details,orderStatus_Details;
+    TextView orderID_Details,orderDate_Details,orderQuantity_Details,orderValue_Details,orderAddress_Details,orderStatus_Details,username,MethodPayment;
     Order order;
     Button close_order_details;
     FirebaseFirestore db;
@@ -82,21 +82,20 @@ public class OrderDetailsActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
-        Bundle bundle = getIntent().getExtras();
-        order = (Order) bundle.get("order_obj");
+
 
         orderID_Details.setText("Order ID #"+order.getId());
         orderDate_Details.setText(String.valueOf(order.getDate()));
         orderQuantity_Details.setText(String.valueOf(order.getQuantity()));
         orderValue_Details.setText(order.getTotal_value()+"đ");
         orderAddress_Details.setText(order.getAddress());
-        if(order.getStatus() == false){
+        if(order.getStatus() == true){
             orderStatus_Details.setText("Delivered");
             orderStatus_Details.setTextColor(getResources().getColor(R.color.green));
         }
         else{
             orderStatus_Details.setText("Delivering");
-            orderStatus_Details.setTextColor(getResources().getColor(R.color.red));
+            orderStatus_Details.setTextColor(Color.parseColor("#FFC107"));
         }
         close_order_details.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +106,10 @@ public class OrderDetailsActivity extends AppCompatActivity {
     }
 
     private void addControls() {
+        Bundle bundle = getIntent().getExtras();
+        order = (Order) bundle.get("order_obj");
+        MethodPayment = findViewById(R.id.MethodPayment);
+        username = findViewById(R.id.username);
         orderID_Details = findViewById(R.id.orderID_Detail);
         orderDate_Details = findViewById(R.id.orderDate_Detail);
         orderQuantity_Details = findViewById(R.id.orderQuantity_Detail);
@@ -120,5 +123,14 @@ public class OrderDetailsActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         rcv_order_details.setLayoutManager(gridLayoutManager);
         rcv_order_details.setAdapter(checkoutAdapter);
+        username.setText(order.getCusName());
+
+
+        db.collection("User").document(user.getUid()).collection("Order").document(order.getId()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                MethodPayment.setText(task.getResult().getString("payment"));
+            }
+        });
     }
 }

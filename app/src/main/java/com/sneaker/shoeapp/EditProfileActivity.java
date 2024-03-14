@@ -128,14 +128,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
         LinearLayout btnSaveName = dialog.findViewById(R.id.btnSaveName);
         edtUserName= dialog.findViewById(R.id.editUsername);
-        edtSurName=dialog.findViewById(R.id.editSurname);
+
         btnSaveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String username = edtUserName.getText().toString();
-                String userSur=edtSurName.getText().toString();
-                if (userSur.equals(username)) {
+
+                if (edtUserName.equals(username)) {
                     db.collection("User").document(user.getUid()).update("username" , edtUserName.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
