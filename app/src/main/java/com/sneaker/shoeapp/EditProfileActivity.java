@@ -8,8 +8,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -18,10 +20,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,10 +35,12 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.storage.FirebaseStorage;
 import com.sneaker.shoeapp.model.User;
 
 import java.net.Authenticator;
@@ -52,11 +58,11 @@ public class EditProfileActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
+    FirebaseStorage storage= FirebaseStorage.getInstance();
 
 
     ProfileActivity profileActivity;
     ProgressDialog progressDialog;
-
 
 
     @Override
@@ -128,14 +134,16 @@ public class EditProfileActivity extends AppCompatActivity {
 
         LinearLayout btnSaveName = dialog.findViewById(R.id.btnSaveName);
         edtUserName= dialog.findViewById(R.id.editUsername);
-
+        edtSurName = dialog.findViewById(R.id.editSurname);
         btnSaveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String username = edtUserName.getText().toString();
+                String userSur=edtSurName.getText().toString();
 
-                if (edtUserName.equals(username)) {
+                if (userSur.equals(username)) {
+
                     db.collection("User").document(user.getUid()).update("username" , edtUserName.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -144,6 +152,11 @@ public class EditProfileActivity extends AppCompatActivity {
                                     finish();
                                 }
                             });
+
+                }
+                else {
+                    Toast.makeText(EditProfileActivity.this, "failed", Toast.LENGTH_SHORT).show();
+
                 }
                 dialog.dismiss();
 
@@ -175,10 +188,20 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         LinearLayout btnsaveAvt = dialog.findViewById(R.id.btnsaveAvt);
-
+        Button btnSelectInSP = dialog.findViewById(R.id.btnSelectInSP);
+        Button btnTakeNow = dialog.findViewById(R.id.btnTakeNow);
+        ImageView imgEditName = dialog.findViewById(R.id.imgEditName);
         btnsaveAvt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                btnTakeNow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivity(intent);
+                    }
+                });
                 dialog.dismiss();
             }
         });
@@ -209,12 +232,13 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         LinearLayout btnSaveEmail = dialog.findViewById(R.id.btnSaveEmail);
-        EditText edtEmail= dialog.findViewById(R.id.editNewEmail);
+        EditText editNewEmail= dialog.findViewById(R.id.editNewEmail);
 
         btnSaveEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email= edtEmail.getText().toString();
+                String email= editNewEmail.getText().toString();
+
 
                 dialog.dismiss();
             }
@@ -245,14 +269,28 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         LinearLayout btnSavePass = dialog.findViewById(R.id.btnSavePass);
-        EditText edtPassOld = dialog.findViewById(R.id.edtPassOld);
-        EditText edtPassNew =dialog.findViewById(R.id.edtPassNew);
+
+         edtPassNew =dialog.findViewById(R.id.edtPassNew);
         edtConfirm=dialog.findViewById(R.id.edtConfirm);
         btnSavePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                            dialog.dismiss();
+                String passNew=edtPassNew.getText().toString();
+                String confirmPass = edtConfirm.getText().toString();
+                if (passNew.equals(confirmPass)) {
+
+                    user.updatePassword(passNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(profileActivity, "Update Success", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
+                    });
+                }
+                else {
+                    Toast.makeText(profileActivity, "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
         dialog.show();
     }
