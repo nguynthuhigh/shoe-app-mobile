@@ -22,20 +22,7 @@
         android:text="Change password"
         />
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="text"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_corner_20"
-        android:textSize="25dp"
-        android:textColorHint="@color/darkGrey"
-        android:paddingStart="20dp"
-        android:hint="Old Password"
-        android:id="@+id/edtPassOld"
-        />
+
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
