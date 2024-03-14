@@ -48,6 +48,7 @@ public class RunningFragment extends Fragment {
         view =inflater.inflate(R.layout.fragment_running, container, false);
         rcv_running = view.findViewById(R.id.rcv_running);
         db = FirebaseFirestore.getInstance();
+        productList = new ArrayList<>();
         productAdapter = new ProductAdapter(productList, new ClickItemProduct() {
             @Override
             public void onClickItemProduct(Product product) {
@@ -55,7 +56,7 @@ public class RunningFragment extends Fragment {
             }
         },getContext());
         CollectionReference collection = db.collection("Product");
-        Query query = collection.document().getParent().whereEqualTo("Running","football").limit(4);
+        Query query = collection.document().getParent().whereEqualTo("category","running").limit(4);
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -65,7 +66,7 @@ public class RunningFragment extends Fragment {
                 for(DocumentChange dc: value.getDocumentChanges()){
 
                     String namePro = dc.getDocument().getString("proName");
-                    //    Double price = Double.valueOf(dc.getDocument().getString("price"));
+
                     String color = dc.getDocument().getString("color");
                     String image = dc.getDocument().getString("image");
                     String cate = dc.getDocument().getString("category");

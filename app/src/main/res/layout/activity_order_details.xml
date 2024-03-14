@@ -130,12 +130,13 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/username"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/date"
                                 android:layout_alignParentEnd="true"
                                 android:fontFamily="@font/alata_regular"
-                                android:text="PhongSongSong"
+
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -170,6 +171,7 @@
                                 android:textSize="12sp" />
 
                             <TextView
+
                                 android:layout_marginTop="25dp"
                                 android:id="@+id/MethodPayment"
                                 android:layout_width="wrap_content"

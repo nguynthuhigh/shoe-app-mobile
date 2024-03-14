@@ -65,7 +65,6 @@ public class EditProfileActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,7 +134,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         LinearLayout btnSaveName = dialog.findViewById(R.id.btnSaveName);
         edtUserName= dialog.findViewById(R.id.editUsername);
-        edtSurName=dialog.findViewById(R.id.editSurname);
+        edtSurName = dialog.findViewById(R.id.editSurname);
         btnSaveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +143,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 String userSur=edtSurName.getText().toString();
 
                 if (userSur.equals(username)) {
+
                     db.collection("User").document(user.getUid()).update("username" , edtUserName.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -155,7 +155,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 }
                 else {
-                    Toast.makeText(profileActivity, "failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileActivity.this, "failed", Toast.LENGTH_SHORT).show();
 
                 }
                 dialog.dismiss();

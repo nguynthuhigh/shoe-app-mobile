@@ -76,7 +76,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 orderInfo.put("Address", address);
                 orderInfo.put("username",username);
                 orderInfo.put("userID",user.getUid());
-
+                orderInfo.put("payment","unpaid");
                 CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
                         .collection("Order");
                 collectionOrderReference.add(orderInfo).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
