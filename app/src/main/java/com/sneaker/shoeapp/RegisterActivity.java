@@ -3,6 +3,7 @@ package com.sneaker.shoeapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -38,8 +39,50 @@ EditText inputEmail,confirmPass,inputPass,inputName;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         addControls();
-
         addbtnSignup();
+
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading");
+        progressDialog.setTitle("Đợi chút xíu...");
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email_Register = inputEmail.getText().toString().trim();
+                String password_Register = inputPass.getText().toString().trim();
+                progressDialog.show();
+                final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                firebaseAuth.createUserWithEmailAndPassword(email_Register, password_Register).addOnCompleteListener((task -> {
+                    progressDialog.hide();
+                    if (task.isSuccessful()){
+                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(RegisterActivity.this,"User registered successfully.",Toast.LENGTH_SHORT).show();
+                                    inputEmail.setText("");
+                                    inputPass.setText("");
+                                }
+                                else {
+                                    Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }));
+            }
+        });
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void addbtnSignup() {

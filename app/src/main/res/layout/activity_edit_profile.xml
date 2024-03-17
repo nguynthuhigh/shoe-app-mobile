@@ -51,25 +51,7 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnChangeAvt"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:text="Change Avatar"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        android:fontFamily="@font/alata_regular"
-        android:textStyle="bold"
-        android:drawableStart="@drawable/icon_person"
-        android:drawableEnd="@drawable/icon_nextarrow"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@drawable/border_radius_30dp"
-        >
 
-    </Button>
 
     <Button
         android:id="@+id/btnChangeEmail"
