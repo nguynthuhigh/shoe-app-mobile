@@ -72,7 +72,7 @@ EditText inputEmail,confirmPass,inputPass,inputName;
                     confirmPass.setCompoundDrawables(null,null,icERR,null);
                     confirmPass.setError("Please, input your confirm password",icERR);
                 }
-                if(!email_Register.isEmpty() && !password_Register.isEmpty() && !name_Register.isEmpty() && !   confirmPass_Register.isEmpty() ){
+                if(!email_Register.isEmpty() && !password_Register.isEmpty() && !name_Register.isEmpty() && !confirmPass_Register.isEmpty() ){
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
                     if (password_Register.equals(confirmPass_Register)) {

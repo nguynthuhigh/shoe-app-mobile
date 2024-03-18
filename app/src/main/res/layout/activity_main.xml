@@ -269,26 +269,6 @@
             </LinearLayout>
 
 
-            <androidx.gridlayout.widget.GridLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:columnCount="4"
-                >
-
-
-                <Button
-                    android:id="@+id/btnPayment"
-                    android:text="Payment"/>
-                <Button
-                    android:id="@+id/btnCheckout"
-                    android:text="Checkout"/>
-                <Button
-                    android:id="@+id/btnOrderDetails"
-                    android:text="put product"/>
-                <Button
-                    android:id="@+id/inputCate"
-                    android:text="Order"/>
-            </androidx.gridlayout.widget.GridLayout>
         </LinearLayout>
     </ScrollView>
 

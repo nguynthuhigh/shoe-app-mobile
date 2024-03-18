@@ -134,24 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        btnPayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeLayout(AdminOrderActivity.class);
-            }
-        });
-        btnCheckout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeLayout(CheckoutActivity.class);
-            }
-        });
-        btnOrderDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeLayout(AdminCustomerActivity.class);
-            }
-        });
+
+
+
 
 
     }
@@ -176,10 +161,9 @@ public class MainActivity extends AppCompatActivity {
     private void addControls() {
 
 
-        btnPayment = findViewById(R.id.btnPayment);
-        btnCheckout = findViewById(R.id.btnCheckout);
-        btnOrderDetails = findViewById(R.id.btnOrderDetails);
-        inputCate = findViewById(R.id.inputCate);
+
+
+
 
         btnSeller = findViewById(R.id.btnSeller);
         btnAddFav = findViewById(R.id.btnAddFav);

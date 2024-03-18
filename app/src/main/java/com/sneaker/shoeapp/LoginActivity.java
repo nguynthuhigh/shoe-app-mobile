@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                     pwLogin.setError("Please, input your password",icERR);
                 }
 
-                else if (!email_user.isEmpty() && !password_user.isEmpty()){
+                if (!email_user.isEmpty() && !password_user.isEmpty()){
                     email_user = emailLogin.getText().toString().trim();
                     password_user = pwLogin.getText().toString().trim();
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
