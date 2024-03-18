@@ -72,9 +72,12 @@ public class RegisterActivity extends AppCompatActivity {
                     confirmPass.setCompoundDrawables(null, null, icERR, null);
                     confirmPass.setError("Please, input your confirm password", icERR);
                 }
-                if (!email_Register.isEmpty() && !password_Register.isEmpty() && !name_Register.isEmpty() && !confirmPass_Register.isEmpty()) {
+                if(!email_Register.isEmpty() && !password_Register.isEmpty() && !name_Register.isEmpty() && !confirmPass_Register.isEmpty() ){
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+
                     if (password_Register.equals(confirmPass_Register)) {
-                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
                         FirebaseUser user = mAuth.getCurrentUser();
                         progressDialog.show();
                         final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -86,31 +89,15 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(RegisterActivity.this, "User registered successfully.", Toast.LENGTH_SHORT).show();
-                                            inputEmail.setText("");
-                                            inputPass.setText("");
-                                        } else {
-                                            Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }));
-                        
-                                addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
                                             Map<String, Object> userinfo = new HashMap<>();
                                             userinfo.put("id", mAuth.getCurrentUser().getUid());
                                             userinfo.put("username", inputName.getText().toString());
 
                                             firestore.collection("User").document(mAuth.getCurrentUser().getUid()).set(userinfo);
-                                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                            Toast.makeText(RegisterActivity.this,"Success",Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(RegisterActivity.this, FormConfirmEmailActivity.class);
+                                            Toast.makeText(RegisterActivity.this,"Verify your email",Toast.LENGTH_SHORT).show();
                                             startActivity(intent);
+                                            firebaseAuth.signOut();
                                             finishAffinity();
                                         } else {
                                             Toast.makeText(RegisterActivity.this, "Authentication failed.",
@@ -118,6 +105,10 @@ public class RegisterActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
+                            } else {
+                                Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }));
                     }
                 }
 
