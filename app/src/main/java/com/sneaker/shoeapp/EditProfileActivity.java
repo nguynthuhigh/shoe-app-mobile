@@ -52,8 +52,8 @@ import io.grpc.Codec;
 
 public class EditProfileActivity extends AppCompatActivity {
     TextView name_userEdit;
-    ImageButton btnSaveNameUS,closeItem;
-    Button btnRename,btnConfirm,btnChangeAvt,btnChangeEmail,btnChangePassword;
+    ImageButton btnSaveNameUS,closeItem,btnBack;
+    Button btnRename,btnConfirm,btnChangeEmail,btnChangePassword;
     EditText edtPassOld, edtPassNew, edtConfirm,edtUserName,edtSurName;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -73,6 +73,12 @@ public class EditProfileActivity extends AppCompatActivity {
         addControls();
         addEvents();
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,12 +94,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             }
         });
-        btnChangeAvt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDialogAvt(Gravity.CENTER);
-            }
-        });
+
 
         btnChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,49 +168,7 @@ public class EditProfileActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void openDialogAvt(int gravity) {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.layout_dialog_changeavt);
-        Window window = dialog.getWindow();
-        if (window == null) {
-            return;
-        }
 
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        WindowManager.LayoutParams windowAttributes = window.getAttributes();
-        windowAttributes.gravity = gravity;
-        window.setAttributes(windowAttributes);
-
-        if (Gravity.BOTTOM == gravity ) {
-            dialog.setCancelable(true);
-        } else {
-            dialog.setCancelable(false);
-        }
-
-        LinearLayout btnsaveAvt = dialog.findViewById(R.id.btnsaveAvt);
-        Button btnSelectInSP = dialog.findViewById(R.id.btnSelectInSP);
-        Button btnTakeNow = dialog.findViewById(R.id.btnTakeNow);
-        ImageView imgEditName = dialog.findViewById(R.id.imgEditName);
-        btnsaveAvt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                btnTakeNow.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivity(intent);
-                    }
-                });
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
 
     private void openDialogEmail(int gravity) {
         final Dialog dialog = new Dialog(this);
@@ -308,14 +267,11 @@ public class EditProfileActivity extends AppCompatActivity {
     private void addControls() {
         btnRename= findViewById(R.id.btnRename);
         btnConfirm=findViewById(R.id.btnConfirm);
-        btnChangeAvt=findViewById(R.id.btnChangeAvt);
         btnChangeEmail=findViewById(R.id.btnChangeEmail);
         btnChangePassword=findViewById(R.id.btnChangePassword);
         closeItem = findViewById(R.id.closeItem);
-
+        btnBack = findViewById(R.id.btnBack);
         name_userEdit=findViewById(R.id.name_userEdit);
-
-
 
         if(user !=null){
             DocumentReference documentReference =db.collection("User").document(user.getUid());
