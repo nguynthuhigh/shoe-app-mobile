@@ -28,8 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
-Button btnSignUp,btnSignIn;
-EditText inputEmail,confirmPass,inputPass,inputName;
+    Button btnSignUp, btnSignIn;
+    EditText inputEmail, confirmPass, inputPass, inputName;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     CollectionReference userCollection = firestore.collection("User");
 
@@ -41,91 +41,70 @@ EditText inputEmail,confirmPass,inputPass,inputName;
         addControls();
         addbtnSignup();
 
-
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading");
-        progressDialog.setTitle("Đợi chút xíu...");
-
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email_Register = inputEmail.getText().toString().trim();
-                String password_Register = inputPass.getText().toString().trim();
-                progressDialog.show();
-                final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                firebaseAuth.createUserWithEmailAndPassword(email_Register, password_Register).addOnCompleteListener((task -> {
-                    progressDialog.hide();
-                    if (task.isSuccessful()){
-                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
-                                    Toast.makeText(RegisterActivity.this,"User registered successfully.",Toast.LENGTH_SHORT).show();
-                                    inputEmail.setText("");
-                                    inputPass.setText("");
-                                }
-                                else {
-                                    Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
-                    else {
-                        Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                }));
-            }
-        });
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void addbtnSignup() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Đang chạy nè");
+        progressDialog.setMessage("Đợi chút xíu...");
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Drawable icERR = getResources().getDrawable(R.drawable.ic_errorlogin);
-                icERR.setBounds(0,0,icERR.getIntrinsicWidth(),icERR.getIntrinsicHeight());
+                icERR.setBounds(0, 0, icERR.getIntrinsicWidth(), icERR.getIntrinsicHeight());
                 String email_Register = inputEmail.getText().toString().trim();
                 String password_Register = inputPass.getText().toString().trim();
                 String name_Register = inputName.getText().toString().trim();
                 String confirmPass_Register = confirmPass.getText().toString().trim();
-                if (email_Register.isEmpty() )
-                {
-                    inputEmail.setCompoundDrawables(null,null,icERR,null);
-                    inputEmail.setError("Please, input your email",icERR);
+                if (email_Register.isEmpty()) {
+                    inputEmail.setCompoundDrawables(null, null, icERR, null);
+                    inputEmail.setError("Please, input your email", icERR);
                 }
-                if (password_Register.isEmpty())
-                {
-                    inputPass.setCompoundDrawables(null,null,icERR,null);
-                    inputPass.setError("Please, input your password",icERR);
+                if (password_Register.isEmpty()) {
+                    inputPass.setCompoundDrawables(null, null, icERR, null);
+                    inputPass.setError("Please, input your password", icERR);
                 }
-                if (name_Register.isEmpty())
-                {
-                    inputName.setCompoundDrawables(null,null,icERR,null);
-                    inputName.setError("Please, input your name",icERR);
+                if (name_Register.isEmpty()) {
+                    inputName.setCompoundDrawables(null, null, icERR, null);
+                    inputName.setError("Please, input your name", icERR);
                 }
-                if (confirmPass_Register.isEmpty())
-                {
-                    confirmPass.setCompoundDrawables(null,null,icERR,null);
-                    confirmPass.setError("Please, input your confirm password",icERR);
+                if (confirmPass_Register.isEmpty()) {
+                    confirmPass.setCompoundDrawables(null, null, icERR, null);
+                    confirmPass.setError("Please, input your confirm password", icERR);
                 }
-                if(!email_Register.isEmpty() && !password_Register.isEmpty() && !name_Register.isEmpty() && !   confirmPass_Register.isEmpty() ){
-                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
+                if (!email_Register.isEmpty() && !password_Register.isEmpty() && !name_Register.isEmpty() && !confirmPass_Register.isEmpty()) {
                     if (password_Register.equals(confirmPass_Register)) {
-                        mAuth.createUserWithEmailAndPassword(email_Register, password_Register)
-                                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        progressDialog.show();
+                        final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                        
+                        firebaseAuth.createUserWithEmailAndPassword(email_Register, password_Register).addOnCompleteListener((task -> {
+                            progressDialog.hide();
+                            if (task.isSuccessful()) {
+                                firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(RegisterActivity.this, "User registered successfully.", Toast.LENGTH_SHORT).show();
+                                            inputEmail.setText("");
+                                            inputPass.setText("");
+                                        } else {
+                                            Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }));
+                        
+                                addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
                                             Map<String, Object> userinfo = new HashMap<>();
-                                            userinfo.put("id",mAuth.getCurrentUser().getUid());
+                                            userinfo.put("id", mAuth.getCurrentUser().getUid());
                                             userinfo.put("username", inputName.getText().toString());
 
                                             firestore.collection("User").document(mAuth.getCurrentUser().getUid()).set(userinfo);
@@ -140,23 +119,37 @@ EditText inputEmail,confirmPass,inputPass,inputName;
                                     }
                                 });
                     }
+                }
 
-                    else {
-                        Toast.makeText(RegisterActivity.this, "Incorrect password.",
-                                Toast.LENGTH_SHORT).show();
-                    }
+                else {
+                    Toast.makeText(RegisterActivity.this, "Please enter information.",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        }
+
+    private void addOnCompleteListener(RegisterActivity registerActivity, OnCompleteListener<AuthResult> onCompleteListener) {
     }
 
 
     private void addControls() {
-        btnSignUp=findViewById(R.id.btnSignUp);
+        btnSignUp = findViewById(R.id.btnSignUp);
         inputEmail = findViewById(R.id.inputEmail);
         confirmPass = findViewById(R.id.confirmPass);
         inputPass = findViewById(R.id.inputPass);
         inputName = findViewById(R.id.inputName);
-        btnSignIn=findViewById(R.id.btnSignIn);
+        btnSignIn = findViewById(R.id.btnSignIn);
     }
 }
+
+
