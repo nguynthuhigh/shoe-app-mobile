@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/alata_regular"
-                    android:text="Need an account?"
+                    android:text="Have an account?"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:fontFamily="@font/alata_regular"
-                    android:text="Sign Up"
+                    android:text="Sign In"
                     android:textColor="#4764FD"
                     android:textSize="15sp"
                     android:textStyle="bold"
