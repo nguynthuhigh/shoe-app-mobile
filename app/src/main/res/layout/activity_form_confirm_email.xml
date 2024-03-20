@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    >
+    android:layout_gravity="center">
 
     <ImageView
         android:id="@+id/imageView"
@@ -18,26 +17,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="310dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="252dp"
-        android:background="@drawable/imgverify"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:fontFamily="@font/alata_regular"
+        android:text="Check your email to Verify"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Verifying your email gives you access to more features on ShoeApp. Click the button below to Login."
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.761">
+
+    </TextView>
+
+    <Button
         android:id="@+id/btnBacktoLogin"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="324dp"
-        android:background="@drawable/ic_backtologin"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="456dp"
+        android:background="@drawable/btn_default"
+        android:textStyle="bold"
+        android:text="Back to Login"
+        android:textSize="15dp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent">
 
-
+    </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

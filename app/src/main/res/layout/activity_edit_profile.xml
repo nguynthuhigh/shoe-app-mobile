@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:layout_marginTop="30dp">
     <include layout="@layout/item_back">
-
     </include>
 
     <ImageView
@@ -53,29 +52,10 @@
 
 
 
-    <Button
-        android:id="@+id/btnChangeEmail"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:text="Change Email"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        android:fontFamily="@font/alata_regular"
-        android:textStyle="bold"
-        android:drawableStart="@drawable/icon_email"
-        android:drawableEnd="@drawable/icon_nextarrow"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@drawable/border_radius_30dp"
-        >
 
-    </Button>
     <Button
         android:id="@+id/btnChangePassword"
-
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:layout_width="300dp"
         android:layout_height="55dp"
@@ -90,43 +70,6 @@
         android:paddingRight="20dp"
         android:background="@drawable/border_radius_30dp"
         >
-
-    </Button>
-
-    <Button
-        android:id="@+id/btnView_order"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:text="Have Lover"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        android:fontFamily="@font/alata_regular"
-        android:textStyle="bold"
-        android:drawableStart="@drawable/icon_heart"
-        android:drawableEnd="@drawable/icon_nextarrow"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@drawable/border_radius_30dp"
-        >
-    </Button>
-    <Button
-        android:id="@+id/btnConfirm"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/border_radius_30dp"
-        android:drawableStart="@drawable/icon_save"
-        android:drawableEnd="@drawable/icon_nextarrow"
-        android:fontFamily="@font/alata_regular"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="Confirm Save"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:textStyle="bold">
 
     </Button>
 </LinearLayout>
