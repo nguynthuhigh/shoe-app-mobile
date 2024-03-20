@@ -67,25 +67,25 @@ public class LoginActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
 
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        if(user.isEmailVerified()){
+
                                             String admin =user.getEmail();
                                             if(!"admin@gmail.com".equals(admin)){
+                                                if(user.isEmailVerified()) {
                                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                                 finish();
                                                 startActivity(intent);
+                                                }
+                                                else{
+                                                    Toast.makeText(LoginActivity.this, "Please verify your email before login!",
+                                                            Toast.LENGTH_SHORT).show();
+                                                    mAuth.signOut();
+                                                }
                                             }
                                             else{
                                                 Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                                                 finish();
                                                 startActivity(intent);
                                             }
-                                        }
-                                        else{
-                                            Toast.makeText(LoginActivity.this, "Please verify your email before login!",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-
-
                                     } else {
 
                                         Toast.makeText(LoginActivity.this, "Account is wrong",

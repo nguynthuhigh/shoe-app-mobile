@@ -88,10 +88,10 @@ public class MyOrderActivity extends AppCompatActivity {
         rcv_order = findViewById(R.id.rcv_order);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         rcv_order.setLayoutManager(linearLayoutManager);
-        db.collection("User").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        db.collection("User").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                username = documentSnapshot.getString("username");
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                username = task.getResult().getString("username");
             }
         });
         orderAdapter.setData(orderList, new ClickItemOrder() {

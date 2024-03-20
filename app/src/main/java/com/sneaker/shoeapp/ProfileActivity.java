@@ -52,9 +52,9 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this, android.R.style.Theme_DeviceDefault_Dialog);
                 builder.setTitle(" Warning!!! ");
-                builder.setMessage("Are you sure want to exit?");
+                builder.setMessage("Are you sure exit?");
                 builder.setIcon(android.R.drawable.ic_dialog_alert);
-                builder.setPositiveButton("Yes, I want", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         onBackPressed();
