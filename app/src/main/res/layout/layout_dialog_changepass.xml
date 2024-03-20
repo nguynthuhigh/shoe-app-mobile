@@ -10,18 +10,35 @@
     android:background="@drawable/bg_corner_gray_30"
     >
 
-    <TextView
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:layout_marginBottom="40dp"
-        android:textColor="@color/black"
-        android:padding="12sp"
-        android:background="@drawable/bg_corner_white_silver_20"
-        android:text="Change password"
-        />
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:layout_marginBottom="40dp"
+            android:textColor="@color/black"
+            android:padding="12sp"
+            android:background="@drawable/bg_corner_white_silver_20"
+            android:text="Change password"
+            />
 
+        <ImageButton
+            android:id="@+id/closeItemChangePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/icon_remove"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck">
+
+        </ImageButton>
+    </RelativeLayout>
 
     <EditText
         android:layout_width="300dp"

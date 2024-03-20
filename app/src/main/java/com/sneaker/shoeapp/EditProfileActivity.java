@@ -52,7 +52,7 @@ import io.grpc.Codec;
 
 public class EditProfileActivity extends AppCompatActivity {
     TextView name_userEdit;
-    ImageButton closeItem,btnBack;
+    ImageButton closeItemRename,closeItemChangePass,btnBack;
     Button btnRename,btnChangePassword;
     EditText  edtPassNew, edtConfirm,edtUserName;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -119,10 +119,10 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         LinearLayout btnSaveName = dialog.findViewById(R.id.btnSaveName);
-        closeItem = dialog.findViewById(R.id.closeItem);
+        closeItemRename = dialog.findViewById(R.id.closeItemRename);
         edtUserName= dialog.findViewById(R.id.editUsername);
 
-        closeItem.setOnClickListener(new View.OnClickListener() {
+        closeItemRename.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
@@ -168,6 +168,13 @@ public class EditProfileActivity extends AppCompatActivity {
             dialog.setCancelable(false);
         }
         LinearLayout btnSavePass = dialog.findViewById(R.id.btnSavePass);
+        closeItemChangePass=dialog.findViewById(R.id.closeItemChangePass);
+        closeItemChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
         edtPassNew =dialog.findViewById(R.id.edtPassNew);
         edtConfirm=dialog.findViewById(R.id.edtConfirm);
         btnSavePass.setOnClickListener(new View.OnClickListener() {
@@ -196,7 +203,8 @@ public class EditProfileActivity extends AppCompatActivity {
     private void addControls() {
         btnRename= findViewById(R.id.btnRename);
         btnChangePassword=findViewById(R.id.btnChangePassword);
-        closeItem = findViewById(R.id.closeItem);
+        closeItemRename = findViewById(R.id.closeItemRename);
+        closeItemChangePass = findViewById(R.id.closeItemChangePass);
         btnBack = findViewById(R.id.btnBack);
         name_userEdit=findViewById(R.id.name_userEdit);
         if(user !=null){
