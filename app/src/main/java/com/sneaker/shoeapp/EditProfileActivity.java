@@ -52,9 +52,9 @@ import io.grpc.Codec;
 
 public class EditProfileActivity extends AppCompatActivity {
     TextView name_userEdit;
-    ImageButton btnSaveNameUS,closeItem,btnBack;
-    Button btnRename,btnConfirm,btnChangeEmail,btnChangePassword;
-    EditText edtPassOld, edtPassNew, edtConfirm,edtUserName,edtSurName;
+    ImageButton closeItem,btnBack;
+    Button btnRename,btnChangePassword;
+    EditText  edtPassNew, edtConfirm,edtUserName;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
@@ -69,20 +69,11 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
         addControls();
-        addEvents();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-            }
-        });
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
                 finish();
             }
         });
@@ -95,14 +86,6 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-
-        btnChangeEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDialogEmail(Gravity.CENTER);
-            }
-        });
-
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,10 +94,6 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void addEvents() {
-
-
-    }
 
     private void openDialogRename(int center) {
         final Dialog dialog = new Dialog(this);
@@ -152,7 +131,6 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSaveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String username = edtUserName.getText().toString();
                     db.collection("User").document(user.getUid()).update("username" , edtUserName.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -169,44 +147,6 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
 
-
-    private void openDialogEmail(int gravity) {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.layout_dialog_changeemail);
-        Window window = dialog.getWindow();
-        if (window == null) {
-            return;
-        }
-
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        WindowManager.LayoutParams windowAttributes = window.getAttributes();
-        windowAttributes.gravity = gravity;
-        window.setAttributes(windowAttributes);
-
-        if (Gravity.BOTTOM == gravity ) {
-            dialog.setCancelable(true);
-        } else {
-            dialog.setCancelable(false);
-        }
-
-        LinearLayout btnSaveEmail = dialog.findViewById(R.id.btnSaveEmail);
-        EditText editNewEmail= dialog.findViewById(R.id.editNewEmail);
-
-        btnSaveEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email= editNewEmail.getText().toString();
-
-
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
     private void openDialogPassword(int gravity) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -218,7 +158,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
         WindowManager.LayoutParams windowAttributes = window.getAttributes();
         windowAttributes.gravity = gravity;
         window.setAttributes(windowAttributes);
@@ -228,9 +167,7 @@ public class EditProfileActivity extends AppCompatActivity {
         } else {
             dialog.setCancelable(false);
         }
-
         LinearLayout btnSavePass = dialog.findViewById(R.id.btnSavePass);
-
         edtPassNew =dialog.findViewById(R.id.edtPassNew);
         edtConfirm=dialog.findViewById(R.id.edtConfirm);
         btnSavePass.setOnClickListener(new View.OnClickListener() {
@@ -256,23 +193,12 @@ public class EditProfileActivity extends AppCompatActivity {
         dialog.show();
     }
 
-
-
-
-
-
-
-
-
     private void addControls() {
         btnRename= findViewById(R.id.btnRename);
-        btnConfirm=findViewById(R.id.btnConfirm);
-        btnChangeEmail=findViewById(R.id.btnChangeEmail);
         btnChangePassword=findViewById(R.id.btnChangePassword);
         closeItem = findViewById(R.id.closeItem);
         btnBack = findViewById(R.id.btnBack);
         name_userEdit=findViewById(R.id.name_userEdit);
-
         if(user !=null){
             DocumentReference documentReference =db.collection("User").document(user.getUid());
             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -283,6 +209,4 @@ public class EditProfileActivity extends AppCompatActivity {
             });
         }
     }
-
-
 }

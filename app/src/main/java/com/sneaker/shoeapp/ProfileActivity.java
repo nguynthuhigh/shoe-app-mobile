@@ -3,8 +3,11 @@ package com.sneaker.shoeapp;
 import static android.view.View.VISIBLE;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -43,12 +46,31 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+
         btnLog_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(ProfileActivity.this,LoginActivity.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this, android.R.style.Theme_DeviceDefault_Dialog);
+                builder.setTitle(" Warning!!! ");
+                builder.setMessage("Are you sure want to exit?");
+                builder.setIcon(android.R.drawable.ic_dialog_alert);
+                builder.setPositiveButton("Yes, I want", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onBackPressed();
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(ProfileActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+
 
             }
         });

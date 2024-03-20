@@ -45,8 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void addbtnSignup() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Đang chạy nè");
-        progressDialog.setMessage("Đợi chút xíu...");
+        progressDialog.setTitle(" Loading!!! ");
+        progressDialog.setMessage("Please wait :3");
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,19 +58,19 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirmPass_Register = confirmPass.getText().toString().trim();
                 if (email_Register.isEmpty()) {
                     inputEmail.setCompoundDrawables(null, null, icERR, null);
-                    inputEmail.setError("Please, input your email", icERR);
+                    inputEmail.setError("Please, enter your email", icERR);
                 }
                 if (password_Register.isEmpty()) {
                     inputPass.setCompoundDrawables(null, null, icERR, null);
-                    inputPass.setError("Please, input your password", icERR);
+                    inputPass.setError("Please, enter your password", icERR);
                 }
                 if (name_Register.isEmpty()) {
                     inputName.setCompoundDrawables(null, null, icERR, null);
-                    inputName.setError("Please, input your name", icERR);
+                    inputName.setError("Please, enter your name", icERR);
                 }
                 if (confirmPass_Register.isEmpty()) {
                     confirmPass.setCompoundDrawables(null, null, icERR, null);
-                    confirmPass.setError("Please, input your confirm password", icERR);
+                    confirmPass.setError("Please, enter your confirm password", icERR);
                 }
                 if(!email_Register.isEmpty() && !password_Register.isEmpty() && !name_Register.isEmpty() && !confirmPass_Register.isEmpty() ){
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
