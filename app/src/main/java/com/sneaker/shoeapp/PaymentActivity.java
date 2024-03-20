@@ -139,18 +139,13 @@ public class PaymentActivity extends AppCompatActivity {
         date_Order = findViewById(R.id.date_Order);
         total_Order = findViewById(R.id.total_Order);
         cus_Order = findViewById(R.id.cus_Order);
-        db.collection("User").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                username = task.getResult().getString("username");
 
-            }
-        });
-        cus_Order.setText(username);
+
         address_Order = findViewById(R.id.address_Order);
         id_Order = findViewById(R.id.id_Order);
         Bundle bundle =getIntent().getExtras();
         orderID = bundle.getString("orderID");
+        cus_Order.setText(bundle.getString("nameCus"));
         id_Order.setText(orderID);
         db.collection("User")
                 .document(user.getUid())
@@ -171,7 +166,7 @@ public class PaymentActivity extends AppCompatActivity {
                                 task.getResult().getBoolean("status"),
                                  task.getResult().getDouble("Quantity").intValue(),
                                 task.getResult().getDouble("Price").intValue(),
-                                task.getResult().getString("Address"),username,user.getUid());
+                                task.getResult().getString("Address"),bundle.getString("nameCus"),user.getUid());
                     }
                 });
         Intent intent = getIntent();

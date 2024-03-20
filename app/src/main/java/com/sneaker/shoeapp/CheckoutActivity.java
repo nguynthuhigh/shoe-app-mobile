@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -66,44 +67,53 @@ public class CheckoutActivity extends AppCompatActivity {
 
                 // Get the address entered by the user
                 String address = edtAddress.getText().toString().trim();
+                if(!address.isEmpty()){
+                    // Create order data
+                    Map<String, Object> orderInfo = new HashMap<>();
+                    orderInfo.put("Date", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()));
+                    orderInfo.put("Quantity", bundle.getInt("quantity"));
+                    orderInfo.put("Price", bundle.getDouble("total"));
+                    orderInfo.put("status", false);
+                    orderInfo.put("Address", address);
+                    orderInfo.put("username",username);
+                    orderInfo.put("userID",user.getUid());
+                    orderInfo.put("payment","unpaid");
+                    CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
+                            .collection("Order");
+                    collectionOrderReference.add(orderInfo).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                            for (Cart pro_item:pro
+                            ) {
+                                orderID = task.getResult().getId();
+                                Map<String, Object> productInfo = new HashMap<>();
+                                productInfo.put("ID", pro_item.getId());
+                                productInfo.put("Quantity", pro_item.getQuantity());
+                                productInfo.put("Total",pro_item.getTotal_cart());
+                                collectionOrderReference.document(task.getResult().getId())
+                                        .collection("listPro").document(pro_item.getId()).set(productInfo);
+                                db.collection("User").document(user.getUid()).collection("AddToCart").document(pro_item.getId()).delete();
 
-                // Create order data
-                Map<String, Object> orderInfo = new HashMap<>();
-                orderInfo.put("Date", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()));
-                orderInfo.put("Quantity", bundle.getInt("quantity"));
-                orderInfo.put("Price", bundle.getDouble("total"));
-                orderInfo.put("status", false);
-                orderInfo.put("Address", address);
-                orderInfo.put("username",username);
-                orderInfo.put("userID",user.getUid());
-                orderInfo.put("payment","unpaid");
-                CollectionReference collectionOrderReference = db.collection("User").document(user.getUid())
-                        .collection("Order");
-                collectionOrderReference.add(orderInfo).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        for (Cart pro_item:pro
-                             ) {
-                            orderID = task.getResult().getId();
-                            Map<String, Object> productInfo = new HashMap<>();
-                            productInfo.put("ID", pro_item.getId());
-                            productInfo.put("Quantity", pro_item.getQuantity());
-                            productInfo.put("Total",pro_item.getTotal_cart());
-                            collectionOrderReference.document(task.getResult().getId())
-                                    .collection("listPro").document(pro_item.getId()).set(productInfo);
-                            db.collection("User").document(user.getUid()).collection("AddToCart").document(pro_item.getId()).delete();
-
+                            }
+                            Toast.makeText(CheckoutActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(CheckoutActivity.this,PaymentActivity.class);
+                            Bundle bundle1 = new Bundle();
+                            bundle1.putString("orderID",orderID);
+                            intent.putExtra("pro",(Serializable) pro);
+                            bundle1.putString("nameCus",username);
+                            intent.putExtras(bundle1);
+                            startActivity(intent);
+                            finish();
                         }
-                        Toast.makeText(CheckoutActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(CheckoutActivity.this,PaymentActivity.class);
-                        Bundle bundle1 = new Bundle();
-                        bundle1.putString("orderID",orderID);
-                        intent.putExtra("pro",(Serializable) pro);
-                        intent.putExtras(bundle1);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+                    });
+                }
+                else{
+                    Drawable icERR = getResources().getDrawable(R.drawable.ic_errorlogin);
+                    icERR.setBounds(0,0,icERR.getIntrinsicWidth(),icERR.getIntrinsicHeight());
+                    edtAddress.setCompoundDrawables(null,null,icERR,null);
+                    edtAddress.setError("Please, enter your address",icERR);
+                }
+
 
 
 
