@@ -1,12 +1,12 @@
-#ShoeApp
+# ShoeApp
 
-##Description
+## Description
 
 ShoeApp is the app we can buy other shoes from Nike, the first mobile project in my career; it's made by PhongSongSong, phucpham13123, LuuCuong1912, NgocHan19, and me.	
 
-##Display
+## Display
 
-<img src="[link_to_image.jpg](https://github.com/NguynThuHigh/shoe-app-mobile/assets/87266672/c7385254-9b1a-4910-817a-d4baa52f724e)" alt="Alt text" style="width:100px">
+![Screenshot 2024-03-19 202827]https://github.com/NguynThuHigh/shoe-app-mobile/assets/87266672/c7385254-9b1a-4910-817a-d4baa52f724e
 
 ![Screenshot 2024-03-19 202827](https://github.com/NguynThuHigh/shoe-app-mobile/assets/87266672/33e3bcba-c57b-4c08-bbcf-65ff850a01fe)
 
@@ -22,8 +22,9 @@ ShoeApp is the app we can buy other shoes from Nike, the first mobile project in
 ![Screenshot 2024-03-19 205323](https://github.com/NguynThuHigh/shoe-app-mobile/assets/87266672/7433965a-1ad5-4823-82b3-324cb2cc336e)
 ![Screenshot 2024-03-19 205604](https://github.com/NguynThuHigh/shoe-app-mobile/assets/87266672/af55af40-7d18-4532-b3ec-ab37b087fbc8)
 
-
-##Feature
+## Database
+\- Firebase
+## Feature
 
 \- Admin
 
@@ -37,33 +38,33 @@ ShoeApp is the app we can buy other shoes from Nike, the first mobile project in
 
 \- Favorite
 
-##Installation
+## Installation
 
-###System Requirements
+### System Requirements
 
 \- For user: Android phone required.
 
 \- For Developers: Android Studio required.
 
-####User Installation
+#### User Installation
 
 Download here: <https://bit.ly/shoeApp-release>
 
-####Devoloper Installation
+#### Devoloper Installation
 
-####Step 1:
+#### Step 1:
 
 Clone the repository: git clone <https://github.com/NguynThuHigh/shoe-app-mobile.git>.
 
-####Step 2:
+#### Step 2:
 
 Open the file with Android Studio and wait for Sync Gradle.
 
-####Step 3:
+#### Step 3:
 
 Run the project.
 
-##Contact##
+## Contact
 
 If you have any questions or suggestions, please feel free to contact us via email minhnguyen11a1cmg@gmail.com or open an issue in the Issues section of the project.
 
